@@ -1,0 +1,354 @@
+{% extends 'app/layout.html' %}
+{% load static %}
+
+{% block title %} JoidWin | Double Panna {% endblock %}
+
+{% block css %}
+
+<style>
+    #myUL {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    #myUL li a {
+        border: 1px solid #ddd;
+        margin-top: -1px;
+        /* Prevent double borders */
+        background-color: #f6f6f6;
+        padding: 12px;
+        text-decoration: none;
+        font-size: 18px;
+        color: black;
+        display: block
+    }
+
+    #myUL li a:hover:not(.header) {
+        background-color: #eee;
+    }
+</style>
+{% endblock %}
+{% block body %}
+<div class="main-container container">
+
+    <!-- Blogs -->
+    <div class="row mb-3">
+        <div class="col">
+            <h6 class="title">Play game with {{title}}</h6>
+            <p><small class="text-success">{{ status }}</small></p>
+        </div>
+        <!-- <div class="col-auto align-self-center">
+            <a href="blog.html" class="small">Read more</a>
+        </div> -->
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-12 col-lg-12">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <form action="/app/place-bid/" method="POST">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-6 my-2 mb-4">
+                                <input type="date" value="" name="date" id="today" class="form-control">
+                            </div>
+
+                            {% if status == 'Batting is running for close' %}
+                            <div class="col-6 my-2 mb-4">
+                                <select class="form-select form-control" name="marketType"
+                                    aria-label="Default select example">
+                                    <option value="close">CLOSE</option>
+                                </select>
+                            </div>
+                            {% else %}
+                            <div class="col-6 my-2 mb-4">
+                                <select class="form-select form-control" name="marketType"
+                                    aria-label="Default select example">
+                                    <option value="open">OPEN</option>
+                                    <option value="close">CLOSE</option>
+                                </select>
+                            </div>
+                            {% endif %}
+
+                            <div class="col-6 my-2 mb-4">
+                                <label for="" class="form-lable"><small>Enter Digit <span class="text-danger">*</span>
+                                    </small> </label>
+                                <input type="number" value="" id="myInput" 
+                                    onkeyup="myFunction()" class="form-control">
+                                    <p><small class="text-success" id="selectedDigit"></small></p>
+                                    <input type="number" name="digit" value="" id="inputDigit" hidden>
+                                    
+                                    <!-- Number Listing here -->
+                                <ul id="myUL" hidden>
+                                    
+
+                                </ul>
+
+
+                            </div>
+                            <div class="col-6 my-2 mb-4">
+                                <label for="" class="form-lable"><small>Points <span
+                                            class="text-danger">*</span></small>
+                                </label>
+                                <input type="number" name="points" id="point" class="form-control" required>
+                                <input type="text" name="marketId" value="{{marketId}}" hidden>
+                                <input type="text" name="gameId" value="{{gameId}}" hidden>
+                            </div>
+                            <div class="col-3 mb-4" style="margin: auto;">
+                                <button class="btn btn-primary bt-lg"> ADD</button>
+                            </div>
+                        </div>
+                    </form>
+                    <hr>
+
+                    <div class="row text-center">
+                        {% if bids %}
+                        <table>
+                            <thead class="" style="font-size: small;">
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Points</th>
+                                    <th>Digit</th>
+                                    <th>Game Type</th>
+                                    <th>Market Type</th>
+                                </tr>
+                            </thead>
+                            <tbody class="" style="font-size: small;">
+                                {% for i in bids %}
+                                <tr>
+                                    <td>{{i.date}}</td>
+                                    <td>{{i.points}}</td>
+                                    <td>{{i.digit}}</td>
+                                    <td>{{i.game.title}}</td>
+                                    <td>{{i.marketType}}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        {% else %}
+                        <p class="text-danger"> Have't bidding history</p>
+                        {% endif %}
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
+
+{% block js %}
+
+<script>
+    document.getElementById('today').value = new Date().toISOString().substring(0, 10);
+
+    function myFunction() {
+        document.getElementById("myUL").hidden = false;
+        var input, filter, ul, li, a, i, txtValue;
+        input = document.getElementById("myInput");
+        inputEmpty = document.getElementById("myInput").value;
+        if (inputEmpty == '') {
+
+            document.getElementById("myUL").hidden = true;
+        }
+
+        filter = input.value.toUpperCase();
+
+
+        if (inputEmpty == 1) {
+            ulList = `<ul id="myUL">
+
+        <!-- 1 -->
+        <li><a href="#" onclick=btnClick(100);>100</a></li>
+        <li><a href="#" onclick=btnClick(110);>110</a></li>
+        <li><a href="#" onclick=btnClick(112);>112</a></li>
+        <li><a href="#" onclick=btnClick(113);>113</a></li>
+        <li><a href="#" onclick=btnClick(114);>114</a></li>
+        <li><a href="#" onclick=btnClick(115);>115</a></li>
+        <li><a href="#" onclick=btnClick(116);>116</a></li>
+        <li><a href="#" onclick=btnClick(117);>117</a></li>
+        <li><a href="#" onclick=btnClick(118);>118</a></li>
+        <li><a href="#" onclick=btnClick(119);>119</a></li>
+        <li><a href="#" onclick=btnClick(122);>122</a></li>
+        <li><a href="#" onclick=btnClick(133);>133</a></li>
+        <li><a href="#" onclick=btnClick(144);>144</a></li>
+        <li><a href="#" onclick=btnClick(155);>155</a></li>
+        <li><a href="#" onclick=btnClick(166);>166</a></li>
+        <li><a href="#" onclick=btnClick(177);>177</a></li>
+        <li><a href="#" onclick=btnClick(188);>188</a></li>
+        <li><a href="#" onclick=btnClick(199);>199</a></li>
+        </ul>`
+            document.getElementById("myUL").innerHTML = ulList
+        }
+        else if (inputEmpty == 2){
+            ulList = `<ul id="myUL">
+
+<!-- 2 -->
+<li><a href="#" onclick=btnClick(200);>200</a></li>
+<li><a href="#" onclick=btnClick(220);>220</a></li>
+<li><a href="#" onclick=btnClick(223);>223</a></li>
+<li><a href="#" onclick=btnClick(224);>224</a></li>
+<li><a href="#" onclick=btnClick(225);>225</a></li>
+<li><a href="#" onclick=btnClick(226);>226</a></li>
+<li><a href="#" onclick=btnClick(227);>227</a></li>
+<li><a href="#" onclick=btnClick(228);>228</a></li>
+<li><a href="#" onclick=btnClick(229);>229</a></li>
+<li><a href="#" onclick=btnClick(233);>233</a></li>
+<li><a href="#" onclick=btnClick(244);>244</a></li>
+<li><a href="#" onclick=btnClick(255);>255</a></li>
+<li><a href="#" onclick=btnClick(266);>266</a></li>
+<li><a href="#" onclick=btnClick(277);>277</a></li>
+<li><a href="#" onclick=btnClick(288);>288</a></li>
+<li><a href="#" onclick=btnClick(299);>299</a></li>
+</ul>`
+    document.getElementById("myUL").innerHTML = ulList
+
+        }
+        else if (inputEmpty == 3){
+            ulList = `<ul id="myUL">
+
+<!-- 3 -->
+<li><a href="#" onclick=btnClick(300);>300</a></li>
+<li><a href="#" onclick=btnClick(330);>330</a></li>
+<li><a href="#" onclick=btnClick(334);>334</a></li>
+<li><a href="#" onclick=btnClick(335);>335</a></li>
+<li><a href="#" onclick=btnClick(336);>336</a></li>
+<li><a href="#" onclick=btnClick(337);>337</a></li>
+<li><a href="#" onclick=btnClick(338);>338</a></li>
+<li><a href="#" onclick=btnClick(339);>339</a></li>
+<li><a href="#" onclick=btnClick(344);>344</a></li>
+<li><a href="#" onclick=btnClick(355);>355</a></li>
+<li><a href="#" onclick=btnClick(366);>366</a></li>
+<li><a href="#" onclick=btnClick(377);>377</a></li>
+<li><a href="#" onclick=btnClick(388);>388</a></li>
+<li><a href="#" onclick=btnClick(399);>399</a></li>
+</ul>`
+    document.getElementById("myUL").innerHTML = ulList
+
+        }
+
+        else if (inputEmpty == 4){
+            ulList = `<ul id="myUL">
+
+<!-- 4 -->
+<li><a href="#" onclick=btnClick(400);>400</a></li>
+<li><a href="#" onclick=btnClick(440);>440</a></li>
+<li><a href="#" onclick=btnClick(445);>445</a></li>
+<li><a href="#" onclick=btnClick(446);>446</a></li>
+<li><a href="#" onclick=btnClick(447);>447</a></li>
+<li><a href="#" onclick=btnClick(448);>448</a></li>
+<li><a href="#" onclick=btnClick(449);>449</a></li>
+<li><a href="#" onclick=btnClick(455);>455</a></li>
+<li><a href="#" onclick=btnClick(466);>466</a></li>
+<li><a href="#" onclick=btnClick(477);>477</a></li>
+<li><a href="#" onclick=btnClick(488);>488</a></li>
+<li><a href="#" onclick=btnClick(499);>499</a></li>
+</ul>`
+    document.getElementById("myUL").innerHTML = ulList
+
+        }
+
+        else if (inputEmpty == 5){
+            ulList = `<ul id="myUL">
+
+<!-- 5 -->
+<li><a href="#" onclick=btnClick(500);>500</a></li>
+<li><a href="#" onclick=btnClick(550);>550</a></li>
+<li><a href="#" onclick=btnClick(556);>556</a></li>
+<li><a href="#" onclick=btnClick(557);>557</a></li>
+<li><a href="#" onclick=btnClick(558);>558</a></li>
+<li><a href="#" onclick=btnClick(559);>559</a></li>
+<li><a href="#" onclick=btnClick(566);>566</a></li>
+<li><a href="#" onclick=btnClick(577);>577</a></li>
+<li><a href="#" onclick=btnClick(588);>588</a></li>
+<li><a href="#" onclick=btnClick(599);>599</a></li>
+</ul>`
+    document.getElementById("myUL").innerHTML = ulList
+
+        }
+
+        else if (inputEmpty == 6){
+            ulList = `<ul id="myUL">
+
+<!-- 6 -->
+<li><a href="#" onclick=btnClick(600);>600</a></li>
+<li><a href="#" onclick=btnClick(660);>660</a></li>
+<li><a href="#" onclick=btnClick(667);>667</a></li>
+<li><a href="#" onclick=btnClick(668);>668</a></li>
+<li><a href="#" onclick=btnClick(669);>669</a></li>
+<li><a href="#" onclick=btnClick(677);>677</a></li>
+<li><a href="#" onclick=btnClick(688);>688</a></li>
+<li><a href="#" onclick=btnClick(699);>699</a></li>
+</ul>`
+    document.getElementById("myUL").innerHTML = ulList
+
+        }
+
+        else if (inputEmpty == 7){
+            ulList = `<ul id="myUL">
+
+<!-- 7 -->
+<li><a href="#" onclick=btnClick(700);>700</a></li>
+<li><a href="#" onclick=btnClick(770);>770</a></li>
+<li><a href="#" onclick=btnClick(778);>778</a></li>
+<li><a href="#" onclick=btnClick(779);>779</a></li>
+<li><a href="#" onclick=btnClick(788);>788</a></li>
+<li><a href="#" onclick=btnClick(799);>799</a></li>
+</ul>`
+    document.getElementById("myUL").innerHTML = ulList
+
+        }
+
+        else if (inputEmpty == 8){
+            ulList = `<ul id="myUL">
+
+<!-- 8 -->
+<li><a href="#" onclick=btnClick(800);>800</a></li>
+<li><a href="#" onclick=btnClick(880);>880</a></li>
+<li><a href="#" onclick=btnClick(889);>889</a></li>
+<li><a href="#" onclick=btnClick(899);>899</a></li>
+</ul>`
+    document.getElementById("myUL").innerHTML = ulList
+
+        }
+
+        else if (inputEmpty == 9){
+            ulList = `<ul id="myUL">
+<li><a href="#" onclick=btnClick(900);>900</a></li>                
+<li><a href="#" onclick=btnClick(990);>990</a></li>                
+<!-- 6 -->
+
+</ul>`
+    document.getElementById("myUL").innerHTML = ulList
+
+        }
+
+
+        ul = document.getElementById("myUL");
+        li = ul.getElementsByTagName("li");
+        for (i = 0; i < li.length; i++) {
+            a = li[i].getElementsByTagName("a")[0];
+            txtValue = a.textContent || a.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                li[i].style.display = "";
+            } else {
+                li[i].style.display = "none";
+            }
+        }
+    }
+
+    function btnClick(id) {
+        document.getElementById('myInput').value = id
+        document.getElementById('inputDigit').value = id
+        document.getElementById('selectedDigit').innerHTML = 'selected digit is :'+id
+        document.getElementById("myUL").hidden = true;
+    }
+
+
+</script>
+
+{% endblock %}

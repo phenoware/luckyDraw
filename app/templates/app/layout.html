@@ -1,0 +1,342 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+
+<!-- Mirrored from maxartkiller.com/website/finwallapp2/HTML/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 28 Sep 2021 18:44:24 GMT -->
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Lucky Draw Card - Games">
+    <meta name="author" content="">
+    <meta name="generator" content="">
+    <title>{% block title %} {% endblock %}</title>
+
+    <!-- manifest meta -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="manifest" href="{% static 'app/manifest.json' %}" />
+
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" href="{% static 'app/assets/img/favicon180.png" sizes="180x180">
+    <link rel="icon" href="{% static 'app/assets/img/favicon32.png' %}" sizes="32x32" type="image/png">
+    <link rel="icon" href="{% static 'app/assets/img/favicon16.png' %}" sizes="16x16" type="image/png">
+
+    <!-- Google fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&amp;display=swap"
+        rel="stylesheet">
+
+    <!-- bootstrap icons -->
+    <link rel="stylesheet" href="{% static 'app/assets/npm/bootstrap-icons/font/bootstrap-icons.css' %}">
+
+    <!-- swiper carousel css -->
+    <link rel="stylesheet" href="{% static 'app/assets/vendor/swiperjs-6.6.2/swiper-bundle.min.css' %}">
+
+    <!-- style css for this template -->
+    <link href="{% static 'app/assets/css/style.css' %}" rel="stylesheet" id="style">
+
+
+    {% block css %} {% endblock %}
+</head>
+
+<body class="body-scroll" data-page="index">
+
+    <!-- loader section -->
+    <div class="container-fluid loader-wrap">
+        <div class="row h-100">
+            <div class="col-10 col-md-6 col-lg-5 col-xl-3 mx-auto text-center align-self-center">
+                <div class="">
+                    <img src="{% static 'app/assets/img/logo.png' %}" style="width: 50px;" alt="" />
+                </div>
+                
+                <p class="mt-4"><span class="text-secondary">Lucky Draw Card - India's popular rummy game App</span><br><strong>Please
+                        wait...</strong></p>
+            </div>
+        </div>
+    </div>
+    <!-- loader section ends -->
+
+    <!-- Sidebar main menu -->
+    <div class="sidebar-wrap  sidebar-overlay">
+        <!-- Add pushcontent or fullmenu instead overlay -->
+        <div class="closemenu text-muted">Close Menu</div>
+        <div class="sidebar ">
+            <!-- user information -->
+            <div class="row my-3">
+                <div class="col-12 profile-sidebar">
+                    <div class="clearfix"></div>
+                    <div class="circle small one"></div>
+                    <div class="circle small two"></div>
+                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                        viewBox="0 0 194.287 141.794" class="menubg">
+                        <defs>
+                            <linearGradient id="linear-gradient" x1="0.5" x2="0.5" y2="1"
+                                gradientUnits="objectBoundingBox">
+                                <stop offset="0" stop-color="#09b2fd" />
+                                <stop offset="1" stop-color="#6b00e5" />
+                            </linearGradient>
+                        </defs>
+                        <path id="menubg"
+                            d="M672.935,207.064c-19.639,1.079-25.462-3.121-41.258,10.881s-24.433,41.037-49.5,34.15-14.406-16.743-50.307-29.667-32.464-19.812-16.308-41.711S500.472,130.777,531.872,117s63.631,21.369,93.913,15.363,37.084-25.959,56.686-19.794,4.27,32.859,6.213,44.729,9.5,16.186,9.5,26.113S692.573,205.985,672.935,207.064Z"
+                            transform="translate(-503.892 -111.404)" fill="url(#linear-gradient)" />
+                    </svg>
+
+                    <div class="row mt-3">
+                        <div class="col-auto">
+                            <figure class="avatar avatar-80 rounded-20 p-1 bg-white shadow-sm">
+                                <img src="{% static 'app/assets/img/user.jpg' %}" alt="" style="margin-top: -7px;"
+                                    class="rounded-18">
+                            </figure>
+                        </div>
+                        <div class="col px-0 align-self-center">
+                            <h5 class="mb-2">{{request.user.first_name}}</h5>
+                            <p class="text-muted size-12">{{request.user.username}}<br />{{request.user.date_joined}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- user emnu navigation -->
+            <div class="row">
+                <div class="col-12">
+                    <ul class="nav nav-pills">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="/app">
+                                <div class="avatar avatar-40 icon"><i class="bi bi-house-door"></i></div>
+                                <div class="col">Home</div>
+                                <div class="arrow"><i class="bi bi-chevron-right"></i></div>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="/app/profile">
+                                <div class="avatar avatar-40 icon"><i class="bi bi-person-circle"></i></div>
+                                <div class="col">My Profile</div>
+                                <div class="arrow"><i class="bi bi-chevron-right"></i></div>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="/app/history">
+                                <div class="avatar avatar-40 icon"><i class="bi bi bi-list"></i></div>
+                                <div class="col">My History</div>
+                                <div class="arrow"><i class="bi bi-chevron-right"></i></div>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="/app/top-winners">
+                                <div class="avatar avatar-40 icon"><i class="bi bi-trophy"></i></div>
+                                <div class="col">Top Winners</div>
+                                <div class="arrow"><i class="bi bi-chevron-right"></i></div>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/app/top-jodi-winners">
+                                <div class="avatar avatar-40 icon"><i class="bi bi-trophy"></i></div>
+                                <div class="col">Top Rummy Patti Winners</div>
+                                <div class="arrow"><i class="bi bi-chevron-right"></i></div>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/app/notifications">
+                                <div class="avatar avatar-40 icon"><i class="bi bi-bell"></i></div>
+                                <div class="col">Notifications</div>
+                                <div class="arrow"><i class="bi bi-chevron-right"></i></div>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/app/game-rate">
+                                <div class="avatar avatar-40 icon"><i class="bi bi-cash-stack"></i></div>
+                                <div class="col">Games Rates</div>
+                                <div class="arrow"><i class="bi bi-chevron-right"></i></div>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/app/notice-board">
+                                <div class="avatar avatar-40 icon"><i class="bi bi-clipboard"></i></div>
+                                <div class="col">Notice Board/ Rules</div>
+                                <div class="arrow"><i class="bi bi-chevron-right"></i></div>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <div class="avatar avatar-40 icon"><i class="bi bi-share"></i></div>
+                                <div class="col">Share</div>
+                                <div class="arrow"><i class="bi bi-chevron-right"></i></div>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/app/about-us">
+                                <div class="avatar avatar-40 icon"><i class="bi bi-file-person"></i></div>
+                                <div class="col">About us</div>
+                                <div class="arrow"><i class="bi bi-chevron-right"></i></div>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/app/contact-us">
+                                <div class="avatar avatar-40 icon"><i class="bi bi-person-lines-fill"></i></div>
+                                <div class="col">Contact Us</div>
+                                <div class="arrow"><i class="bi bi-chevron-right"></i></div>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/app/terms-condition">
+                                <div class="avatar avatar-40 icon"><i class="bi bi-file-earmark-check"></i></div>
+                                <div class="col">Terms & Condition</div>
+                                <div class="arrow"><i class="bi bi-chevron-right"></i></div>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/app/privacy-policy">
+                                <div class="avatar avatar-40 icon"><i class="bi bi-file-earmark-check"></i></div>
+                                <div class="col">Privacy Policy</div>
+                                <div class="arrow"><i class="bi bi-chevron-right"></i></div>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/app/refund-policy">
+                                <div class="avatar avatar-40 icon"><i class="bi bi-file-earmark-check"></i></div>
+                                <div class="col">Refund Policy</div>
+                                <div class="arrow"><i class="bi bi-chevron-right"></i></div>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/app/user-logout">
+                                <div class="avatar avatar-40 icon"><i class="bi bi-box-arrow-right"></i></div>
+                                <div class="col">Logout</div>
+                                <div class="arrow"><i class="bi bi-chevron-right"></i></div>
+                            </a>
+                        </li>
+                    </ul>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Sidebar main menu ends -->
+
+    <!-- Begin page -->
+    <main class="h-100">
+
+        <!-- Header -->
+        <header class="header position-fixed">
+            <div class="row">
+                <div class="col-auto">
+                    <a href="javascript:void(0)" target="_self" class="btn btn-light btn-44 menu-btn">
+                        <i class="bi bi-list"></i>
+                    </a>
+                </div>
+                <div class="col">
+                    <div class="logo-small">
+                        <img src="{% static 'app/assets/img/logo.png' %}"  alt="" /><small> <span class="text-secondary fw-light" style="font-family:monospace">Lucky Draw</span> Card </small>
+                        <h5></h5>
+                    </div>
+                </div>
+                <div class="col-auto text-center">
+                    <a href="/app/profile" target="_self" class="btn btn-light ">
+                        <i class="bi bi-wallet2"></i>&nbsp;<small>{{walletBalance}}</small>
+
+                    </a>
+                </div>
+            </div>
+        </header>
+        <!-- Header ends -->
+
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-warning alert-dismissible fade show mx-2" role="alert">
+            <strong>Message ! </strong> {{ message }}
+            <button type="button" class="btn-close btn-sm" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+        {% endif %}
+
+
+        {% block body %}
+        <!-- main page content -->
+
+        <!-- main page content ends -->
+        {% endblock %}
+
+    </main>
+    <!-- Page ends-->
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <ul class="nav nav-pills nav-justified">
+                <li class="nav-item">
+                    <a class="nav-link" href="/app">
+                        <span>
+                            <i class="nav-icon bi bi-house"></i>
+                            <span class="nav-text">Home</span>
+                        </span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/app/products">
+                        <span>
+                            <i class="nav-icon bi bi-list"></i>
+                            <span class="nav-text">Products</span>
+                        </span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/app/broker-register">
+                        <span>
+                            <i class="nav-icon bi bi-briefcase"></i>
+                            <span class="nav-text">Broker</span>
+                        </span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " href="/app/profile">
+                        <span>
+                            <i class="nav-icon bi bi-person-circle"></i>
+                            <span class="nav-text">Profile</span>
+                        </span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </footer>
+    
+    <!-- Required jquery and libraries -->
+    <script src="{% static 'app/assets/js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'app/assets/js/popper.min.js' %}"></script>
+    <script src="{% static 'app/assets/vendor/bootstrap-5/js/bootstrap.bundle.min.js' %}"></script>
+
+    <!-- Customized jquery file  -->
+    <script src="{% static 'app/assets/js/main.js' %}"></script>
+    <script src="{% static 'app/assets/js/color-scheme.js' %}"></script>
+
+    <!-- PWA app service registration and works -->
+    <script src="{% static 'app/assets/js/pwa-services.js' %}"></script>
+
+    <!-- Chart js script -->
+    <script src="{% static 'app/assets/vendor/chart-js-3.3.1/chart.min.js' %}"></script>
+
+    <!-- Progress circle js script -->
+    <script src="{% static 'app/assets/vendor/progressbar-js/progressbar.min.js' %}"></script>
+
+    <!-- swiper js script -->
+    <script src="{% static 'app/assets/vendor/swiperjs-6.6.2/swiper-bundle.min.js' %}"></script>
+
+    <!-- page level custom script -->
+    <script src="{% static 'app/assets/js/app.js' %}"></script>
+
+
+    <script>
+        window.setTimeout(function () {
+            window.location.reload();
+        }, 300000);
+    </script>
+    {% block js %}
+
+    {% endblock %}
+</body>
+
+
+<!-- Mirrored from maxartkiller.com/website/finwallapp2/HTML/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 28 Sep 2021 18:46:04 GMT -->
+
+</html>

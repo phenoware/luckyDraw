@@ -1,0 +1,72 @@
+{% extends 'app/layout.html' %}
+{% load static %}
+
+{% block title %} JoidWin | Bid Details {% endblock %}
+
+{% block body %}
+<div class="main-container container">
+
+    <!-- Blogs -->
+    <div class="row mb-3">
+        <div class="col">
+            <h6 class="title">Bidding Details</h6>
+        </div>
+        <!-- <div class="col-auto align-self-center">
+            <a href="blog.html" class="small">Read more</a>
+        </div> -->
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-12 col-lg-12">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col row">
+                            {% for i in bids %}
+                            <label class="mb-2 col-6">Date</label>
+                            <p class="text-secondary small col-6">{{i.date}}</p>
+
+                            <label class="mb-2 col-6">Market Title</label>
+                            <p class="text-secondary small col-6">{{i.market.title}}</p>
+
+                            <label class="mb-2 col-6">Game</label>
+                            <p class="text-secondary small col-6">{{i.game.title}}</p>
+                            
+                            <label class="mb-2 col-6">Digit</label>
+                            <p class="text-secondary small col-6">{{i.digit}}</p>
+                             
+                            <label class="mb-2 col-6">Points <small></small></label>
+                            <p class="text-secondary small col-6">{{i.points}} Points</p>
+
+                            <label class="mb-2 col-6">Status</label>
+                            {% if i.status == 'win'%}
+                            <p class="text-secondary small col-6"><span class="badge bg-success">{{i.status}}</span> </p>
+                            {% elif i.status == 'loss' %}
+                            <p class="text-secondary small col-6"><span class="badge bg-danger">Better luck next time</span> </p>
+                            {% else %}
+                            <p class="text-secondary small col-6"><span class="badge bg-primary">{{i.status}}</span> </p>
+                            {% endif %}
+                            <label class="mb-2 col-6">Win Amount</label>
+                            <p class="text-secondary small col-6">Rs. {{i.winAmount}}</p>
+
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                
+                
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
+
+{% block js %}
+
+<script>
+    document.getElementById('today').value = new Date().toISOString().substring(0, 10);
+</script>
+
+{% endblock %}

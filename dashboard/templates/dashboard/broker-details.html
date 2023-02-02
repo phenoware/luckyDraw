@@ -1,0 +1,289 @@
+{% extends 'dashboard/layout.html' %}
+{% load static %}
+{% block title %} Broker Detaiils | Jodiwin {% endblock %}
+{% block body %}
+
+<!-- Start Content-->
+<div class="container-fluid">
+
+    <!-- start page title -->
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="/dashboard/">Home</a></li>
+                        <li class="breadcrumb-item"><a href="/dashboard/brokers">Broker</a></li>
+                        <li class="breadcrumb-item active">Broker Profile</li>
+                    </ol>
+                </div>
+                <h4 class="page-title">Broker Profile</h4>
+            </div>
+        </div>
+    </div>
+    <!-- end page title -->
+    {% if messages %}
+    <div class="alert alert-success" role="alert">
+        {% for message in messages %}
+        <i style="list-style: none;" class=" me-2"></i> <strong>Message - </strong>
+        {{ message }}
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <div class="row">
+        <div class="col-sm-12">
+            <!-- Profile -->
+            <div class="card bg-primary">
+                <div class="card-body profile-user-box">
+                    {% for i in broker %}
+                    <div class="row">
+                        <div class="col-sm-10">
+                            <div class="row align-items-center">
+                                <div class="col-auto">
+                                    <div class="avatar-lg">
+                                        <img src="{% static 'dashboard/assets/images/users/userAvtar.jpg' %}" alt=""
+                                            class="rounded-circle img-thumbnail">
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div>
+                                        <h4 class="mt-1 mb-1 text-white">{{i.user.first_name}} {{i.user.last_name}}</h4>
+                                        <p class="font-13 text-white-50"> {{i.user.email}}</p>
+
+                                        <ul class="mb-0 list-inline text-light">
+                                            <li class="list-inline-item me-3">
+                                                <h5 class="mb-1">Rs. {{i.walletAmount}}</h5>
+                                                <p class="mb-0 font-13 text-white-50">Wallet Balance</p>
+                                            </li>
+                                            <li class="list-inline-item">
+                                                <h5 class="mb-1">Rs. {{i.totalBiddingAmount}}</h5>
+                                                <p class="mb-0 font-13 text-white-50">Total Bidding </p>
+                                            </li>
+                                            <li class="list-inline-item mx-3">
+                                                <h5 class="mb-1">Rs. {{i.payingBiddingAmount}}</h5>
+                                                <p class="mb-0 font-13 text-white-50">Payable Bidding </p>
+                                            </li>
+                                            <li class="list-inline-item mx-2">
+                                                <h5 class="mb-1">{{i.commision}} %</h5>
+                                                <p class="mb-0 font-13 text-white-50">Commision Rate </p>
+                                            </li>
+                                            <li class="list-inline-item mx-2">
+                                                <h5 class="mb-1">{{userCount}} Users</h5>
+                                                <p class="mb-0 font-13 text-white-50">Total Referal User </p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> <!-- end col-->
+
+                        <div class="col-sm-2">
+                            <div class="text-center mt-sm-0 mt-3 text-sm-end">
+                                <button type="button" class="btn btn-light">
+                                    <i class="mdi mdi-account-edit me-1"></i> Edit Profile
+                                </button>
+                            </div>
+                        </div> <!-- end col-->
+                    </div> <!-- end row -->
+                    {% endfor %}
+                </div> <!-- end card-body/ profile-user-box-->
+            </div>
+            <!--end profile/ card -->
+        </div> <!-- end col-->
+    </div>
+    <!-- end row -->
+
+    {% for i in broker %}
+    <div class="row">
+        <div class="col-xl-4">
+            <!-- Personal-Information -->
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="header-title mt-0 mb-3">Broker Information</h4>
+
+                    <hr />
+
+                    <div class="text-start">
+                        <p class="text-muted"><strong>Full Name :</strong> <span class="ms-2">{{i.user.first_name}}
+                                {{i.user.last_name}}</span>
+                        </p>
+
+                        <p class="text-muted"><strong>Mobile :</strong><span class="ms-2">(+91) {{i.phone}}</span></p>
+
+                        <p class="text-muted"><strong>Email :</strong> <span class="ms-2"><i class="mdi mdi-email"></i>
+                                {{i.user.email}}</span>
+                        </p>
+
+                        <p class="text-muted"><strong>Last Login :</strong> <span class="ms-2">{{i.user.last_login}}</span></p>
+
+                        <!-- <p class="text-muted"><strong>Address :</strong>
+                            <span class="ms-2"> {{i.address_line_1}},<br>
+                                {{i.address_line_2}}, <br>
+                            {{i.landmark}}, {{i.city}}- {{i.pincode}}, {{i.state}}-India </span>
+                        </p> -->
+
+                    </div>
+                </div>
+            </div>
+            <!-- Personal-Information -->
+
+            <!-- Toll free number box-->
+            <div class="card text-white bg-info overflow-hidden">
+                <div class="card-body">
+                    <div class="toll-free-box text-center">
+                        <h4> <i class="mdi mdi-phone"></i> Call : <a href="tel:{{i.phone}}"
+                                class="fw-bold text-light">(+91) {{i.phone}} </a></h4>
+                    </div>
+                </div> <!-- end card-body-->
+            </div> <!-- end card-->
+            <!-- End Toll free number box-->
+            {% for a in bankAccount %}
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="header-title mt-0 mb-3">Bank Account Details</h4>
+
+                    <hr />
+
+                    <div class="text-start">
+                        <p class="text-muted"><strong>Bank Name :</strong> <span class="ms-2">{{a.bankName}}</span>
+                        </p>
+                        <p class="text-muted"><strong>Account Number :</strong> <span class="ms-2">{{a.accountNumber}}</span>
+                        </p>
+                        <p class="text-muted"><strong>IFSC Code :</strong> <span class="ms-2">{{a.ifscCode}}</span>
+                        </p>
+                        <p class="text-muted"><strong>Account Name :</strong> <span class="ms-2">{{a.accountName}}</span>
+                        </p>
+                        
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        </div> <!-- end col-->
+
+        <div class="col-xl-8">
+
+            <!-- Chart-->
+
+            
+
+            <div class="card">
+
+                <div class="card-body">
+                    <ul class="nav nav-tabs mb-3">
+                        <li class="nav-item">
+                            <a href="#home" data-bs-toggle="tab" aria-expanded="true" class="nav-link active">
+                                <i class="mdi mdi-home-variant d-md-none d-block"></i>
+                                <span class="d-none d-md-block">Referal User</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#profile" data-bs-toggle="tab" aria-expanded="false" class="nav-link">
+                                <i class="mdi mdi-account-circle d-md-none d-block"></i>
+                                <span class="d-none d-md-block">Withdraw Request</span>
+                            </a>
+                        </li>
+                    </ul>
+
+                    <div class="tab-content">
+                        <div class="tab-pane show active" id="home">
+
+                            <div class="table-responsive">
+                                <table class="table table-hover table-centered mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th>#ID</th>
+                                            <th>Name</th>
+                                            <th>Email</th>
+                                            <th>Created Date</th>
+                                            <th>Status</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for b in brokerUsers reversed %}
+                                        <tr>
+                                            <td>BID#{{b.id}}</td>
+                                            <td><a href="#" class="text-secondary"><b> {{b.user.user.first_name}} {{b.user.user.last_name}}</b></a></td>
+                                            <td>{{b.user.user.email}}</td>
+                                            <td>{{b.user.user.date_joined}}</td>
+                                            {% if b.user.user.is_active %}
+                                            <td>
+                                                <h5><span class="badge badge-success-lighten"><i
+                                                            class="mdi mdi-check"></i> Active</span></h5>
+                                            </td>
+                                            {% else %}
+                                            <td>
+                                                <h5><span class="badge badge-danger-lighten"><i
+                                                            class=""></i>Inactive</span></h5>
+                                            </td>
+                                            {% endif %}
+
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="profile">
+                            <div class="table-responsive">
+                                <table class="table table-hover table-centered mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th>Id</th>
+                                            <th>Wallet Ballance</th>
+                                            <th>Request Amount</th>
+                                            <th>Date <i class="mdi mdi-calendar"></i></th>
+                                            <th>Status</th>
+                                    
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for b in withdraw reversed %}
+                                        <tr>
+                                            <td>#{{b.id}}</td>
+                                            <td>Rs. {{b.partner.walletAmount}}</td>
+                                            <td>Rs. {{b.amount}}</td>
+                                            <td>{{b.date}}</td>
+                                            {% if b.status == 'New' %}
+                                            <td>
+                                                <h5><span class="badge badge-danger-lighten"><i class="mdi mdi-timer-sand"></i>
+                                                        Pending</span></h5>
+                                            </td>
+                                            {% else %}
+                                            <td>
+                                                <h5><span class="badge badge-success-lighten"><i class="mdi mdi-bank-check"></i>
+                                                        Success</span></h5>
+                                            </td>
+                                            {% endif %}
+                                            
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                         <!-- end col-->
+                    </div> <!-- end row-->
+
+                </div>
+                <!-- end col -->
+
+            </div>
+            <!-- end row -->
+            {% endfor %}
+        </div> <!-- container -->
+
+    </div> <!-- content -->
+
+    {% endblock %}
+
+    {% block js %}
+    <script>
+        function block(id) {
+            result = document.getElementById('block').value;
+            // alert("Changing status ")
+            location.replace('/dashboard/customer-block/' + result + '/' + id)
+        }
+    </script>
+    {% endblock %}

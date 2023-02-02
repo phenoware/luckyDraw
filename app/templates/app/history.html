@@ -1,0 +1,78 @@
+{% extends 'app/layout.html' %}
+{% load static %}
+
+{% block title %} 52 Patti Mall | History {% endblock %}
+
+{% block body %}
+<div class="main-container container">
+
+    <!-- Blogs -->
+    <div class="row mb-3">
+        <div class="col">
+            <h6 class="title">History</h6>
+        </div>
+        <!-- <div class="col-auto align-self-center">
+            <a href="blog.html" class="small">Read more</a>
+        </div> -->
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-12 col-lg-12">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <div class="row ">
+                        
+                        <a href="/app/bidding-history" class="text-secondary"> <img src="{% static 'app/assets/img/icon/bidHistory.png' %}" alt="" style="width: 35px;"> &nbsp; Games History</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-12 col-lg-12">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <div class="row ">
+                        
+                        <a href="/app/bid-result-history" class="text-secondary"> <img src="{% static 'app/assets/img/icon/bidResult.png' %}" alt="" style="width: 35px;"> &nbsp; Games Result History</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-12 col-md-12 col-lg-12">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <div class="row ">
+                        
+                        <a href="/app/jodi-win-bid-history" class="text-secondary"> <img src="{% static 'app/assets/img/icon/jodiWinHistory.png' %}" alt="" style="width: 35px;"> &nbsp; Jodi Sequence Games History</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12 col-md-12 col-lg-12">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <div class="row ">
+                        
+                        <a href="/app/jodi-win-result-history" class="text-secondary"> <img src="{% static 'app/assets/img/icon/jodiWinresult.png' %}" alt="" style="width: 35px;"> &nbsp; Jodi Sequence Win Result History</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block js %}
+
+<script>
+    document.getElementById('today').value = new Date().toISOString().substring(0, 10);
+</script>
+
+{% endblock %}

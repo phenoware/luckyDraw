@@ -1,0 +1,172 @@
+{% extends 'partner/layout.html' %}
+{% load static %}
+{% block title %} JodiWin | Withdraw Request {% endblock %}
+{% block body %}
+
+<!-- Start Content-->
+<div class="container-fluid">
+
+    <!-- start page title -->
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="/partner">Home</a></li>
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Withdraw</a></li>
+                        <li class="breadcrumb-item active">Withdraw Request</li>
+                    </ol>
+                </div>
+                <h4 class="page-title">Withdraw Request</h4>
+            </div>
+        </div>
+    </div>
+    <!-- end page title -->
+    {% if messages %}
+    <div class="alert alert-success" role="alert">
+        {% for message in messages %}
+        <i style="list-style: none;" class=" me-2"></i> <strong>Message - </strong>
+        {{ message }}
+        {% endfor %}
+    </div>
+    {% endif %}
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row mb-2">
+                        <div class="col-xl-8">
+                            <button class="btn btn-danger mb-2 me-2 col-auto " data-bs-toggle="modal" data-bs-target="#bs-example-modal-lg"><i class="mdi mdi-plus me-1"></i> Create new request</button>
+                        </div>
+                        <div class="col-xl-4">
+                            <div class="text-xl-end mt-xl-0 mt-2">
+                                <a href="/dashboard/reguler-market" type="button" class="btn btn-primary mb-2 me-2"><i
+                                        class="mdi mdi-autorenew me-1"></i> </a>
+                                <!-- <button type="button" class="btn btn-light mb-2">Export</button> -->
+                            </div>
+                        </div><!-- end col-->
+                    </div>
+
+                    <div class="table-responsive">
+                        <table id="basic-datatable" class="table dt-responsive nowrap w-100">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Payabel Bidding </th>
+                                    <th>Commision Rate</th>
+                                    <th>Wallet Ballance</th>
+                                    <th>Request Amount</th>
+                                    <th>Date <i class="mdi mdi-calendar"></i></th>
+                                    <th>Status</th>
+                                    <th>Remark</th>
+                                    
+                                </tr>
+                            </thead>
+
+
+                            <tbody>
+                                {% for i in withdraw reversed %}
+                                <tr>
+                                    <td>#20210{{i.id}}</a> </td>
+                                    <td><a href="#" class="text-secondary">Rs. {{i.partner.payingBiddingAmount}}</a> </td>
+                                    <td>{{i.partner.commision}} %</td>
+                                    <td>Rs. {{i.partner.walletAmount}}</td>
+                                    <td>Rs. {{i.amount}}</td>
+                                    <td>{{i.date}} </td>
+                                    {% if i.status == 'New' %}
+                                    <td>
+                                        <h5><span class="badge badge-danger-lighten"><i class="mdi mdi-timer-sand"></i>
+                                                Pending</span></h5>
+                                    </td>
+                                    {% else %}
+                                    <td>
+                                        <h5><span class="badge badge-success-lighten"><i class="mdi mdi-bank-check"></i>
+                                                Success</span></h5>
+                                    </td>
+                                    {% endif %}
+                                    <td>{{i.remark}} </td>
+                                </tr>
+                                {% endfor %}
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div> <!-- end card-body-->
+            </div> <!-- end card-->
+        </div> <!-- end col -->
+    </div>
+    <!-- end row -->
+
+</div> <!-- container -->
+
+
+<!-- Modals Here  -->
+
+<!-- Large modal -->
+<!-- <button type="button" class="btn btn-info">Large Modal</button> -->
+<div class="modal fade" id="bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myLargeModalLabel">Adding New Market </h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
+            </div>
+            <div class="modal-body">
+                <div class="conatiner">
+                    <form action="/partner/new-withdraw-request/" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-xl-12 row">
+                                <div class="mb-3 col-4">
+                                    <label for="project-budget" class="form-label">Request Amount : <span
+                                            class="text-danger">*</span></label>
+                                    <input type="number" id="openTime" value="0" name="amount" class="form-control"
+                                         required>
+                                </div>
+                                <div class="mb-3 col-12">
+                                    <label for="title" class="form-label">Remark/ Message : <span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" id="title" name="remark" class="form-control"
+                                        placeholder="Remark" required>
+                                </div>
+                                
+                                
+                            </div> <!-- end col-->
+                            
+                            <div class="col-xl-12 row">
+
+                                <!-- Date View -->
+                                <div class="mb-3 position-relative" id="datepicker2">
+                                    <button class="btn btn-success " type="submit">Save & Add</button>
+                                    <button class="btn btn-warning mx-2" type="reset">Reset</button>
+                                </div>
+                            </div> <!-- end col-->
+                        </div>
+                        <!-- end row -->
+                    </form>
+                </div>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+
+
+</div> <!-- content -->
+
+
+{% endblock %}
+
+{% block js %}
+
+<script>
+function payment(id, status) {
+    if (confirm("Do you realy want to make changes ?")) {
+    location.replace('/dashboard/make-withdraw/'+id+'/'+status)
+  }
+  
+}
+</script>
+{% endblock %}

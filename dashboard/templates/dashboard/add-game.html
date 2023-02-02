@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="/dashboard/submit-new-game/" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="text"  name="title" placeholder="title" id="">
+        <input type="text"  name="marketType" placeholder="Reguler Market/ Jodi-market" id="">
+        <input type="text"  name="rate" placeholder="10 KA 100" id="">
+        <input type="text"  name="multipleTimes" placeholder="90" id="">
+        <input type="file"  name="logo" placeholder="title" id="">
+
+        <input type="submit" value="submit" id="">
+    </form>
+</body>
+</html>

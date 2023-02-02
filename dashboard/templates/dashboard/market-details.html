@@ -1,0 +1,636 @@
+{% extends 'dashboard/layout.html' %}
+{% load static %}
+{% block title %} Market Details | Jodiwin {% endblock %}
+{% block body %}
+
+<!-- Start Content-->
+<div class="container-fluid">
+
+    <!-- start page title -->
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="/dashboard/">Home</a></li>
+                        <li class="breadcrumb-item"><a href="/dashboard/reguler-market">Reguler Markets</a></li>
+                        <li class="breadcrumb-item active">Market Details</li>
+                    </ol>
+                </div>
+                <h4 class="page-title">Market Details test</h4>
+            </div>
+        </div>
+    </div>
+    <!-- end page title -->
+    {% if messages %}
+    <div class="alert alert-success" role="alert">
+        {% for message in messages %}
+        <i style="list-style: none;" class=" me-2"></i> <strong>Message - </strong>
+        {{ message }}
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <div class="row">
+        <div class="col-sm-12">
+            <!-- Profile -->
+            <div class="card bg-primary">
+                <div class="card-body profile-user-box">
+                    {% for i in market %}
+                    <div class="row">
+                        <div class="col-sm-10">
+                            <div class="row align-items-center">
+
+                                <div class="col">
+                                    <div>
+                                        <h4 class="mt-1 mb-1 text-white">{{i.title}}</h4>
+                                        <!-- <p class="font-13 text-white-50"> {{i.user.email}}</p> -->
+
+                                        <ul class="mb-0 list-inline text-light">
+                                            <li class="list-inline-item me-3">
+                                                <h5 class="mb-1">Open Time</h5>
+                                                <p class="mb-0 font-13 text-white-50">{{i.openTime}}</p>
+                                            </li>
+                                            <li class="list-inline-item">
+                                                <h5 class="mb-1">Closing Time</h5>
+                                                <p class="mb-0 font-13 text-white-50">{{i.closeTime}}</p>
+                                            </li>
+                                          
+                                            <li class="list-inline-item">
+                                                <h5 class="mb-1">Total Bidding</h5>
+                                                <p class="mb-0 font-13 text-white-50">{{totalBidding}}</p>
+                                            </li>
+                                            <li class="list-inline-item">
+                                                <h5 class="mb-1">Total Bidding Amount</h5>
+                                                <p class="mb-0 font-13 text-white-50">Rs. {{biddingAmount.points__sum}} </p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <div class="col ml-5">
+                                    <div style="display: flex;">
+                                        {% if marketObj.resultOpen == '***' %}
+                                        <div style="display: flex;">
+                                            <img src="{% static 'app/assets/img/card/cardBack.jpg' %}"
+                                                style="width: 35px; height: 48px; margin: 3px;" alt="">
+                                            <img src="{% static 'app/assets/img/card/cardBack.jpg' %}"
+                                                style="width: 35px; height: 48px; margin: 3px;" alt="">
+                                            <img src="{% static 'app/assets/img/card/cardBack.jpg' %}"
+                                                style="width: 35px; height: 48px; margin: 3px;" alt="">
+                                            <img src="{% static 'app/assets/img/card/cardBack.jpg' %}"
+                                                style="width: 35px; height: 48px; margin: 3px;" alt="">
+                                        </div>
+
+                                        {% else %}
+                                        <div>
+                                            {% for key, value in resultOpenCard.items %}
+                                            <img src="/media/{{value.4}}"
+                                                style="width: 35px; height: 48px; margin: 3px;" alt="">
+                                            {% endfor %}
+                                        </div>
+                                        {% endif %}
+
+                                        {% if marketObj.resultClose == '***' %}
+                                        <span class="text-white mt-2"> - </span>
+                                        <div style="display: flex;">
+                                            <img src="{% static 'app/assets/img/card/cardBack.jpg' %}"
+                                                style="width: 35px; height: 48px; margin: 3px;" alt="">
+                                            <img src="{% static 'app/assets/img/card/cardBack.jpg' %}"
+                                                style="width: 35px; height: 48px; margin: 3px;" alt="">
+                                            <img src="{% static 'app/assets/img/card/cardBack.jpg' %}"
+                                                style="width: 35px; height: 48px; margin: 3px;" alt="">
+                                            <img src="{% static 'app/assets/img/card/cardBack.jpg' %}"
+                                                style="width: 35px; height: 48px; margin: 3px;" alt="">
+                                        </div>
+
+                                        {% else %}
+                                        <div>
+                                            <span class="text-white mt-2"> - </span>
+                                            {% for key, value in resultCloseCard.items %}
+                                            <img src="/media/{{value.4}}"
+                                                style="width: 35px; height: 48px; margin: 3px;" alt="">
+                                            {% endfor %}
+                                        </div>
+                                        {% endif %}
+                                    </div>
+                                    <div>
+
+                                        <div class="text-center">
+                                            <ul class="mb-0 list-inline text-light">
+                                                <li class="list-inline-item me-3">
+                                                    <h5 class="mb-1">{{i.status}}</h5>
+                                                </li>
+
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div> <!-- end col-->
+
+                        <div class="col-sm-2">
+                            <div class="text-center mt-sm-0 mt-3 text-sm-end">
+                                <button type="button" class="btn btn-light" data-bs-toggle="modal"
+                                    data-bs-target="#bs-example-modal-lg">
+                                    <i class="mdi mdi-briefcase-edit-outline me-1"></i>
+                                </button>
+                            </div>
+                        </div> <!-- end col-->
+                    </div> <!-- end row -->
+                    {% endfor %}
+                </div> <!-- end card-body/ profile-user-box-->
+            </div>
+            <!--end profile/ card -->
+        </div> <!-- end col-->
+    </div>
+    <!-- end row -->
+
+    <div class="row">
+        <div class="col-xl-12">
+            <div class="row">
+                <div class="col-sm">
+                    <div class="card tilebox-one">
+                        <div class="card-body">
+                            <h6 class="text-muted text-uppercase mt-0">Cards for open results</h6>
+                            <div style="display: flex; flex-wrap: wrap;">
+                                {% for i in cards %}
+                                <img src="/media/{{i.image}}"
+                                    onclick="selectOpenPatti({{i.id}},'{{i.name}}','{{i.value}}','{{i.category}}','{{i.image}}')"
+                                    style="width: 35px; height: 48px; margin: 3px;" alt="">
+                                {% endfor %}
+                            </div>
+
+                        </div> <!-- end card-body-->
+                    </div>
+                    <!--end card-->
+                </div><!-- end col -->
+
+                <div class="col-sm">
+                    <div class="card tilebox-one">
+                        <div class="card-body">
+                            <h6 class="text-muted text-uppercase mt-0">Cards for close results</h6>
+                            <div style="display: flex; flex-wrap: wrap;">
+                                {% for i in cards %}
+                                <img src="/media/{{i.image}}"
+                                    onclick="selectClosePatti({{i.id}},'{{i.name}}','{{i.value}}','{{i.category}}','{{i.image}}')"
+                                    style="width: 35px; height: 48px; margin: 3px;" alt="">
+                                {% endfor %}
+                            </div>
+
+                        </div> <!-- end card-body-->
+                    </div>
+                    <!--end card-->
+                </div><!-- end col -->
+
+
+            </div>
+        </div>
+
+        <div class="col-xl-12">
+            {% for i in market %}
+            <div class="row">
+                <form action="/dashboard/update-open-four-cards/" method="POST" class="col-6">
+                    {% csrf_token %}
+                    <div class="form-floating mb-3">
+                        <div id="openCart">
+
+                        </div>
+                        <input type="hidden" name="openCard" class="form-control" id="openCard" value="" required />
+                        <input type="text" value="{{i.id}}" name="id" hidden>
+                        {% if marketObj.resultOpen == '***' %}
+                        <button class="btn btn-success my-2" type="submit">Save</button>
+                        {% else %}
+                        <button class="btn btn-danger my-2" type="submit" disabled>Result Declared</button>
+                        {% endif %}
+
+                    </div>
+                </form>
+
+
+
+                <form action="/dashboard/update-close-four-cards/" method="POST" class="col-6">
+                    {% csrf_token %}
+                    <div class="form-floating mb-3">
+                        <div id="closeCart">
+                            
+                        </div>
+                        <input type="hidden" name="closeCard" class="form-control" id="closeCard" value=""
+                            required />
+                        <input type="text" value="{{i.id}}" name="id" hidden>
+
+                        {% if marketObj.resultClose == '***' %}
+                        <button class="btn btn-success my-2" type="submit">Save</button>
+                        {% else %}
+                        <button class="btn btn-danger my-2" type="submit" disabled>Result Declared</button>
+                        {% endif %}
+
+                    </div>
+                </form>
+            </div>
+            {% endfor %}
+        </div>
+
+
+
+
+        <div class="col-xl-6">
+            <h4 class="mt-1 mb-1">Open Market</h4>
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table id="basic-datatable" class="table dt-responsive nowrap w-100">
+                            <thead>
+                                <tr>
+                                    <th>Load Amount</th>
+                                    <th>Count</th>
+                                    <th>Cards</th>
+                                </tr>
+                            </thead>
+
+
+                            <tbody>
+                                {% for key, values in Dic1.items %}
+                                <tr>
+                                    <td>{{values.totalPointsOpenCard.points__sum}}</td>
+                                    <td>{{values.openCardCount}}</td>
+                                    <td>
+                                        {% for k, v in values.openRummyCardDict.items %}
+                                        <img src="/media/{{v.4}}" style="width: 30px; height: 40px; margin-right: 2px;"
+                                            alt="">
+
+
+                                        {% endfor %}
+                                        {% for k, v in values.openJokerCardDict.items %}
+                                        - <img src="/media/{{v.4}}"
+                                            style="width: 30px; height: 40px; margin-right: 2px;" alt="">
+
+
+                                        {% endfor %}
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- end col -->
+
+            </div>
+            <!-- end row -->
+
+        </div> <!-- container -->
+
+        <div class="col-xl-6">
+            <h4 class="mt-1 mb-1">Close Market</h4>
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table id="selection-datatable" class="table dt-responsive nowrap w-100">
+                            <thead>
+                                <tr>
+                                    <th>Load Amount</th>
+                                    <th>Count</th>
+                                    <th>Card</th>
+
+                                </tr>
+                            </thead>
+
+
+                            <tbody>
+                                {% for key, values in Dic2.items %}
+                                <tr>
+                                    <td>{{values.totalPointsCloseCard.points__sum}}</td>
+                                    <td>{{values.closeCardCount}}</td>
+                                    <td>
+                                        {% for k, v in values.closeRummyCardDict.items %}
+                                        <img src="/media/{{v.4}}" style="width: 30px; height: 40px; margin-right: 2px;"
+                                            alt="">
+
+
+                                        {% endfor %}
+                                        {% for k, v in values.closeJokerCardDict.items %}
+                                        - <img src="/media/{{v.4}}"
+                                            style="width: 30px; height: 40px; margin-right: 2px;" alt="">
+
+
+                                        {% endfor %}
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- end col -->
+
+            </div>
+            <!-- end row -->
+
+        </div>
+
+        <div class="col-xl-12">
+
+            
+            <h4 class="mt-1 mb-1">Megalot Bidding</h4>
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table id="datatable-buttons" class="table dt-responsive nowrap w-100">
+                            <thead>
+                                <tr>
+                                    <th>Load Amount</th>
+                                    <th>Count</th>
+                                    <th>Cards</th>
+                                </tr>
+                            </thead>
+
+
+                            <tbody>
+                                {% for key, values in dictMegalot.items %}
+                                <tr>
+                                    <td>{{values.totalPointsOpenCard.points__sum}}</td>
+                                    <td>{{values.openCardCount}}</td>
+                                    <td>
+                                        {% for k, v in values.openRummyCardDict.items %}
+                                        <img src="/media/{{v.4}}" style="width: 30px; height: 40px; margin-right: 2px;"
+                                            alt="">
+
+
+                                        {% endfor %}
+                                        {% for k, v in values.openJokerCardDict.items %}
+                                        - <img src="/media/{{v.4}}"
+                                            style="width: 30px; height: 40px; margin-right: 2px;" alt="">
+
+
+                                        {% endfor %}
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- end col -->
+
+            </div>
+            <!-- end row -->
+
+        </div>
+
+        <hr>
+        <!-- Same Day Bidding List -->
+        <div class="col-xl-12">
+            <h4 class="mt-1 mb-1">{{marketName}} - Todays Bidding</h4>
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table id="" class="table dt-responsive nowrap w-100">
+                            <thead>
+                                <tr>
+                                    <th>#ID</th>
+                                    <th>Customer <i class="mdi mdi-account-circle"></i></th>
+                                    <th>Market</th>
+                                    <th>Cards</th>
+                                    <th>Points</th>
+                                    <th>Status</th>
+                                    <th style="">Win Amount</th>
+
+                                </tr>
+                            </thead>
+
+
+                            <tbody>
+                                {% for i in bidding reversed %}
+
+                                <tr>
+                                    <td>#{{i.id}}</a> </td>
+                                    <td>{{i.customer.user.first_name}}</td>
+                                    <td>{{i.market.title}}- {{i.marketType}} - {{i.game.title}}</td>
+
+                                    <td>{% for key, values in rummyCardDict.items %}
+                                        {% if key.id == i.id %}
+                                        {% for k, v in values.rummyCards.items %}
+                                        <img src="/media/{{v.4}}" alt="" style="width: 30px; margin: 1.5px;">
+                                        {% endfor %}
+                                        {% endif %}
+                                        {% endfor %}
+                                    
+                                        {% for key, values in jokerCardDict.items %}
+                                        {% if key.id == i.id %}
+                                        {% for k, v in values.jokerCards.items %}
+                                        - <img src="/media/{{v.4}}" alt="" style="width: 30px; margin: 1.5px;">
+                                        {% endfor %}
+                                        {% endif %}
+                                        {% endfor %}
+                                    </td>
+                                    
+                                    <td>{{i.points}} </td>
+                                    {% if i.status == 'win' %}
+                                    <td>
+                                        <h5><span class="badge badge-success-lighten"><i class="mdi mdi-coin"></i>
+                                                {{i.status}}</span></h5>
+                                    </td>
+                                    {% elif i.status == 'loss' %}
+                                    <td>
+                                        <h5><span class="badge badge-danger-lighten"><i class="mdi mdi-coin"></i>
+                                                {{i.status}}</span></h5>
+                                    </td>
+                                    {% else %}
+                                    <td>
+                                        <h5><span class="badge badge-primary-lighten"><i class="mdi mdi-coin"></i>
+                                                {{i.status}}</span></h5>
+                                    </td>
+                                    {% endif %}
+                                    <td>{{i.winAmount}} </td>
+
+                                </tr>
+                                {% endfor %}
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- end col -->
+
+            </div>
+            <!-- end row -->
+
+        </div>
+
+
+
+        <!-- Large modal -->
+        <!-- <button type="button" class="btn btn-info" >Large Modal</button> -->
+        <div class="modal fade" id="bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myLargeModalLabel">Edit/ Declare The Result</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
+                    </div>
+                    <div class="modal-body">
+                        {% for i in market %}
+                        <form action="/dashboard/edit-market/" method="POST">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="form-floating mb-3 col-12">
+                                    <input type="text" name="title" class="form-control" id="floatingInput"
+                                        placeholder="Market Name " value="{{i.title}}" required />
+                                    <input type="number" name="id" class="form-control" id="floatingInput"
+                                        placeholder="Market Name " value="{{i.id}}" hidden />
+                                    <label for="floatingInput">Market Title <small class="text-danger">*</small></label>
+                                </div>
+
+                                <div class="form-floating mb-3 col-6">
+                                    <input type="text" name="openTime" class="form-control" id="floatingInput"
+                                        placeholder="Market Open Time " value="{{i.openTime}}" required />
+                                    <small>Current Open Time : {{i.openTime}}</small>
+                                    <label for="floatingInput">Open Time <small class="text-danger">*</small></label>
+                                </div>
+                                <div class="form-floating mb-3 col-6">
+                                    <input type="text" name="closeTime" class="form-control" id="floatingInput"
+                                        placeholder="Market Close Time" value="{{i.closeTime}}" required />
+                                    <small>Current close Time : {{i.closeTime}}</small>
+                                    <label for="floatingInput">Close Time <small class="text-danger">*</small></label>
+                                </div>
+                                <div class="form-floating col-12 mb-2">
+                                    <select class="form-select" id="floatingSelect"
+                                        aria-label="Floating label select example" name="status">
+                                        <option value="{{i.status}}" selected>{{i.status}}</option>
+                                        <option value="Batting is running now">Batting is running now</option>
+                                        <option value="Close batting running now">Close batting running now</option>
+                                        <option value="Batting is closed for today">Batting is closed for today</option>
+                                    </select>
+                                    <label for="floatingSelect">Update with status</label>
+                                </div>
+                                <div class=" mb-3 col-6">
+                                    <button class="btn btn-success" type="submit">Save</button>
+                                </div>
+                            </div>
+                        </form>
+                        {% endfor %}
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+
+
+    </div> <!-- content -->
+
+    {% endblock %}
+
+    {% block js %}
+    <script>
+
+        // declraing new cart for open card 
+        if (localStorage.getItem('openCart') == null) {
+            var openCart = {};
+        } else {
+            openCart = JSON.parse(localStorage.getItem('openCart'));
+
+        }
+
+        // declraing new cart for close card 
+        if (localStorage.getItem('closeCart') == null) {
+            var closeCart = {};
+        } else {
+            closeCart = JSON.parse(localStorage.getItem('closeCart'));
+
+        }
+
+        // Select card for open result 
+        function selectOpenPatti(id, name, value, category, image) {
+            keyId = Math.floor((Math.random() * 10000) + 1);
+            id = id;
+            name = name;
+            value = value;
+            category = category;
+            image = image;
+            openCart['id' + keyId] = [id, name, value, category, image];
+
+            updateOpenCart(openCart)
+            $('#openCard').val(JSON.stringify(openCart));
+        }
+        // Select card for close result 
+        function selectClosePatti(id, name, value, category, image) {
+            keyId = Math.floor((Math.random() * 10000) + 1);
+            id = id;
+            name = name;
+            value = value;
+            category = category;
+            image = image;
+            closeCart['id' + keyId] = [id, name, value, category, image];
+
+            updatecloseCart(closeCart)
+            $('#closeCard').val(JSON.stringify(closeCart));
+        }
+
+
+        // Update open Cart 
+        function updateOpenCart(openCart) {
+
+
+            if ($.isEmptyObject(openCart)) {
+
+                document.getElementById("openCart").innerHTML = `<img src="{% static 'app/assets/img/card/cardBack.jpg' %}"
+                                     alt="" style="margin: 3px; width: 40px;">
+                                <img src="{% static 'app/assets/img/card/cardBack.jpg' %}"
+                                     alt="" style="margin: 3px; width: 40px;">
+                                <img src="{% static 'app/assets/img/card/cardBack.jpg' %}"
+                                     alt="" style="margin: 3px; width: 40px;">`;
+
+            } else {
+                document.getElementById("openCart").innerHTML = ``;
+                for (item in openCart) {
+                    let id = openCart[item][0];
+                    let name = openCart[item][1];
+                    let value = openCart[item][2];
+                    let category = openCart[item][3];
+                    let image = openCart[item][4];
+
+                    mystr = `<img src="/media/${image}"
+                                     alt="" style="margin: 3px; width: 40px;">`;
+
+                    $('#openCart').append(mystr);
+
+                }
+            }
+        }
+
+        // Update close Cart 
+        function updatecloseCart(closeCart) {
+
+
+            if ($.isEmptyObject(closeCart)) {
+
+                document.getElementById("closeCart").innerHTML = `<img src="{% static 'app/assets/img/card/cardBack.jpg' %}"
+                         alt="" style="margin: 3px; width: 40px;">
+                    <img src="{% static 'app/assets/img/card/cardBack.jpg' %}"
+                         alt="" style="margin: 3px; width: 40px;">
+                    <img src="{% static 'app/assets/img/card/cardBack.jpg' %}"
+                         alt="" style="margin: 3px; width: 40px;">`;
+
+            } else {
+                document.getElementById("closeCart").innerHTML = ``;
+                for (item in closeCart) {
+                    let id = closeCart[item][0];
+                    let name = closeCart[item][1];
+                    let value = closeCart[item][2];
+                    let category = closeCart[item][3];
+                    let image = closeCart[item][4];
+
+                    mystr = `<img src="/media/${image}"
+                         alt="" style="margin: 3px; width: 40px;">`;
+
+                    $('#closeCart').append(mystr);
+
+                }
+            }
+        }
+
+    </script>
+    {% endblock %}

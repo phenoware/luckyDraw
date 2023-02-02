@@ -1,0 +1,201 @@
+{% extends 'dashboard/layout.html' %}
+{% load static %}
+{% block title %} JodiWin | Bidding History {% endblock %}
+{% block body %}
+
+<!-- Start Content-->
+<div class="container-fluid">
+
+    <!-- start page title -->
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Bidding History</a></li>
+                        <li class="breadcrumb-item active">Bidding History</li>
+                    </ol>
+                </div>
+                <h4 class="page-title">Bidding History</h4>
+            </div>
+        </div>
+    </div>
+    <!-- end page title -->
+    {% if messages %}
+    <div class="alert alert-success" role="alert">
+        {% for message in messages %}
+        <i style="list-style: none;" class=" me-2"></i> <strong>Message - </strong>
+        {{ message }}
+        {% endfor %}
+    </div>
+    {% endif %}
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row mb-2">
+                        <div class="col-xl-8">
+                            <form
+                                class="row gy-2 gx-2 align-items-center justify-content-xl-start justify-content-between">
+
+                                <div class="col-auto">
+                                    <div class="d-flex align-items-center">
+                                        <!-- <label for="status-select" class="me-2">Status</label>
+                                        <select class="form-select" id="status-select" onchange="selectStatus()">
+                                            <option selected> -- Choose -- </option>
+                                            <option value="new">New Leads</option>
+                                            <option value="followup">Followp</option>
+                                            <option value="login">Login</option>
+                                            <option value="soft-approval">Soft Approval</option>
+                                            <option value="approval">Approval</option>
+                                            <option value="sanction">Sanction</option>
+                                            <option value="disbursed">Disbursed</option>
+                                            <option value="rejected">Rejected</option>
+                                            <option value="canceled">Canceled</option>
+                                        </select> -->
+                                    </div>
+                                </div>
+                                <input type="text" name="" id="loanType" value="{{loanType}}" hidden>
+                            </form>
+                        </div>
+                        <div class="col-xl-4">
+                            <div class="text-xl-end mt-xl-0 mt-2">
+                                <a href="/dashboard/bidding-history" type="button" class="btn btn-primary mb-2 me-2"><i
+                                        class="mdi mdi-autorenew me-1"></i> </a>
+                                <!-- <button type="button" class="btn btn-light mb-2">Export</button> -->
+                            </div>
+                        </div><!-- end col-->
+                    </div>
+
+                    <div class="table-responsive">
+                        <table id="basic-datatable" class="table dt-responsive nowrap w-100">
+                            <thead>
+                                <tr>
+                                    <th>#ID</th>
+                                    <th>Customer <i class="mdi mdi-account-circle"></i></th>
+                                    <th>Market</th>
+                                    <th>Game</th>
+                                    <th>Digit</th>
+                                    <th>Points</th>
+                                    <th>Date <i class="mdi mdi-calendar"></i></th>
+                                    <th>Status</th>
+                                    <th style="">Win Amount</th>
+                                    <th style="">Market Type</th>
+                                    
+                                </tr>
+                            </thead>
+
+
+                            <tbody>
+                                {% for i in history reversed %}
+                                <tr>
+                                    <td>#20210{{i.id}}</a> </td>
+                                    <td>{{i.customer.user.first_name}}</td>
+                                    <td>{{i.market.title}}</td>
+                                    <td>{{i.game.title}}</td>
+                                    <td>{{i.digit}} </td>
+                                    <td>{{i.points}} </td>
+                                    <td>{{i.date}} </td>
+                                    {% if i.status == 'win' %}
+                                    <td>
+                                        <h5><span class="badge badge-success-lighten"><i class="mdi mdi-coin"></i>
+                                                {{i.status}}</span></h5>
+                                    </td>
+                                    {% elif i.status == 'loss' %}
+                                    <td>
+                                        <h5><span class="badge badge-danger-lighten"><i class="mdi mdi-coin"></i>
+                                                {{i.status}}</span></h5>
+                                    </td>
+                                    {% else %}
+                                    <td>
+                                        <h5><span class="badge badge-primary-lighten"><i class="mdi mdi-coin"></i>
+                                                {{i.status}}</span></h5>
+                                    </td>
+                                    {% endif %}
+                                    <td>{{i.winAmount}} </td>
+                                    <td>{{i.marketType}} </td>
+                                    
+                                </tr>
+                                {% endfor %}
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div> <!-- end card-body-->
+            </div> <!-- end card-->
+        </div> <!-- end col -->
+    </div>
+    <!-- end row -->
+
+</div> <!-- container -->
+
+
+<!-- Modals Here  -->
+
+<!-- Large modal -->
+<!-- <button type="button" class="btn btn-info">Large Modal</button> -->
+<div class="modal fade" id="bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myLargeModalLabel">Adding New Market </h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
+            </div>
+            <div class="modal-body">
+                <div class="conatiner">
+                    <form action="/dashboard/add-reguler-market/" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-xl-12 row">
+                                <div class="mb-3 col-12">
+                                    <label for="title" class="form-label">Market Title : <span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" id="title" name="title" class="form-control"
+                                        placeholder="Market title" required>
+                                </div>
+                                <div class="mb-3 col-4">
+                                    <label for="project-budget" class="form-label">Open Time : <span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" id="openTime" name="openTime" class="form-control"
+                                        placeholder="Eg. 9.30 AM" required>
+                                </div>
+                                <div class="mb-3 col-4">
+                                    <label for="project-budget" class="form-label">Close Time : <span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" id="closeTime" name="closeTime" class="form-control"
+                                        placeholder="Eg. 5.30 PM" required>
+                                </div>
+                                
+                            </div> <!-- end col-->
+                            
+                            <div class="col-xl-12 row">
+
+                                <!-- Date View -->
+                                <div class="mb-3 position-relative" id="datepicker2">
+                                    <button class="btn btn-success " type="submit">Save & Add</button>
+                                    <button class="btn btn-warning mx-2" type="reset">Reset</button>
+                                </div>
+                            </div> <!-- end col-->
+                        </div>
+                        <!-- end row -->
+                    </form>
+                </div>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+</div> <!-- content -->
+
+
+{% endblock %}
+
+{% block js %}
+
+<script>
+
+</script>
+{% endblock %}

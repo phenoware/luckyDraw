@@ -1,0 +1,401 @@
+{% extends 'dashboard/layout.html' %}
+{% load static %}
+{% block title %} JodiWin Market Details | Jodiwin {% endblock %}
+{% block body %}
+
+<!-- Start Content-->
+<div class="container-fluid">
+
+    <!-- start page title -->
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="/dashboard/">Home</a></li>
+                        <li class="breadcrumb-item"><a href="/dashboard/jodi-market">Jodi Markets Details</a></li>
+                        <li class="breadcrumb-item active">Jodi Markets Details</li>
+                    </ol>
+                </div>
+                <h4 class="page-title">Jodi Markets Details</h4>
+            </div>
+        </div>
+    </div>
+    <!-- end page title -->
+    {% if messages %}
+    <div class="alert alert-success" role="alert">
+        {% for message in messages %}
+        <i style="list-style: none;" class=" me-2"></i> <strong>Message - </strong>
+        {{ message }}
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <div class="row">
+        <div class="col-sm-12">
+            <!-- Profile -->
+            <div class="card bg-primary">
+                <div class="card-body profile-user-box">
+                    {% for i in market %}
+                    <div class="row">
+                        <div class="col-sm-10">
+                            <div class="row align-items-center">
+                                <div class="col">
+                                    <div>
+                                        <h4 class="mt-1 mb-1 text-white">{{i.title}}</h4>
+
+                                        <ul class="mb-0 list-inline text-light">
+                                            <li class="list-inline-item me-3">
+                                                <h5 class="mb-1">Close Time</h5>
+                                                <p class="mb-0 font-13 text-white-50">{{i.closeTime}}</p>
+                                            </li>
+                                            <li class="list-inline-item">
+                                                <h5 class="mb-1">Total Bidding</h5>
+                                                <p class="mb-0 font-13 text-white-50">{{totalBidding}}</p>
+                                            </li>
+                                            <li class="list-inline-item">
+                                                <h5 class="mb-1">Total Bidding Amount</h5>
+                                                <p class="mb-0 font-13 text-white-50">Rs. {{biddingAmount.points__sum}} </p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col ">
+                                    <div style="display: flex;">
+                                        {% if marketObj.result == '**' %}
+                                        <div style="display: flex; margin-left: 30px;" >
+                                            <img src="{% static 'app/assets/img/card/cardBack.jpg' %}"
+                                                style="width: 35px; height: 48px; margin: 3px;" alt="">
+                                            <img src="{% static 'app/assets/img/card/cardBack.jpg' %}"
+                                                style="width: 35px; height: 48px; margin: 3px;" alt="">
+                                        </div>
+
+                                        {% else %}
+                                        <div>
+                                            {% for key, value in resultCard.items %}
+                                            <img src="/media/{{value.4}}"
+                                                style="width: 35px; height: 48px; margin: 3px;" alt="">
+                                            {% endfor %}
+                                        </div>
+                                        {% endif %}
+
+                                    </div>
+                                    <div>
+
+                                        <div class="">
+                                            <ul class="mb-0 list-inline text-light">
+                                                <li class="list-inline-item ">
+                                                    <h5 class="mb-1">{{i.status}}</h5>
+                                                </li>
+
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-sm-2">
+                            <div class="text-center mt-sm-0 mt-3 text-sm-end">
+                                <button type="button" class="btn btn-light" data-bs-toggle="modal"
+                                    data-bs-target="#bs-example-modal-lg">
+                                    <i class="mdi mdi-briefcase-edit-outline me-1"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div> <!-- end col-->
+
+                     <!-- end col-->
+                </div> <!-- end row -->
+                {% endfor %}
+            </div> <!-- end card-body/ profile-user-box-->
+        </div>
+        <!--end profile/ card -->
+    </div> <!-- end col-->
+</div>
+<!-- end row -->
+
+<div class="row">
+    <div class="col-xl-12">
+        <div class="row">
+            <div class="col-sm">
+                <div class="card tilebox-one">
+                    <div class="card-body">
+                        <h6 class="text-muted text-uppercase mt-0">Cards for open results</h6>
+                        <div style="display: flex; flex-wrap: wrap;">
+                            {% for i in cards %}
+                            <img src="/media/{{i.image}}"
+                                onclick="selectOpenPatti({{i.id}},'{{i.name}}','{{i.value}}','{{i.category}}','{{i.image}}')"
+                                style="width: 35px; height: 48px; margin: 3px;" alt="">
+                            {% endfor %}
+                        </div>
+
+                    </div> <!-- end card-body-->
+                </div>
+                <!--end card-->
+            </div><!-- end col -->
+
+
+        </div>
+    </div>
+
+    <div class="col-xl-12">
+        {% for i in market %}
+        <div class="row">
+            <form action="/dashboard/update-jodi-win-digit/" method="POST" class="col-4">
+                {% csrf_token %}
+                <div class="form-floating mb-3">
+                    <div id="openCart">
+
+                    </div>
+                    <input type="hidden" name="resultCard" class="form-control" id="openCard" value="" required />
+                    <input type="text" value="{{i.id}}" name="id" hidden>
+                    {% if marketObj.result == '**' %}
+                    <button class="btn btn-success my-2" type="submit">Save</button>
+                    {% else %}
+                    <button class="btn btn-danger my-2" type="submit" disabled>Result Declared</button>
+                    {% endif %}
+
+                </div>
+            </form>
+
+        </div>
+        {% endfor %}
+    </div>
+
+
+    <div class="col-xl-12">
+        <h4 class="mt-1 mb-1">Jodi Digit & Load</h4>
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table id="basic-datatable" class="table dt-responsive nowrap w-100">
+                        <thead>
+                            <tr>
+                                <th>Load Amount</th>
+                                <th>Count</th>
+                                <th>Digit</th>
+                            </tr>
+                        </thead>
+
+
+                        <tbody>
+                            {% for key, values in jodiWinDigitList.items %}
+                            <tr>
+                                <td>{{values.totalPoints.points__sum}}</td>
+                                <td>{{values.digitCount}}</td>
+                                <td>
+                                    {% for k, v in values.resultCardDict.items %}
+                                    <img src="/media/{{v.4}}" style="width: 30px; height: 40px; margin-right: 2px;"
+                                        alt="">
+
+
+                                    {% endfor %}
+                                   
+                                </td>
+
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- end col -->
+
+        </div>
+        <!-- end row -->
+
+    </div> <!-- container -->
+
+    <div class="col-xl-12">
+        <h4 class="mt-1 mb-1">Jodi Win Digit Todays Bidding Hsitory</h4>
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table id="selection-datatable" class="table dt-responsive nowrap w-100">
+                        <thead>
+                            <tr>
+                                <th>#ID</th>
+                                <th>User <i class="mdi mdi-account"></i></th>
+                                <th>Market Time</th>
+                                <th>Digit</th>
+                                <th>Points</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                                <th>Win Amount</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for b in gameJodiDigit reversed %}
+                            <tr>
+                                <td>#{{b.id}}</td>
+                                <td>{{b.customer.user.first_name}} {{b.customer.user.last_name}}</td>
+                                <td>{{b.market.closeTime}}</td>
+                                <td>{% for key, values in cardsImgDict.items %}
+                                    {% if key.id == b.id %}
+                                    {% for k, v in values.cardsImg.items %}
+                                    <img src="/media/{{v.4}}" alt="" style="width: 30px; margin: 1.5px;">
+                                    {% endfor %}
+                                    {% endif %}
+                                    {% endfor %}
+                                </td>
+
+                                <td>{{b.points}}</td>
+                                <td>{{b.date}}</td>
+                                {% if b.status == 'win' %}
+                                <td>
+                                    <h5><span class="badge badge-success-lighten"><i class="mdi mdi-coin"></i>
+                                            {{b.status}}</span></h5>
+                                </td>
+                                {% elif b.status == 'loss' %}
+                                <td>
+                                    <h5><span class="badge badge-danger-lighten"><i class="mdi mdi-coin"></i>
+                                            {{b.status}}</span></h5>
+                                </td>
+                                {% else %}
+                                <td>
+                                    <h5><span class="badge badge-primary-lighten"><i class="mdi mdi-coin"></i>
+                                            {{b.status}}</span></h5>
+                                </td>
+                                {% endif %}
+                                <td>{{b.winAmount}}</td>
+
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- end col -->
+
+        </div>
+        <!-- end row -->
+
+    </div> <!-- container -->
+
+
+
+    <!-- Market Edit Modal Here  -->
+
+
+
+
+    <!-- Large modal -->
+    <!-- <button type="button" class="btn btn-info" >Large Modal</button> -->
+    <div class="modal fade" id="bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myLargeModalLabel">Edit/ Declare The Result</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
+                </div>
+                <div class="modal-body">
+                    {% for i in market %}
+                    <form action="/dashboard/edit-jodi-win-market/" method="POST">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="form-floating mb-3 col-12">
+                                <input type="text" name="title" class="form-control" id="floatingInput"
+                                    placeholder="Market Name " value="{{i.title}}" required />
+                                <input type="number" name="id" class="form-control" id="floatingInput"
+                                    placeholder="Market Name " value="{{i.id}}" hidden />
+                                <label for="floatingInput">Market Title <small class="text-danger">*</small></label>
+                            </div>
+                            <div class="form-floating mb-3 col-12">
+                                <input type="text" name="closeTime" class="form-control" id="floatingInput"
+                                    placeholder="Market Close Time" value="{{i.closeTime}}" required />
+                                <small>Current close time : {{i.closeTime}}</small>
+                                <label for="floatingInput">Close Time <small class="text-danger">*</small></label>
+                            </div>
+                            <div class="form-floating col-12 mb-2">
+                                <select class="form-select" id="floatingSelect"
+                                    aria-label="Floating label select example" name="status">
+                                    <option value="{{i.status}}" selected>{{i.status}}</option>
+                                    <option value="Batting is running now">Batting is running now</option>
+                                    <option value="Batting is closed for today">Batting is closed for today</option>
+                                </select>
+                                <label for="floatingSelect">Update with status</label>
+                            </div>
+                            <div class=" mb-3 col-6">
+                                <button class="btn btn-success" type="submit">Save</button>
+                            </div>
+                        </div>
+                    </form>
+                    {% endfor %}
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+
+</div> <!-- content -->
+
+{% endblock %}
+
+{% block js %}
+
+<script>
+
+    // declraing new cart for open card 
+    if (localStorage.getItem('resultCart') == null) {
+        var resultCart = {};
+    } else {
+        resultCart = JSON.parse(localStorage.getItem('resultCart'));
+
+    }
+
+   
+    // Select card for open result 
+    function selectOpenPatti(id, name, value, category, image) {
+        keyId = Math.floor((Math.random() * 10000) + 1);
+        id = id;
+        name = name;
+        value = value;
+        category = category;
+        image = image;
+        resultCart['id' + keyId] = [id, name, value, category, image];
+
+        updateResultCart(resultCart)
+        $('#openCard').val(JSON.stringify(resultCart));
+    }
+    
+
+    // Update resultCart
+    function updateResultCart(resultCart) {
+
+
+        if ($.isEmptyObject(resultCart)) {
+
+            document.getElementById("openCart").innerHTML = `<img src="{% static 'app/assets/img/card/cardBack.jpg' %}"
+                                 alt="" style="margin: 3px; width: 40px;">
+                            <img src="{% static 'app/assets/img/card/cardBack.jpg' %}"
+                                 alt="" style="margin: 3px; width: 40px;">
+                           `;
+
+        } else {
+            document.getElementById("openCart").innerHTML = ``;
+            for (item in resultCart) {
+                let id = resultCart[item][0];
+                let name = resultCart[item][1];
+                let value = resultCart[item][2];
+                let category = resultCart[item][3];
+                let image = resultCart[item][4];
+
+                mystr = `<img src="/media/${image}"
+                                 alt="" style="margin: 3px; width: 40px;">`;
+
+                $('#openCart').append(mystr);
+
+            }
+        }
+    }
+
+
+
+</script>
+{% endblock %}

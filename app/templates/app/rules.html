@@ -1,0 +1,137 @@
+{% extends 'app/layout.html' %}
+{% load static %}
+
+{% block title %} JoidWin | Rules & Notice Board {% endblock %}
+
+{% block body %}
+<div class="main-container container">
+
+    <!-- Blogs -->
+    <div class="row mb-3">
+        <div class="col">
+            <h4 class="title text-center" style="color: orange;">खेलने की विधि </h4>
+        </div>
+        <!-- <div class="col-auto align-self-center">
+            <a href="blog.html" class="small">Read more</a>
+        </div> -->
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-12 col-lg-12">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <div class="row ">
+                        <img src="{% static 'app/assets/img/icon/download.png' %}" alt="" style="height: 40px;"  class="col-2">
+                        <p class="text-secondary col-10">सबसे पहले प्ले स्टोर से हमारी ऐप डाउनलोड करें</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-12 col-lg-12">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <div class="row ">
+                        <img src="{% static 'app/assets/img/icon/registered.png' %}" alt="" style="height: 40px;"  class="col-2">
+                        <p class="text-secondary col-10">फिर आपको अपना नाम , मोबाइल नंबर और पासवर्ड भरकर खुदको रजिस्टर करना होंगा | </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-12 col-md-12 col-lg-12">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <div class="row ">
+                        <img src="{% static 'app/assets/img/icon/wallet.png' %}" alt="" style="height: 40px;"  class="col-2">
+                        <p class="text-secondary col-10">इसके बाद अपने खाते में कुछ पैसे जमा करे उसके लिए आपको एड फंड का बटन दबाना होगा |</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12 col-md-12 col-lg-12">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <div class="row ">
+                        <img src="{% static 'app/assets/img/icon/money-bag.png' %}" alt="" style="height: 40px;"  class="col-2">
+                        <p class="text-secondary col-10">न्यूनतम जमा राशि १०० रुपए हे | </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-12 col-lg-12">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <div class="row ">
+                        <img src="{% static 'app/assets/img/icon/payment-method.png' %}" alt="" style="height: 40px;"  class="col-2">
+                        <p class="text-secondary col-10">आप राशि जमा करने के लिए किसी भी माध्यम का उपयोग कर सकते हे, जैसे गूगल पे, फ़ोन पे, पेटीएम् , कार्ड इत्यादि </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-12 col-lg-12">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <div class="row ">
+                        <img src="{% static 'app/assets/img/icon/hand-gesture.png' %}" alt="" style="height: 40px;"  class="col-2">
+                        <p class="text-secondary col-10">जितनी राशि जमा करेंगे उतने पॉइंट्स आपके अकाउंट में जमा होंगे | ( 1 रूपये  = १ पॉइंट्स </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-12 col-lg-12">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <div class="row ">
+                        <img src="{% static 'app/assets/img/icon/video-game.png' %}" alt="" style="height: 40px;"  class="col-2">
+                        <p class="text-secondary col-10">खेल खेलने के लिए बाजार ,  खेल का प्रकार और अपने पसंदीदा नम्बर का चयन करें | आदि आप खेल जीतते हे , तो आपके पॉइंट्स बढ़ेंगे | </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-12 col-lg-12">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <div class="row ">
+                        <img src="{% static 'app/assets/img/icon/withdraw.png' %}" alt="" style="height: 40px;"  class="col-2">
+                        <p class="text-secondary col-10">Withdraw बटन को दबाकर आप अपने खाते से पैसे निकाल सकते हे और आपके पैसे आपके बैंक खाते में जमा हो जाएंगे | विड्रॉल की सुविधा २४ घंटे उपलब्ध हे |  </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><div class="row">
+        <div class="col-12 col-md-12 col-lg-12">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <div class="row ">
+                        <img src="{% static 'app/assets/img/icon/call-center.png' %}" alt="" style="height: 40px;"  class="col-2">
+                        <p class="text-secondary col-10">दिन में दो बार विड्रॉल किया जाता हे , दिन में  १२.००  बजे और रात  १०. ०० बजे , तो घबराये नहीं हमारी तरफ से खुद आपके पास कॉल आएंगा अगर आप विड्रॉल करते हे तो | </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block js %}
+
+<script>
+    document.getElementById('today').value = new Date().toISOString().substring(0, 10);
+</script>
+
+{% endblock %}

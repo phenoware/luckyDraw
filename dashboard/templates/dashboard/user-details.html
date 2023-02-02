@@ -1,0 +1,373 @@
+{% extends 'dashboard/layout.html' %}
+{% load static %}
+{% block title %} User Detaiils | Jodiwin {% endblock %}
+{% block body %}
+
+<!-- Start Content-->
+<div class="container-fluid">
+
+    <!-- start page title -->
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="/dashboard/">Home</a></li>
+                        <li class="breadcrumb-item"><a href="/dashboard/users">Users</a></li>
+                        <li class="breadcrumb-item active">User Profile</li>
+                    </ol>
+                </div>
+                <h4 class="page-title">User Profile</h4>
+            </div>
+        </div>
+    </div>
+    <!-- end page title -->
+    {% if messages %}
+    <div class="alert alert-success" role="alert">
+        {% for message in messages %}
+        <i style="list-style: none;" class=" me-2"></i> <strong>Message - </strong>
+        {{ message }}
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <div class="row">
+        <div class="col-sm-12">
+            <!-- Profile -->
+            <div class="card bg-primary">
+                <div class="card-body profile-user-box">
+                    {% for i in customer %}
+                    <div class="row">
+                        <div class="col-sm-8">
+                            <div class="row align-items-center">
+                                <div class="col-auto">
+                                    <div class="avatar-lg">
+                                        <img src="{% static 'dashboard/assets/images/users/userAvtar.jpg' %}" alt=""
+                                            class="rounded-circle img-thumbnail">
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div>
+                                        <h4 class="mt-1 mb-1 text-white">{{i.user.first_name}} {{i.user.last_name}}</h4>
+                                        <p class="font-13 text-white-50"> {{i.user.email}}</p>
+
+                                        <ul class="mb-0 list-inline text-light">
+                                            <li class="list-inline-item me-3">
+                                                <h5 class="mb-1">Rs. {{i.walletAmount}}</h5>
+                                                <p class="mb-0 font-13 text-white-50">Wallet Balance</p>
+                                            </li>
+                                            <li class="list-inline-item">
+                                                <h5 class="mb-1">{{totalBidding}}</h5>
+                                                <p class="mb-0 font-13 text-white-50">Number of Bidding</p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> <!-- end col-->
+
+                        <div class="col-sm-4">
+                            <div class="text-center mt-sm-0 mt-3 text-sm-end">
+                                <button type="button" class="btn btn-light">
+                                    <i class="mdi mdi-account-edit me-1"></i> Edit Profile
+                                </button>
+                            </div>
+                        </div> <!-- end col-->
+                    </div> <!-- end row -->
+                    {% endfor %}
+                </div> <!-- end card-body/ profile-user-box-->
+            </div>
+            <!--end profile/ card -->
+        </div> <!-- end col-->
+    </div>
+    <!-- end row -->
+
+    {% for i in customer %}
+    <div class="row">
+        <div class="col-xl-4">
+            <!-- Personal-Information -->
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="header-title mt-0 mb-3">Customer Information</h4>
+
+                    <hr />
+
+                    <div class="text-start">
+                        <p class="text-muted"><strong>Full Name :</strong> <span class="ms-2">{{i.user.first_name}}
+                                {{i.user.last_name}}</span>
+                        </p>
+
+                        <p class="text-muted"><strong>Mobile :</strong><span class="ms-2">(+91) {{i.phone}}</span></p>
+
+                        <p class="text-muted"><strong>Email :</strong> <span class="ms-2"><i class="mdi mdi-email"></i>
+                                {{i.user.email}}</span>
+                        </p>
+
+                        <p class="text-muted"><strong>Last Login :</strong> <span class="ms-2">{{i.user.last_login}}</span></p>
+
+                        <!-- <p class="text-muted"><strong>Address :</strong>
+                            <span class="ms-2"> {{i.address_line_1}},<br>
+                                {{i.address_line_2}}, <br>
+                            {{i.landmark}}, {{i.city}}- {{i.pincode}}, {{i.state}}-India </span>
+                        </p> -->
+
+                    </div>
+                </div>
+            </div>
+            <!-- Personal-Information -->
+
+            <!-- Toll free number box-->
+            <div class="card text-white bg-info overflow-hidden">
+                <div class="card-body">
+                    <div class="toll-free-box text-center">
+                        <h4> <i class="mdi mdi-phone"></i> Call : <a href="tel:{{i.phone}}"
+                                class="fw-bold text-light">(+91) {{i.phone}} </a></h4>
+                    </div>
+                </div> <!-- end card-body-->
+            </div> <!-- end card-->
+            <!-- End Toll free number box-->
+            {% for a in bankAccount %}
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="header-title mt-0 mb-3">Bank Account Details</h4>
+
+                    <hr />
+
+                    <div class="text-start">
+                        <p class="text-muted"><strong>Bank Name :</strong> <span class="ms-2">{{a.bankName}}</span>
+                        </p>
+                        <p class="text-muted"><strong>Account Number :</strong> <span class="ms-2">{{a.accountNumber}}</span>
+                        </p>
+                        <p class="text-muted"><strong>IFSC Code :</strong> <span class="ms-2">{{a.ifscCode}}</span>
+                        </p>
+                        <p class="text-muted"><strong>Account Name :</strong> <span class="ms-2">{{a.accountName}}</span>
+                        </p>
+                        
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        </div> <!-- end col-->
+
+        <div class="col-xl-8">
+
+            <!-- Chart-->
+
+            <div class="row">
+                <div class="col-sm">
+                    <div class="card tilebox-one">
+                        <div class="card-body">
+                            <i class="dripicons-basket float-end text-muted"></i>
+                            <h6 class="text-muted text-uppercase mt-0">Numbers of time bidding</h6>
+                            <h2 class="m-b-20">{{totalBidding}}</h2>
+                            <span class="badge bg-primary"> +1 % </span> <span class="text-muted">From previous
+                                month</span>
+                        </div> <!-- end card-body-->
+                    </div>
+                    <!--end card-->
+                </div><!-- end col -->
+
+                <div class="col-sm">
+                    <div class="card tilebox-one">
+                        <div class="card-body">
+                            <i class="dripicons-box float-end text-muted"></i>
+                            <h6 class="text-muted text-uppercase mt-0">Total Win Amount</h6>
+                            <h2 class="m-b-20">Rs. <span>{{totalWin}}</span></h2>
+                            <span class="badge bg-primary"> +1 % </span> <span class="text-muted">From previous
+                                month</span>
+                        </div> <!-- end card-body-->
+                    </div>
+                    <!--end card-->
+                </div><!-- end col -->
+
+
+            </div>
+            <!-- end row -->
+
+
+            <div class="card">
+
+                <div class="card-body">
+                    <ul class="nav nav-tabs mb-3">
+                        <li class="nav-item">
+                            <a href="#home" data-bs-toggle="tab" aria-expanded="true" class="nav-link active">
+                                <i class="mdi mdi-home-variant d-md-none d-block"></i>
+                                <span class="d-none d-md-block">Bidding History</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#profile" data-bs-toggle="tab" aria-expanded="false" class="nav-link">
+                                <i class="mdi mdi-account-circle d-md-none d-block"></i>
+                                <span class="d-none d-md-block">Jodiwin Bidding History</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#settings" data-bs-toggle="tab" aria-expanded="false" class="nav-link">
+                                <i class="mdi mdi-settings-outline d-md-none d-block"></i>
+                                <span class="d-none d-md-block">Withdraw Request</span>
+                            </a>
+                        </li>
+                    </ul>
+
+                    <div class="tab-content">
+                        <div class="tab-pane show active" id="home">
+
+                            <div class="table-responsive">
+                                <table class="table table-hover table-centered mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th>#ID</th>
+                                            <th>Market</th>
+                                            <th>Game</th>
+                                            <th>Digit</th>
+                                            <th>Points</th>
+                                            <th>Date</th>
+                                            <th>Market type</th>
+                                            <th>Win Amount</th>
+                                            <th>Status</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for b in biddingHistory reversed %}
+                                        <tr>
+                                            <td>BID#{{b.id}}</td>
+                                            <td>{{b.market.title}}</td>
+                                            <td>{{b.game.title}}</td>
+                                            <td>{{b.digit}}</td>
+                                            <td>{{b.points}}</td>
+                                            <td>{{b.date}}</td>
+                                            <td>{{b.marketType}}</td>
+                                            <td>Rs. {{b.winAmount}}</td>
+                                            {% if b.status == 'win' %}
+                                            <td>
+                                                <h5><span class="badge badge-success-lighten"><i
+                                                            class="mdi mdi-check"></i> {{b.status}}</span></h5>
+                                            </td>
+                                            {% elif b.status == 'loss' %}
+                                            <td>
+                                                <h5><span class="badge badge-danger-lighten"><i
+                                                            class="mdi mdi-wrong"></i> {{b.status}}</span></h5>
+                                            </td>
+                                            {% else %}
+                                            <td>
+                                                <h5><span class="badge badge-primary-lighten"><i
+                                                            class=""></i>{{b.status}}</span></h5>
+                                            </td>
+                                            {% endif %}
+
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="profile">
+                            <div class="table-responsive">
+                                <table class="table table-hover table-centered mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th>#ID</th>
+                                            <th>Market Time</th>
+                                            <th>Digit</th>
+                                            <th>Points</th>
+                                            <th>Date</th>
+                                            <th>Win Amount</th>
+                                            <th>Status</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for b in jodiBiddingHistory reversed %}
+                                        <tr>
+                                            <td>BID#{{b.id}}</td>
+                                            <td>{{b.market.closeTime}}</td>
+                                            <td>{{b.digit}}</td>
+                                            <td>{{b.points}}</td>
+                                            <td>{{b.date}}</td>
+                                            <td>Rs. {{b.winAmount}}</td>
+                                            {% if b.status == 'win' %}
+                                            <td>
+                                                <h5><span class="badge badge-success-lighten"><i
+                                                            class="mdi mdi-check"></i> {{b.status}}</span></h5>
+                                            </td>
+                                            {% elif b.status == 'loss' %}
+                                            <td>
+                                                <h5><span class="badge badge-danger-lighten"><i
+                                                            class="mdi mdi-wrong"></i> {{b.status}}</span></h5>
+                                            </td>
+                                            {% else %}
+                                            <td>
+                                                <h5><span class="badge badge-primary-lighten"><i
+                                                            class=""></i>{{b.status}}</span></h5>
+                                            </td>
+                                            {% endif %}
+
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="settings">
+                            <div class="table-responsive">
+                                <table class="table table-hover table-centered mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th>#ID</th>
+                                            <th>Amount</th>
+                                            <th>Date</th>
+                                            <th>Status</th>
+                                            <th>Remark</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for b in withdraw reversed %}
+                                        <tr>
+                                            <td>WID#{{b.id}}</td>
+                                            <td>Rs. {{b.amount}}</td>
+                                            <td>{{b.date}}</td>
+                                            {% if b.status == 'Done' %}
+                                            <td>
+                                                <h5><span class="badge badge-success-lighten"><i
+                                                            class="mdi mdi-check"></i> Success</span></h5>
+                                            </td>
+                                            {% else %}
+                                            <td>
+                                                <h5><span class="badge badge-danger-lighten"><i
+                                                            class="mdi mdi-timer-sand"></i>Pending</span></h5>
+                                            </td>
+                                            {% endif %}
+                                            <td>{{b.remark}}</td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <!-- end table responsive-->
+                        </div> <!-- end col-->
+                    </div> <!-- end row-->
+
+                </div>
+                <!-- end col -->
+
+            </div>
+            <!-- end row -->
+            {% endfor %}
+        </div> <!-- container -->
+
+    </div> <!-- content -->
+
+    {% endblock %}
+
+    {% block js %}
+    <script>
+        function block(id) {
+            result = document.getElementById('block').value;
+            // alert("Changing status ")
+            location.replace('/dashboard/customer-block/' + result + '/' + id)
+        }
+    </script>
+    {% endblock %}

@@ -1,0 +1,84 @@
+{% extends 'app/layout.html' %}
+{% load static %}
+{% block title %} Checkout {% endblock %}
+
+{% block body %}
+
+
+<!-- main page content -->
+<div class="main-container container">
+    <!-- products -->
+    <div class="row mb-2">
+        <div class="col-12 col-md-12 ">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-auto">
+                            <figure class="avatar avatar-60 rounded-15 border">
+                                <img src="/media/{{cart.product.image}}" alt="" class="w-100">
+                            </figure>
+                        </div>
+                        <div class="col align-self-center">
+                            <p class="mb-0"><small class="text-muted size-12">{{cart.product.name}}</small>
+                            </p>
+                            <h5>&#8377; {{cart.product.price}} /{{cart.product.unit}}</h5>
+                        </div>
+                        <div class="col-auto align-self-center ps-0">
+                            <div class="counter-number">
+                                <button class="btn btn-sm avatar avatar-30 p-0 rounded-circle">
+                                    <i class="bi bi-dash size-22"></i>
+                                </button>
+                                <span>{{cart.qnt}}</span>
+                                <button class="btn btn-sm avatar avatar-30 p-0 rounded-circle">
+                                    <i class="bi bi-plus size-22"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="row mb-4">
+        <div class="col align-self-center">
+            <h6 class="title">Pricing</h6>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col">
+            <p>Shipping Cost</p>
+        </div>
+        <div class="col-auto">&#8377; 00.00</div>
+    </div>
+    <div class="row mb-3">
+        <div class="col">
+            <p>Subtotal</p>
+        </div>
+        <div class="col-auto">&#8377; {{cart.total}}</div>
+    </div>
+    <div class="row fw-bold mb-4">
+        <div class="mb-3 col-12">
+            <div class="dashed-line"></div>
+        </div>
+        <div class="col">
+            <p>Total</p>
+        </div>
+        <div class="col-auto">&#8377; {{cart.total}}</div>
+    </div>
+    <div class="row mb-4">
+        <div class="col-12">
+            <form action="/app/paytm/" method="post">
+                {% csrf_token %}
+                <input type="text" name="amount" value="{{cart.total}}" required id="" hidden>
+                <button type="submit" class="btn btn-default shadow-sm btn-lg w-100">Next</button>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- main page content ends -->
+
+
+{% endblock %}

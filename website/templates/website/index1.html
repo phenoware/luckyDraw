@@ -1,0 +1,47 @@
+{% load static %}
+<html>
+   <head>
+      <title>52 Pattimall</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+      <script type="application/javascript" crossorigin="anonymous" src="{{env}}/merchantpgpui/checkoutjs/merchants/{{mid}}.js"></script>
+     <script src="{% static 'website/js/paytm/script.js' %}"></script>
+   </head>
+   <body >
+      <div class="container text-center">
+
+         <div class="col-6" style="display: block; margin-left:auto; margin-right: auto; margin-top: 50px;">
+            <div class="grid-product space-mb--20">
+                <div class="grid-product__image">
+                    <!-- <a href="/provider/product-details/{{i.id}}">
+                        <img src="{% static 'provider/assets/img/icons/plan/1.png' %}" class="img-fluid" style="width: 100%; height: auto;"
+                            alt="">
+                    </a> -->
+                </div>
+                <div class="grid-product__content">
+                    <div class="price">
+                        <span class="discounted-price">&#8377; {{amount}}/-</span>
+                    </div>
+                   
+                </div>
+                <button type="button" id="jsCheckoutPayment" name="submit" class="btn btn-success btn-sm my-2">Pay Now</button>
+                <p class="text-sm text-success">Do not refresh or press back button.</p>
+                <!-- <a href="/provider/paytm/1000"  style="width: 100%;"><i class="fa fa-location-arrow"></i> Select</a> -->
+            </div>
+        </div>
+
+      	
+      </div>
+      <script>
+      	 
+         document.getElementById("jsCheckoutPayment").addEventListener("click", function(){
+         		openJsCheckoutPopup('{{orderid}}','{{token}}','{{amount}}'); 
+         	}
+         );
+         
+
+         
+      </script>
+   </body>
+</html>

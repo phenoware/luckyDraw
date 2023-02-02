@@ -1,0 +1,188 @@
+{% extends 'app/layout.html' %}
+{% load static %}
+
+{% block title %} JoidWin | Triple Panna {% endblock %}
+
+{% block css %}
+
+<style>
+    #myUL {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    #myUL li a {
+        border: 1px solid #ddd;
+        margin-top: -1px;
+        /* Prevent double borders */
+        background-color: #f6f6f6;
+        padding: 12px;
+        text-decoration: none;
+        font-size: 18px;
+        color: black;
+        display: block
+    }
+
+    #myUL li a:hover:not(.header) {
+        background-color: #eee;
+    }
+</style>
+{% endblock %}
+{% block body %}
+<div class="main-container container">
+
+    <!-- Blogs -->
+    <div class="row mb-3">
+        <div class="col">
+            <h6 class="title">Play game with {{title}}</h6>
+            <p><small class="text-success">{{ status }}</small></p>
+        </div>
+        <!-- <div class="col-auto align-self-center">
+            <a href="blog.html" class="small">Read more</a>
+        </div> -->
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-12 col-lg-12">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <form action="/app/place-bid/" method="POST">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-6 my-2 mb-4">
+                                <input type="date" value="" name="date" id="today" class="form-control">
+                            </div>
+                            {% if status == 'Batting is running for close' %}
+                            <div class="col-6 my-2 mb-4">
+                                <select class="form-select form-control" name="marketType"
+                                    aria-label="Default select example">
+                                    <option value="close">CLOSE</option>
+                                </select>
+                            </div>
+                            {% else %}
+                            <div class="col-6 my-2 mb-4">
+                                <select class="form-select form-control" name="marketType"
+                                    aria-label="Default select example">
+                                    <option value="open">OPEN</option>
+                                    <option value="close">CLOSE</option>
+                                </select>
+                            </div>
+                            {% endif %}
+                            <div class="col-6 my-2 mb-4">
+                                <label for="" class="form-lable"><small>Enter Digit <span class="text-danger">*</span>
+                                    </small> </label>
+                                <input type="number" name="" value="" id="myInput" oninput="clearInput()"
+                                    onkeyup="myFunction()" class="form-control">
+                                    <p><small class="text-success" id="selectedDigit"></small></p>
+                                <input type="number" name="digit" value="" id="inputDigit" hidden>    
+                                <ul id="myUL" hidden>
+                                    <!-- 0  -->
+                                    <li><a href="#" onclick=btnClick(0);>0</a></li>
+                                    <li><a href="#" onclick=btnClick(1);>1</a></li>
+                                    <li><a href="#" onclick=btnClick(2);>2</a></li>
+                                    <li><a href="#" onclick=btnClick(3);>3</a></li>
+                                    <li><a href="#" onclick=btnClick(4);>4</a></li>
+                                    <li><a href="#" onclick=btnClick(5);>5</a></li>
+                                    <li><a href="#" onclick=btnClick(6);>6</a></li>
+                                    <li><a href="#" onclick=btnClick(7);>7</a></li>
+                                    <li><a href="#" onclick=btnClick(8);>8</a></li>
+                                    <li><a href="#" onclick=btnClick(9);>9</a></li>
+                                    </ul>
+
+                            </div>
+                            <div class="col-6 my-2 mb-4">
+                                <label for="" class="form-lable"><small>Points <span
+                                            class="text-danger">*</span></small>
+                                </label>
+                                <input type="number" name="points" id="point" class="form-control" required>
+
+                                <input type="text" name="marketId" value="{{marketId}}" hidden>
+                                <input type="text" name="gameId" value="{{gameId}}" hidden>
+                            </div>
+                            <div class="col-3 mb-4" style="margin: auto;">
+                                <button class="btn btn-primary bt-lg"> ADD</button>
+                            </div>
+                        </div>
+                    </form>
+                    <hr>
+
+                    <div class="row text-center">
+                        {% if bids %}
+                        <table>
+                            <thead class="" style="font-size: small;">
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Points</th>
+                                    <th>Digit</th>
+                                    <th>Game Type</th>
+                                    <th>Market Type</th>
+                                </tr>
+                            </thead>
+                            <tbody class="" style="font-size: small;">
+                                {% for i in bids %}
+                                <tr>
+                                    <td>{{i.date}}</td>
+                                    <td>{{i.points}}</td>
+                                    <td>{{i.digit}}</td>
+                                    <td>{{i.game.title}}</td>
+                                    <td>{{i.marketType}}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        {% else %}
+                        <p class="text-danger"> Have't bidding history</p>
+                        {% endif %}
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
+
+{% block js %}
+
+<script>
+    document.getElementById('today').value = new Date().toISOString().substring(0, 10);
+
+    function myFunction() {
+        document.getElementById("myUL").hidden = false;
+        var input, filter, ul, li, a, i, txtValue;
+        input = document.getElementById("myInput");
+        inputEmpty = document.getElementById("myInput").value;
+        if (inputEmpty == '') {
+
+            document.getElementById("myUL").hidden = true;
+        }
+
+        filter = input.value.toUpperCase();
+        ul = document.getElementById("myUL");
+        li = ul.getElementsByTagName("li");
+        for (i = 0; i < li.length; i++) {
+            a = li[i].getElementsByTagName("a")[0];
+            txtValue = a.textContent || a.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                li[i].style.display = "";
+            } else {
+                li[i].style.display = "none";
+            }
+        }
+    }
+
+    function btnClick(id) {
+        document.getElementById('myInput').value = id 
+        document.getElementById('inputDigit').value = id
+        document.getElementById('selectedDigit').innerHTML = 'selected digit is :'+id
+        document.getElementById("myUL").hidden = true; 
+    }
+
+
+</script>
+
+{% endblock %}

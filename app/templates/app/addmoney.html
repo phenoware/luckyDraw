@@ -1,0 +1,84 @@
+{% extends 'app/layout.html' %}
+{% load static %}
+
+{% block title %} Luckydraw | Add Funds{% endblock %}
+
+{% block body %}
+<!-- main page content -->
+<div class="main-container container">
+    <!-- select Amount -->
+    <form action="/app/paytm/" method="POST">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-12 text-center mb-4">
+                <input type="text" class="trasparent-input text-center" value="Vika chaok , karvengar, pune" name="address_line_1" hidden required>
+               
+                <input type="number" class="trasparent-input text-center" value="100" placeholder="Enter Amount" name="amount" id="amount" required onkeyup="checkAmount()">
+                
+                
+                <!-- <label for=""> <small class="text-danger">Do not enter below Rs. 100.00</small></label> -->
+                <div class="text-center"><span class="text-muted">Rs </span>
+                    <button class="btn btn-link btn-sm text-muted px-1 dropdown-toggle" type="button" id="ln1"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end shadow border-0 w-110" aria-labelledby="ln1">
+                        <li><a class="dropdown-item active" href="#">Rs</a></li>
+
+                    </ul>
+                    
+                </div>
+            </div>
+        </div>
+
+        
+        <!-- Saving targets -->
+        
+        <div class="row mb-4 mt-4">
+            <div class="col-12 ">
+                <button type="submit" class="btn btn-default btn-lg shadow-sm w-100" id="addFund">
+                    Add Funds
+                </button>
+            </div>
+        </div>
+    </form>
+    <div class="row mb-2">
+        <div class="col">
+            <h6 class="title">Add Funds from</h6>
+        </div>
+
+    </div>
+    <!-- swiper credit cards -->
+    <div class="row mb-2">
+        <div class="col-12 row">
+            <button class="col-auto btn btn-primary btn-sm mx-2 my-2" onclick="amountClick(500)"><small>Rs. 500</small></button> 
+            <button class="col-auto btn btn-primary btn-sm mx-2 my-2" onclick="amountClick(1000)"><small>Rs. 1000</small></button> 
+            <button class="col-auto btn btn-primary btn-sm mx-2 my-2" onclick="amountClick(2000)"><small>Rs. 2000</small></button> 
+            <button class="col-auto btn btn-primary btn-sm mx-2 my-2" onclick="amountClick(5000)"><small>Rs. 5000</small></button> 
+            <button class="col-auto btn btn-primary btn-sm mx-2 my-2" onclick="amountClick(10000)"><small>Rs. 10000</small></button> 
+            <button class="col-auto btn btn-primary btn-sm mx-2 my-2" onclick="amountClick(50000)"><small>Rs. 50000</small></button> 
+            <button class="col-auto btn btn-primary btn-sm mx-2 my-2" onclick="amountClick(100000)"><small>Rs. 100000</small></button>
+        </div>
+    </div>
+</div>
+<!-- main page content ends -->
+{% endblock %}
+
+{% block js %}
+<script>
+    function amountClick(amount){
+        document.getElementById("amount").value= amount;
+        document.getElementById("addFund").disabled = false;
+    }
+
+    function checkAmount(){
+        amount = document.getElementById("amount").value;
+        if(amount < 1){
+            document.getElementById("addFund").disabled = true;  
+        }
+        else{
+            document.getElementById("addFund").disabled = false;
+        }
+    }
+    
+</script>
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends 'app/layout.html' %}
+{% load static %}
+
+{% block title %} JoidWin | Result Panel Chart {% endblock %}
+
+{% block body %}
+<div class="main-container container">
+
+    <!-- Blogs -->
+    <div class="row mb-3">
+        <div class="col">
+            <h6 class="title">Result Panel Chart</h6>
+        </div>
+        <!-- <div class="col-auto align-self-center">
+            <a href="blog.html" class="small">Read more</a>
+        </div> -->
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-12 col-lg-12">
+            <div class="card mb-3">
+                <table id="scroll-horizontal-datatable" class="table nowrap">
+                    <thead class="" style="font-size: small;">
+                        <tr>
+                            <th><small>Date</small></th>
+                            <th><small>Result</small></th>
+                        </tr>
+                    </thead>
+                    <tbody class="" style="font-size: small;">
+                        {% for i in chart %}
+                        <tr>
+                            <td><small><a href="/app/bid-details/{{i.id}}" class="text-secondary">
+                                        {{i.date}}</a></small></td>
+                            <td><small><a href="/app/bid-details/{{i.id}}" class="text-secondary">
+                                        {{i.resultDigit}}</a></small></td>
+                        </tr>
+
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
+
+{% block js %}
+
+<script>
+    document.getElementById('today').value = new Date().toISOString().substring(0, 10);
+</script>
+
+{% endblock %}

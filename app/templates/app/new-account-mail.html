@@ -1,0 +1,55 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+</head>
+
+<body>
+
+    <div class="container text-center">
+        <h2 class="my-4"> Congratulations ! </h2>
+        <a href="https://play.google.com/store/apps/details?id=com.phenoware.pattimall" target="_blank">
+            <img src="{% static 'app/assets/img/banner/2.png' %}" style="width: 100%; border-radius: 10px;" alt="">
+        </a>
+
+        
+        <h5 class="my-4">You got <b>Rs. 1000/-</b>  real cash</h6>
+        <p style="font-family:sans-serif"> <i> Congratulations, Your 52 Patti Mall  wallet has been credited with Rs.1000 real cash, Download the app now and play from Rs.10 and win 2Cr. </i></p>
+
+        <!-- <label for="" class="my-4">Note :</label> -->
+        <h6>
+            Use below login details :
+        </h6>
+        <p>Username - {{username}}</p>
+        <p>Password - {{password}}   (You can change password letter.)</p>
+        <a href="https://play.google.com/store/apps/details?id=com.phenoware.pattimall" class="btn btn-danger my-4 " style="border-radius: 10px;">Play Now</a>
+    </div>
+
+
+
+    <!-- <h1>Hello, world!</h1> -->
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+    -->
+</body>
+
+</html>

@@ -1,0 +1,272 @@
+{% extends 'dashboard/layout.html' %} {% load static %}
+
+{% block title %}Dashboard | CRM {% endblock %} {% block body %}
+<!-- Start Content-->
+<div class="container-fluid">
+
+    <!-- start page title -->
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <div class="page-title-right">
+                    <form class="d-flex" action="/dashboard/date-filter/" method="POST">
+                        {% csrf_token %}
+                        <!-- <div class="input-group">
+                            <span class="input-group-text bg-primary border-primary text-white">
+                                <i class=" font-13"> From</i>
+                            </span>
+                            <input type="date" name="datef" class="form-control form-control-light">
+
+                        </div>
+                        <div class="input-group mx-2">
+                            <span class="input-group-text bg-primary border-primary text-white">
+                                <i class="font-13">To</i>
+                            </span>
+                            <input type="date" name="datet" class="form-control form-control-light">
+
+                        </div>
+                        <button class="btn btn-primary ms-1" type="submit">
+                            <i class="dripicons-search noti-icon"></i>
+                        </button> -->
+                        <a href="/dashboard/reset-market" class="btn btn-primary ms-2">
+                            <i class="mdi mdi-autorenew"></i>&nbsp; Reset Markets & Result
+                        </a>
+                        <a href="/dashboard/" class="btn btn-primary ms-2">
+                            <i class="mdi mdi-autorenew"></i>
+                        </a>
+
+                    </form>
+                </div>
+                <h4 class="page-title">Dashboard</h4>
+            </div>
+        </div>
+    </div>
+    <!-- end page title -->
+    {% if messages %}
+    <div class="alert alert-success" role="alert">
+        {% for message in messages %}
+        <i style="list-style: none;" class=" me-2"></i> <strong>Message - </strong>
+        {{ message }}
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <div class="row">
+        <div class="col-xl-12 col-lg-12">
+
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="card widget-flat">
+                        <div class="card-body">
+                            <div class="float-end">
+                                <i class="mdi mdi-account-multiple widget-icon"></i>
+                            </div>
+                            <h5 class="text-muted fw-normal mt-0" title="Number of Customers">Users</h5>
+                            <h3 class="mt-3 mb-3">{{usersCount}}</h3>
+                            <p class="mb-0 text-muted">
+                                <span class="text-success me-2"><i class="mdi mdi-arrow-up-bold"></i> 5.27%</span>
+                                <span class="text-nowrap">Since last month</span>
+                            </p>
+                        </div> <!-- end card-body-->
+                    </div> <!-- end card-->
+                </div> <!-- end col-->
+
+                <div class="col-lg-3">
+                    <div class="card widget-flat">
+                        <div class="card-body">
+                            <div class="float-end">
+                                <i class="mdi mdi-cart-plus widget-icon"></i>
+                            </div>
+                            <h5 class="text-muted fw-normal mt-0" title="Number of Orders">Reguler Markets</h5>
+                            <h3 class="mt-3 mb-3">{{regulerMarketCount}}</h3>
+                            <p class="mb-0 text-muted">
+                                <span class="text-danger me-2"><i class="mdi mdi-arrow-down-bold"></i> 1.08%</span>
+                                <span class="text-nowrap">Since last month</span>
+                            </p>
+                        </div> <!-- end card-body-->
+                    </div> <!-- end card-->
+                </div> <!-- end col-->
+                <div class="col-lg-3">
+                    <div class="card widget-flat">
+                        <div class="card-body">
+                            <div class="float-end">
+                                <i class="mdi mdi-currency-usd widget-icon"></i>
+                            </div>
+                            <h5 class="text-muted fw-normal mt-0" title="Average Revenue">Jodi Market</h5>
+                            <h3 class="mt-3 mb-3">{{jodiWinMarketCount}}</h3>
+                            <p class="mb-0 text-muted">
+                                <span class="text-danger me-2"><i class="mdi mdi-arrow-down-bold"></i> 7.00%</span>
+                                <span class="text-nowrap">Since last month</span>
+                            </p>
+                        </div> <!-- end card-body-->
+                    </div> <!-- end card-->
+                </div> <!-- end col-->
+
+                <div class="col-lg-3">
+                    <div class="card widget-flat">
+                        <div class="card-body">
+                            <div class="float-end">
+                                <i class="mdi mdi-pulse widget-icon"></i>
+                            </div>
+                            <h5 class="text-muted fw-normal mt-0" title="Growth">Games</h5>
+                            <h3 class="mt-3 mb-3">{{gamesCount}}</h3>
+                            <p class="mb-0 text-muted">
+                                <span class="text-success me-2"><i class="mdi mdi-arrow-up-bold"></i> 4.87%</span>
+                                <span class="text-nowrap">Since last month</span>
+                            </p>
+                        </div> <!-- end card-body-->
+                    </div> <!-- end card-->
+                </div> <!-- end col-->
+            </div> <!-- end row -->
+
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="card widget-flat">
+                        <div class="card-body">
+                            <div class="float-end">
+                                <i class="mdi mdi-account-multiple widget-icon"></i>
+                            </div>
+                            <h5 class="text-muted fw-normal mt-0" title="Number of Customers">Total User Wallet Ballance</h5>
+                            <h3 class="mt-3 mb-3">Rs. {{userWalletBalance}}</h3>
+                            <p class="mb-0 text-muted">
+                                <span class="text-success me-2"><i class="mdi mdi-arrow-up-bold"></i> 5.27%</span>
+                                <span class="text-nowrap">Since last month</span>
+                            </p>
+                        </div> <!-- end card-body-->
+                    </div> <!-- end card-->
+                </div> <!-- end col-->
+
+                <div class="col-lg-3">
+                    <div class="card widget-flat">
+                        <div class="card-body">
+                            <div class="float-end">
+                                <i class="mdi mdi-cart-plus widget-icon"></i>
+                            </div>
+                            <h5 class="text-muted fw-normal mt-0" title="Number of Orders">Pending Withdraw Request</h5>
+                            <h3 class="mt-3 mb-3">{{pendingWithdrawRequest}}</h3>
+                            <p class="mb-0 text-muted">
+                                <span class="text-danger me-2"><i class="mdi mdi-arrow-down-bold"></i> 1.08%</span>
+                                <span class="text-nowrap">Since last month</span>
+                            </p>
+                        </div> <!-- end card-body-->
+                    </div> <!-- end card-->
+                </div> <!-- end col-->
+                <div class="col-lg-3">
+                    <div class="card widget-flat">
+                        <div class="card-body">
+                            <div class="float-end">
+                                <i class="mdi mdi-currency-usd widget-icon"></i>
+                            </div>
+                            <h5 class="text-muted fw-normal mt-0" title="Average Revenue">Pending Withdraw Amount</h5>
+                            <h3 class="mt-3 mb-3">Rs. {{pendingWithAmount}}</h3>
+                            <p class="mb-0 text-muted">
+                                <span class="text-danger me-2"><i class="mdi mdi-arrow-down-bold"></i> 7.00%</span>
+                                <span class="text-nowrap">Since last month</span>
+                            </p>
+                        </div> <!-- end card-body-->
+                    </div> <!-- end card-->
+                </div> <!-- end col-->
+
+                <div class="col-lg-3">
+                    <div class="card widget-flat">
+                        <div class="card-body">
+                            <div class="float-end">
+                                <i class="mdi mdi-pulse widget-icon"></i>
+                            </div>
+                            <h5 class="text-muted fw-normal mt-0" title="Growth">Todays Bidding Count</h5>
+                            <h3 class="mt-3 mb-3">{{todaysBiddingCount}}</h3>
+                            <p class="mb-0 text-muted">
+                                <span class="text-success me-2"><i class="mdi mdi-arrow-up-bold"></i> 4.87%</span>
+                                <span class="text-nowrap">Since last month</span>
+                            </p>
+                        </div> <!-- end card-body-->
+                    </div> <!-- end card-->
+                </div> <!-- end col-->
+            </div>
+        </div> <!-- end col -->
+
+        <div class="col-xl-12 col-lg-12">
+            <div class="card card-h-100">
+                <div class="card-body">
+                    <h4 class="header-title mt-2 mb-3">Todays bidding history</h4>
+                    <div class="row">
+                        <div class="table-responsive">
+                            <table id="basic-datatable" class="table dt-responsive nowrap w-100">
+                                <thead>
+                                    <tr>
+                                        <th>#ID</th>
+                                        <th>Customer <i class="mdi mdi-account-circle"></i></th>
+                                        <th>Market</th>
+                                        <th>Game</th>
+                                        <th>Date <i class="mdi mdi-calendar"></i></th>
+                                        <th>Status</th>
+                                        <th style="">Win Amount</th>
+                                        <th style="">Market Type</th>
+                                        
+                                    </tr>
+                                </thead>
+    
+    
+                                <tbody>
+                                    {% for i in history reversed %}
+                                    <tr>
+                                        <td>#20210{{i.id}}</a> </td>
+                                        <td>{{i.customer.user.first_name}}</td>
+                                        <td>{{i.market.title}}</td>
+                                        <td>{{i.game.title}}</td>
+                                        <td>{{i.date}} </td>
+                                        {% if i.status == 'win' %}
+                                        <td>
+                                            <h5><span class="badge badge-success-lighten"><i class="mdi mdi-coin"></i>
+                                                    {{i.status}}</span></h5>
+                                        </td>
+                                        {% elif i.status == 'loss' %}
+                                        <td>
+                                            <h5><span class="badge badge-danger-lighten"><i class="mdi mdi-coin"></i>
+                                                    {{i.status}}</span></h5>
+                                        </td>
+                                        {% else %}
+                                        <td>
+                                            <h5><span class="badge badge-primary-lighten"><i class="mdi mdi-coin"></i>
+                                                    {{i.status}}</span></h5>
+                                        </td>
+                                        {% endif %}
+                                        <td>{{i.winAmount}} </td>
+                                        <td>{{i.marketType}} </td>
+                                        
+                                    </tr>
+                                    {% endfor %}
+    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div> <!-- end row -->
+
+
+
+                </div> <!-- end card-body-->
+            </div> <!-- end card-->
+
+        </div> <!-- end col -->
+    </div>
+
+    <!-- end row -->
+
+    <!-- end row -->
+
+</div>
+<!-- container -->
+
+</div>
+<!-- content -->
+
+{% endblock %} {% block js %}
+<script>
+    function deleteLead(id, loanType) {
+        del = confirm("Do you really want to delete leads ?")
+        if (del == true) {
+            location.replace("/dashboard/delete-lead/" + id + "/" + loanType + "/")
+        }
+    }
+</script>
+{% endblock %}

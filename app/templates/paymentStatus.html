@@ -1,0 +1,30 @@
+{% extends 'website/layout.html' %}
+{% load static %}
+{% block title%} Fialed {% endblock %}
+{% block body %}
+<div class="container">
+
+    <div class="col my-4" style="margin-top: 50px;">
+
+        <h2>Payment status regarding your order Id {{response.ORDERID}}</h2>
+        {% if response.RESPCODE == '01' %}
+        ORDER SUCCESS
+        {% else %}
+        <div class="container">
+            <h4>Failuer Reason : {{response}}</h4>
+            <img src="{% static 'website/assets/img/failed.gif' %}"
+                style="display:block; margin-left:auto; margin-right: auto; width: 350px;" alt="">
+        </div>
+        {% endif%}
+
+    </div>
+
+    <div>
+        <div class="order-button-payment mt-20">
+            <a href="/" class="tp-btn tp-color-btn w-100 banner-animation text-center"><i class="fa fa-arrow-left me-1"></i> Home </a>
+        </div>
+    </div>
+    
+
+</div>
+{% endblock %}

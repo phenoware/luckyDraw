@@ -1,0 +1,55 @@
+{% extends 'app/layout.html' %}
+{% load static %}
+{% block title %} Address {% endblock %}
+
+{% block body %}
+
+
+<!-- main page content -->
+<div class="main-container container">
+    <div class="row">
+        <div class="col-12 col-md-6 col-lg-4 mx-auto">
+            <div class="card card-light shadow-sm mb-4">
+                <div class="card-body">
+                    <form class="" action="/app/address/" method="post">
+                        {% csrf_token %}
+
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="city" placeholder="Phone " value="{{user.phone}}" name="phone" required maxlength="10"> 
+                            <label for="city">Phone</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <select class="form-select form-control" id="select" name="country">
+                                <option>India</option>
+                            </select>
+                            <label for="select">Country</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="city" placeholder="state" value="{{user.state}}" name="state">
+                            <label for="city">State</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="pincode" placeholder="Pincode" value="{{user.pincode}}" maxlength="6" name="pincode" required> 
+                            <label for="pincode">Pincode</label>
+                        </div>
+                       
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="city" placeholder="City" value="{{user.city}}" name="city" required> 
+                            <label for="city">City</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="street" placeholder="Address" name="address" value="{{user.address}}" required>
+                            <label for="city">Address</label>
+                        </div>
+                     
+                        <div class="d-grid"><button type="submit" class="btn btn-lg btn-default shadow-sm">Next</button></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- main page content ends -->
+
+{% endblock %}

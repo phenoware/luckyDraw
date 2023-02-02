@@ -1,0 +1,62 @@
+{% extends 'website/layout.html' %}
+{% load static %}
+{% block title %} Jodi Win - Term of service {% endblock %}
+
+{% block body %}
+
+<section id="news" class="ptb-90 bg-white">
+    <div class="blog-section-wrap">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class=" text-center">
+                        <h3>Select Market</h3>
+
+                    </div>
+                    <div>
+                        <table id="example" class="table table-striped table-bordered" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Open Time</th>
+                                    <th>Close Time</th>
+                                    <th>Today's Result</th>
+                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for i in markets %}
+                                
+                                <tr>
+                                    
+                                    <td><a href="/result-panel-chart/{{i.id}}"> {{i.title}}</a></td>
+                                    <td><a href="/result-panel-chart/{{i.id}}"> {{i.openTime}}</a></td>
+                                    <td><a href="/result-panel-chart/{{i.id}}"> {{i.closeTime}}</a></td>
+                                    <td><a href="/result-panel-chart/{{i.id}}"> {{i.reusltOpenThreeDigit}} - {{i.reusltOpenAnk}}{{i.reusltCloseAnk}} - {{i.reusltCloseThreeDigit}}</a></td>
+                                
+                                    
+                                </tr>
+                        
+                                {% endfor %}
+
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Open Time</th>
+                                    <th>Close Time</th>
+                                    <th>Today's Result</th>
+                                    
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+</section>
+<!--start promo section-->
+
+{% endblock %}

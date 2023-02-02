@@ -1,0 +1,55 @@
+{% extends 'app/layout.html' %}
+{% load static %}
+
+{% block title %} JoidWin | Rules & Notice Board {% endblock %}
+
+{% block body %}
+<div class="main-container container">
+
+    <!-- Blogs -->
+    <div class="row mb-3">
+        <div class="col">
+            <h4 class="title text-center" style="color: orange;">Refund Policy</h4>
+        </div>
+    </div>
+    <div style="background-color: white; padding: 15px;" class="container">
+        
+        <p><b>The Golden Green Agriculture Pvt. Ltd. can its sole discretion process refunds to you under the following
+                circumstances</b> </p>
+        <p>
+            Erroneous/Accidental transactions – transaction amount unutilized: In case of an accidental/ erroneous cash
+            credit or other similar event, you may request for a refund of such Cash Credit transaction ("Refund")
+            within 2 weeks of initiating such transaction. The Company, after determining in its sole discretion whether
+            such Refund request is genuine, and that you have the requisite corresponding Cash Balance in your Accounts,
+            will process the Refund request within 2 weeks. Any Refund will be carried out only to the instrument which
+            was used to carry out the corresponding Cash Credit transaction, and no requests for an alternate mode of
+            Refund will be entertained under any circumstances.
+        </p>
+        <p>
+            Fraudulent transactions – transaction amount unutilized: In case of a fraudulent cash credit that was not
+            authorized by yourself and has been credited to another user’s account who has not yet utilized the funds of
+            such a transaction, the Company shall process the Refund request within 2 weeks after determining whether
+            such Refund request is genuine and ascertaining that another user has the requisite corresponding Cash
+            Balance pertaining to the fraudulent transaction. <br><br>
+            Fraudulent transactions – transaction amount utilized: In case of a fraudulent cash credit that was not
+            authorized by yourself and has been credited to either your account or another user’s account and the funds
+            of such a transaction are utilized, the Company shall extend its complete cooperation to the banks and other
+            investigating authorities and provide all requisite details of the user who has utilized the proceeds of the
+            fraudulent transaction. The Company shall not process any refunds in this scenario and your sole recourse
+            shall lie with the issuing authority of the credit instrument.
+
+        </p>
+
+
+    </div>
+</div>
+
+{% endblock %}
+
+{% block js %}
+
+<script>
+    document.getElementById('today').value = new Date().toISOString().substring(0, 10);
+</script>
+
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends 'app/layout.html' %}
+{% load static %}
+
+{% block title %} JoidWin | Rules & Notice Board {% endblock %}
+
+{% block body %}
+<div class="main-container container">
+
+    <!-- Blogs -->
+    <div class="row mb-3">
+        <div class="col">
+            <h4 class="title text-center" style="color: orange;">About Us</h4>
+        </div>
+        <!-- <div class="col-auto align-self-center">
+            <a href="blog.html" class="small">Read more</a>
+        </div> -->
+    </div>
+    <div style="background-color: white; text-align: center; padding: 10px;" class="container">
+        <p>The Golden Green Agriculture Pvt. Ltd. company produces and sells agricultural commodities. Customers are given the facility to book company shares and products. When customers book compnay shares and products , they will get points to play rummy or cards games on 52Patti Mall.</p>
+        <p>52 Patti Rummy is an online rummy game app, fully owned and operated 52 Patti Mall. Our main purpose to promote Rummy as a professional game and create a community of skilled gamers. You can play our 52 patti rummy game online 24x7 from your home, on mobile or any location that has access to the Internet. You can create a valid account on our application and play free 52 patti rummy games. With a vast experience of managing online multiplayer games, we believe in maintaining complete confidentiality of your information. So, create your account with us, join a Table and start playing online 52 patti rummy games.
+
+            52 Patti Mall offers free rummy games and points on every new joining that allows rummy players to compete for entertainment and possible monetary gains with the use of their rummy skills.</p>
+            <p>
+                We have put in great amount of effort to build our application so that players can enjoy excellent 52 patti rummy games online right from their home and earn real money. we offers platform to the players to use their skills and play the game online and have entertainment with friends, family, collegues and also to have opportunity to earn real cash.
+            </p>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block js %}
+
+<script>
+    document.getElementById('today').value = new Date().toISOString().substring(0, 10);
+</script>
+
+{% endblock %}

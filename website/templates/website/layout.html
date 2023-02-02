@@ -1,0 +1,251 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from cssmaterial.com/apetech/demo/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 09 Sep 2021 07:11:14 GMT -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--title-->
+    <title>{% block title %} {% endblock %}</title>
+
+    <!--favicon icon-->
+    <link rel="icon" href="{% static 'website/img/logo/logo.png' %}" type="image/png" sizes="16x16">
+
+    <!-- font-awesome css -->
+    <link rel="stylesheet" href="{% static 'website/css/font-awesome.min.css' %}">
+
+    <!--themify icon-->
+    <link rel="stylesheet" href="{% static 'website/css/themify-icons.css' %}">
+
+    <!-- magnific popup css-->
+    <link rel="stylesheet" href="{% static 'website/css/magnific-popup.css' %}">
+
+    <!--owl carousel -->
+    <link href="{% static 'website/css/owl.theme.default.min.css' %}" rel="stylesheet">
+    <link href="{% static 'website/css/owl.carousel.min.css' %}" rel="stylesheet">
+
+    <!-- bootstrap core css -->
+    <link href="{% static 'website/css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- custom css -->
+    <link href="{% static 'website/css/style.css' %}" rel="stylesheet">
+
+    <!-- responsive css -->
+    <link href="{% static 'website/css/responsive.css' %}" rel="stylesheet">
+
+    <script src="{% static 'website/js/vendor/modernizr-2.8.1.min.js' %}"></script>
+    <!-- HTML5 Shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="js/vendor/html5shim.js"></script>
+    <script src="js/vendor/respond.min.js"></script>
+    <![endif]-->
+    {% block css %}
+
+    {% endblock %}
+</head>
+
+
+<body>
+
+<!-- Preloader -->
+<div id="preloader">
+    <div id="loader"></div>
+</div>
+<!--end preloader-->
+
+<div id="main" class="main-content-wraper">
+    <div class="main-content-inner">
+
+        <!--start header section-->
+        <header class="header">
+            <!--start navbar-->
+            <div class="navbar navbar-default navbar-fixed-top">
+                <div class="container">
+                    <div class="row">
+                        <div class="navbar-header page-scroll">
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                                    data-target="#myNavbar">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <a class="navbar-brand page-scroll " style="display: flex;" href="/">
+                                <img src="{% static 'website/img/logo/logo.png' %}" style="width: 50px;" alt="logo"> 
+                                <h4 style="color: aliceblue; margin: 8px;" >LUCKY DRAW CARD </h4>
+                            </a>
+                        </div>
+
+                        <!-- Collect the nav links, forms, and other content for toggling -->
+                        <div class="navbar-collapse collapse" id="myNavbar">
+                            <ul class="nav navbar-nav navbar-right">
+                                <li class="active"><a class="page-scroll" href="/#hero">Home</a></li>
+                                <!-- <li class="active"><a class="page-scroll" href="/result-panel">Result Panel</a></li> -->
+                                <li><a class="page-scroll" href="/#aboutUs">About Us</a></li>
+                                <li><a class="page-scroll" href="/#features">Products</a></li>
+                                <li><a class="page-scroll" href="/#order">Order now</a></li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!--end navbar-->
+        </header>
+        <!--end header section-->
+
+        <!--start hero section-->
+<section id="hero" class="section-lg section-hero section-circle">
+    <!--background circle shape-->
+    <div class="shape shape-style-1 shape-primary">
+        <span class="circle-150"></span>
+        <span class="circle-50"></span>
+        <span class="circle-50"></span>
+        <span class="circle-75"></span>
+        <span class="circle-100"></span>
+        <span class="circle-75"></span>
+        <span class="circle-50"></span>
+        <span class="circle-100"></span>
+        <span class="circle-50"></span>
+        <span class="circle-100"></span>
+    </div>
+    <!--background circle shape-->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="hero-content-wrap">
+                    <div class="hero-content">
+                        <h1>India's most popular Lucky Draw Card Free Rummy Game</h1>
+                        <p>We Welcomes You To India's Most popular rummy game app at Lucky Draw Card.</p>
+                        <div class="slider-action-btn">
+                            <a href="https://play.google.com/store/apps/details?id=phenoware.luckydrawcard.com" target="_blank" class="btn softo-solid-btn"><i class="fa fa-android"></i> Download App Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="mobile-slider-area">
+                    <div class="phone">
+                        <img src="{% static 'website/img/iphone-x-frame.png' %}" alt="Phone" class="img-responsive">
+                        <div class="mobile-slider owl-carousel owl-theme">
+                            <div class="item"><img src="{% static 'website/img/screenshot/4.jpeg' %}" alt="Screen 1"
+                                                   class="img-responsive"></div>
+                            <div class="item"><img src="{% static 'website/img/screenshot/5.jpeg' %}" alt="Screen 1"
+                                                   class="img-responsive"></div>
+                            <div class="item"><img src="{% static 'website/img/screenshot/1.jpeg' %}" alt="Screen 2"
+                                                   class="img-responsive"></div>
+                            <div class="item"><img src="{% static 'website/img/screenshot/2.jpeg' %}" alt="Screen 2"
+                                                   class="img-responsive"></div>
+                            <div class="item"><img src="{% static 'website/img/screenshot/4.jpeg' %}" alt="Screen 3"
+                                                   class="img-responsive"></div>
+                            <div class="item"><img src="{% static 'website/img/screenshot/1.jpeg' %}" alt="Screen 3"
+                                                   class="img-responsive"></div>
+                        </div>
+                    </div>
+
+                    <div class="slider-indicator">
+                        <ul>
+                            <li id="prev">
+                                <i class="fa fa-angle-left"></i>
+                            </li>
+                            <li id="next">
+                                <i class="fa fa-angle-right"></i>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="section-shape">
+        <img src="{% static 'website/img/waves-shape.svg' %}" alt="shape image">
+    </div>
+</section>
+<!--end hero section-->
+        {% block body %}
+
+        
+        {% endblock %}
+        <!--start footer section-->
+        <footer class="footer-section bg-secondary ptb-60">
+            <div class="footer-wrap">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6 col-md-offset-3">
+                            <div class="footer-single-col text-center">
+                                <img src="{% static 'website/img/logo/logo.png' %}" style="width: 60px;" alt="footer logo">
+                                <div class="footer-social-list">
+                                    <ul class="list-inline">
+                                        <li><a href="#"> <i class="fa fa-facebook"></i></a></li>
+                                        <li><a href="#"> <i class="fa fa-twitter"></i></a></li>
+                                        <li><a href="#"> <i class="fa fa-linkedin"></i></a></li>
+                                        <li><a href="#"> <i class="fa fa-google-plus"></i></a></li>
+                                        <li><a href="#"> <i class="fa fa-youtube"></i></a></li>
+                                    </ul>
+                                </div>
+                                <div class="">
+                                    <ul class="list-inline">
+                                        <li><a href="/about-us"> About us</a></li>
+                                        <li><a href="/term-of-services"> Terms & Conditions</a></li>
+                                        <li><a href="/refund-policy"> Refund Policy</a></li>
+<li><a href="/privacy-policy"> Privacy Policy</a></li>
+                                    </ul> 
+                                </div>
+                                <div class="copyright-text">
+                                    <p>&copy; copyright <a href="#">Lucky Draw Card</a> </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!--end footer section-->
+
+    </div><!--end main content inner-->
+</div>
+<!--end main container -->
+
+
+<!--=========== all js file link ==============-->
+
+<!-- main jQuery -->
+<script src="{% static 'website/js/jquery-3.3.1.min.js' %}"></script>
+
+<!-- bootstrap core js -->
+<script src="{% static 'website/js/bootstrap.min.js' %}"></script>
+
+<!-- smothscroll -->
+<script src="{% static 'website/js/jquery.easeScroll.min.js' %}"></script>
+
+<!--owl carousel-->
+<script src="{% static 'website/js/owl.carousel.min.js' %}"></script>
+
+<!-- scrolling nav -->
+<script src="{% static 'website/js/jquery.easing.min.js' %}"></script>
+
+<!--fullscreen background video js-->
+<script src="{% static 'website/js/jquery.mb.ytplayer.min.js' %}"></script>
+
+<!--typed js -->
+<script src="{% static 'website/js/typed.min.js' %}"></script>
+
+<!--magnific popup js-->
+<script src="{% static 'website/js/magnific-popup.min.js' %}"></script>
+
+<!-- custom script -->
+<script src="{% static 'website/js/scripts.js' %}"></script>
+
+{% block js %}
+
+{% endblock %}
+
+
+</body>
+
+<!-- Mirrored from cssmaterial.com/apetech/demo/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 09 Sep 2021 07:13:01 GMT -->
+</html>

@@ -1,0 +1,44 @@
+{% extends 'app/layout.html' %}
+{% load static %}
+
+{% block title %} JoidWin | Rules & Notice Board {% endblock %}
+
+{% block body %}
+<div class="main-container container">
+
+    <!-- Blogs -->
+    <div class="row mb-3">
+        <div class="col">
+            <h4 class="title text-center" style="color: orange;">Contact Us</h4>
+        </div>
+        <!-- <div class="col-auto align-self-center">
+            <a href="blog.html" class="small">Read more</a>
+        </div> -->
+    </div>
+    <div style="background-color: white; text-align: center; padding: 50px;" class="container row">
+        
+        <div class="col">
+            <i class="bi bi-telephone my-4" style="font-size:x-large; padding: 15px;"></i>
+            <h5>+91 7304022648</h5>
+        </div>
+        <div class="col">
+            <i class="bi bi-envelope" style="font-size:x-large; padding: 15px;"></i>
+            <h5>52pattimall@gmail.com</h5>
+        </div>
+        <div class="col-12 my-5">
+            <i class="bi bi-geo-alt" style="font-size:x-large; padding: 15px;"></i>
+            <h5>Maharashtra , India</h5>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}
+
+{% block js %}
+
+<script>
+    document.getElementById('today').value = new Date().toISOString().substring(0, 10);
+</script>
+
+{% endblock %}

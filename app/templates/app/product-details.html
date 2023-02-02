@@ -1,0 +1,131 @@
+{% extends 'app/layout.html' %}
+{% load static %}
+{% block title %} {{product.name}} {% endblock %}
+
+{% block body %}
+<!-- main page content -->
+<div class="main-container container">
+    <!-- product banner -->
+    <div class="row">
+        <div class="col-12 px-0 position-relative">
+            <div class="swiper-container cardswiper">
+                <div class="card shadow-sm mb-3">
+                    <div class="">
+                        <img src="/media/{{product.image}}" alt="" class="rounded-15"
+                            style=" height: 230px; padding: 20px; display: block; margin-left: auto; margin-right: auto;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- name and description -->
+    <div class="row mb-2">
+        <div class="col">
+            <!-- <p class="text-secondary small">Electronics </p> -->
+
+        </div>
+        <div class="col-auto">
+            <p class="small">
+                <span class="text-secondary">5.0 (1445 Reviews)</span>
+                <i class="bi bi-star-fill text-warning"></i>
+            </p>
+        </div>
+    </div>
+    <h4 class="mb-2">{{product.name}}</h4>
+    <form action="/app/cart/" method="post" >
+        {% csrf_token %}
+        <div class="row mb-3">
+            <div class="col align-self-center">
+                <h5>&#8377; {{product.price}} /{{product.unit}} <s class="small text-secondary fw-light">&#8377;
+                        650.00</s></h5>
+            </div>
+            <div class="col-auto">
+                <div class="counter-number">
+                    <button class="btn btn-sm avatar avatar-30 p-0 rounded-circle" onclick="decresQnt()">
+                        <i class="bi bi-dash size-22"></i>
+                    </button>
+                    <span><input type="number" name="qnt" id="qnt" value="1" class="form-control" style="width: 60px;"
+                            min="0"></span>
+                            <input type="text" name="product" value="{{product.id}}" id="" hidden>
+                    <button class="btn btn-sm avatar avatar-30 p-0 rounded-circle" onclick="increaseQnt()">
+                        <i class="bi bi-plus size-22"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- buttons -->
+        <div class="row mb-4">
+            <div class="col">
+                <button type="submit" class="btn btn-default btn-lg shadow-sm w-100">Add to Cart</button>
+                
+            </div>
+            <div class="col">
+                <button type="submit" class="btn btn-success btn-lg shadow-sm w-100 text-white">Buy Now</button>
+            </div>
+        </div>
+
+    </form>
+    <h5 class="mb-3">Product Description</h5>
+    <p class="text-secondary">{{product.description}}</p>
+
+    <br />
+
+
+
+    <!-- related product  -->
+    <div class="row mb-3">
+        <div class="col">
+            <h6 class="title">Related Products</h6>
+        </div>
+    </div>
+    <!--products -->
+    <div class="row mb-3">
+        <div class="col-12 px-0">
+            <!-- swiper categories -->
+            <div class="swiper-container connectionwiper">
+                <div class="swiper-wrapper">
+                    {% for i in products %}
+                    <div class="swiper-slide text-center">
+                        <a href="/app/product-details/{{i.id}}/" class="card text-center">
+                            <div class="card-body p-1">
+                                <figure class="avatar   mb-1">
+                                    <img src="/media/{{i.image}}" alt=""
+                                        style="height: 150px; width: 150px; padding: 20px;">
+                                </figure>
+                                <p class="text-center size-12"><small class="text-muted">{{i.name}}</small><br />&#8377;
+                                    {{i.price}}</p>
+                            </div>
+                        </a>
+                    </div>
+
+                    {% endfor %}
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- main page content ends -->
+
+{% endblock %}
+
+{% block js %}
+
+<script>
+    function decresQnt() {
+        qnt = document.getElementById("qnt").value;
+        if (qnt > 1) {
+            document.getElementById("qnt").value = parseInt(qnt) - 1
+        }
+
+
+    }
+
+    function increaseQnt() {
+        qnt = document.getElementById("qnt").value;
+        document.getElementById("qnt").value = parseInt(qnt) + 1
+    }
+</script>
+{% endblock %}

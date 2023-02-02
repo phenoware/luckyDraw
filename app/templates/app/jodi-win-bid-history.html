@@ -1,0 +1,87 @@
+{% extends 'app/layout.html' %}
+{% load static %}
+
+{% block title %} JoidWin | Jodi Win Bidding History {% endblock %}
+
+{% block body %}
+<div class="main-container container">
+
+    <!-- Blogs -->
+    <div class="row mb-3">
+        <div class="col">
+            <h6 class="title">Jodi Win Bidding History</h6>
+        </div>
+        <!-- <div class="col-auto align-self-center">
+            <a href="blog.html" class="small">Read more</a>
+        </div> -->
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-12 col-lg-12">
+            <div class="card mb-3">
+                {% if bids %}
+                <table id="scroll-horizontal-datatable" class="table nowrap">
+                    <thead class="" style="font-size: small;">
+                        <tr>
+                            <th><small>Date</small></th>
+                            <th><small>Market</small></th>
+                            <th><small>Cards</small></th>
+                            <th><small>Points</small></th>
+                            <th><small>Status</small></th>
+                            <th><small>Win Amount</small></th>
+                        </tr>
+                    </thead>
+                    <tbody class="" style="font-size: small;">
+                        {% for i in bids %}
+                        <tr>
+                            <td><small><a href="/app/jodi-win-bid-details/{{i.id}}" class="text-secondary">
+                                        {{i.date}}</a></small></td>
+                            <td><small><a href="/app/jodi-win-bid-details/{{i.id}}"
+                                        class="text-secondary">{{i.market.closeTime}}</a></small></td>
+                            <td>
+                                {% for key, values in resulrCardDict.items %}
+                                {% if key.id == i.id %}
+                                {% for k, v in values.resultCards.items %}
+                                <img src="/media/{{v.4}}" alt="" style="width: 30px; margin: 1.5px;">
+                                {% endfor %}
+                                {% endif %}
+                                {% endfor %}
+                            </td>
+                            <td><small><a href="/app/jodi-win-bid-details/{{i.id}}"
+                                        class="text-secondary">{{i.points}}</a></small></td>
+
+                            {% if i.status == 'win'%}
+                            <td><small><a href="/app/jodi-win-bid-details/{{i.id}}" class="text-secondary"><span
+                                            class="badge bg-success">{{i.status}}</span></a></small></td>
+                            {% elif i.status == 'loss' %}
+                            <td><small><a href="/app/jodi-win-bid-details/{{i.id}}" class="text-secondary"><span
+                                            class="badge bg-danger">Better luck next time</span></a></small></td>
+                            {% else %}
+                            <td><small><a href="/app/jodi-win-bid-details/{{i.id}}" class="text-secondary"><span
+                                            class="badge bg-primary">{{i.status}}</span></a></small></td>
+                            {% endif %}
+                            <td><small><a href="/app/jodi-win-bid-details/{{i.id}}"
+                                        class="text-secondary">{{i.winAmount}} Points</a></small></td>
+                        </tr>
+
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                <p class="text-danger"> Have't bidding history</p>
+                {% endif %}
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
+
+{% block js %}
+
+<script>
+    document.getElementById('today').value = new Date().toISOString().substring(0, 10);
+</script>
+
+{% endblock %}

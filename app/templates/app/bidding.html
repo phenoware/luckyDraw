@@ -1,0 +1,371 @@
+{% extends 'app/layout.html' %}
+{% load static %}
+
+{% block title %} JoidWin | Place Bid {% endblock %}
+
+{% block css %}
+
+<style>
+    #myUL {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    #myUL li a {
+        border: 1px solid #ddd;
+        margin-top: -1px;
+        /* Prevent double borders */
+        background-color: #f6f6f6;
+        padding: 12px;
+        text-decoration: none;
+        font-size: 18px;
+        color: black;
+        display: block
+    }
+
+    #myUL li a:hover:not(.header) {
+        background-color: #eee;
+    }
+</style>
+{% endblock %}
+
+{% block body %}
+<div class="main-container container">
+
+    <!-- Blogs -->
+    <div class="row mb-3">
+        <div class="col">
+            <h6 class="title">Play game with {{title}}</h6>
+            
+        </div>
+        <!-- <div class="col-auto align-self-center">
+            <a href="blog.html" class="small">Read more</a>
+        </div> -->
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-12 col-lg-12">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <form action="/app/place-bid/" method="POST">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-6 my-2 mb-4">
+                                <input type="date" value="" name="date" id="today" class="form-control">
+                            </div>
+
+                            {% if title == 'Jodi Digit' %}
+                            <div class="col-6 my-2 mb-4">
+                                <input type="text" name="marketType" value="close" hidden>
+                            </div>
+                            {% else %}
+                            <div class="col-6 my-2 mb-4">
+                                <select class="form-select form-control" name="marketType" aria-label="Default select example">
+                                    <option value="open">OPEN</option>
+                                    <option value="close">CLOSE</option>
+                                </select>
+                            </div>
+                            {% endif %}
+                            <div class="col-6 my-2 mb-4">
+                                <label for="" class="form-lable"><small>Enter Digit <span class="text-danger">*</span>
+                                    </small> </label>
+                                <input type="number" value="" id="myInput" 
+                                    onkeyup="myFunction()" class="form-control">
+                                    <p><small class="text-success" id="selectedDigit"></small></p>
+                                    <input type="number" name="digit" value="" id="inputDigit" hidden>
+                                    
+                                    <!-- Number Listing here -->
+                                <ul id="myUL" hidden>
+                                    
+
+                                </ul>
+                            </div>
+                            <div class="col-6 my-2 mb-4">
+                                <label for="" class="form-lable"><small>Points <span
+                                            class="text-danger">*</span></small>
+                                </label>
+                                <input type="number" name="points" id="point" class="form-control" required>
+                                <input type="text" name="marketId" value="{{marketId}}" hidden>
+                                <input type="text" name="gameId" value="{{gameId}}" hidden>
+                            </div>
+                            <div class="col-auto mb-4" style="margin: auto;">
+                                {% if status == 'Betting is running now' %}
+                                <button class="btn btn-primary bt-lg"> ADD</button>
+                                {% else %}
+                                <button class="btn btn-primary bt-lg" disabled> <small>Jodi Betting is closed</small></button>
+                                
+                                {% endif %}
+                            </div>
+                            
+                        </div>
+                    </form>
+                    <hr>
+
+                    <div class="row text-center">
+                        {% if bids %}
+                        <table>
+                            <thead class="" style="font-size: small;">
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Points</th>
+                                    <th>Digit</th>
+                                    <th>Game Type</th>
+                                    <th>Market Type</th>
+                                </tr>
+                            </thead>
+                            <tbody class="" style="font-size: small;">
+                                {% for i in bids %}
+                                <tr>
+                                    <td>{{i.date}}</td>
+                                    <td>{{i.points}}</td>
+                                    <td>{{i.digit}}</td>
+                                    <td>{{i.game.title}}</td>
+                                    <td>{{i.marketType}}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        {% else %}
+                        <p class="text-danger"> Have't bidding history</p>
+                        {% endif %}
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
+
+{% block js %}
+
+<script>
+    document.getElementById('today').value = new Date().toISOString().substring(0, 10);
+
+
+    function myFunction() {
+        document.getElementById("myUL").hidden = false;
+        var input, filter, ul, li, a, i, txtValue;
+        input = document.getElementById("myInput");
+        inputEmpty = document.getElementById("myInput").value;
+        if (inputEmpty == '') {
+
+            document.getElementById("myUL").hidden = true;
+        }
+
+        filter = input.value.toUpperCase();
+
+
+        if (inputEmpty == 1) {
+            ulList = `<ul id="myUL">
+
+        <!-- 1 -->
+        <li><a href="#" onclick=btnClick(10);>10</a></li>
+        <li><a href="#" onclick=btnClick(11);>11</a></li>
+        <li><a href="#" onclick=btnClick(12);>12</a></li>
+        <li><a href="#" onclick=btnClick(13);>13</a></li>
+        <li><a href="#" onclick=btnClick(14);>14</a></li>
+        <li><a href="#" onclick=btnClick(15);>15</a></li>
+        <li><a href="#" onclick=btnClick(16);>16</a></li>
+        <li><a href="#" onclick=btnClick(17);>17</a></li>
+        <li><a href="#" onclick=btnClick(18);>18</a></li>
+        <li><a href="#" onclick=btnClick(19);>19</a></li>
+        </ul>`
+            document.getElementById("myUL").innerHTML = ulList
+        }
+        else if (inputEmpty == 2){
+            ulList = `<ul id="myUL">
+
+<!-- 2 -->
+        <li><a href="#" onclick=btnClick(20);>20</a></li>
+        <li><a href="#" onclick=btnClick(21);>21</a></li>
+        <li><a href="#" onclick=btnClick(22);>22</a></li>
+        <li><a href="#" onclick=btnClick(23);>23</a></li>
+        <li><a href="#" onclick=btnClick(24);>24</a></li>
+        <li><a href="#" onclick=btnClick(25);>25</a></li>
+        <li><a href="#" onclick=btnClick(26);>26</a></li>
+        <li><a href="#" onclick=btnClick(27);>27</a></li>
+        <li><a href="#" onclick=btnClick(28);>28</a></li>
+        <li><a href="#" onclick=btnClick(29);>29</a></li>
+</ul>`
+    document.getElementById("myUL").innerHTML = ulList
+
+        }
+        else if (inputEmpty == 3){
+            ulList = `<ul id="myUL">
+
+<!-- 3 -->
+        <li><a href="#" onclick=btnClick(30);>30</a></li>
+        <li><a href="#" onclick=btnClick(31);>31</a></li>
+        <li><a href="#" onclick=btnClick(32);>32</a></li>
+        <li><a href="#" onclick=btnClick(33);>33</a></li>
+        <li><a href="#" onclick=btnClick(34);>34</a></li>
+        <li><a href="#" onclick=btnClick(35);>35</a></li>
+        <li><a href="#" onclick=btnClick(36);>36</a></li>
+        <li><a href="#" onclick=btnClick(37);>37</a></li>
+        <li><a href="#" onclick=btnClick(38);>38</a></li>
+        <li><a href="#" onclick=btnClick(39);>39</a></li>
+</ul>`
+    document.getElementById("myUL").innerHTML = ulList
+
+        }
+
+        else if (inputEmpty == 4){
+            ulList = `<ul id="myUL">
+
+<!-- 4 -->
+        <li><a href="#" onclick=btnClick(40);>40</a></li>
+        <li><a href="#" onclick=btnClick(41);>41</a></li>
+        <li><a href="#" onclick=btnClick(42);>42</a></li>
+        <li><a href="#" onclick=btnClick(43);>43</a></li>
+        <li><a href="#" onclick=btnClick(44);>44</a></li>
+        <li><a href="#" onclick=btnClick(45);>45</a></li>
+        <li><a href="#" onclick=btnClick(46);>46</a></li>
+        <li><a href="#" onclick=btnClick(47);>47</a></li>
+        <li><a href="#" onclick=btnClick(48);>48</a></li>
+        <li><a href="#" onclick=btnClick(49);>49</a></li>
+</ul>`
+    document.getElementById("myUL").innerHTML = ulList
+
+        }
+
+        else if (inputEmpty == 5){
+            ulList = `<ul id="myUL">
+
+<!-- 5 -->
+        <li><a href="#" onclick=btnClick(50);>50</a></li>
+        <li><a href="#" onclick=btnClick(51);>51</a></li>
+        <li><a href="#" onclick=btnClick(52);>52</a></li>
+        <li><a href="#" onclick=btnClick(53);>53</a></li>
+        <li><a href="#" onclick=btnClick(54);>54</a></li>
+        <li><a href="#" onclick=btnClick(55);>55</a></li>
+        <li><a href="#" onclick=btnClick(56);>56</a></li>
+        <li><a href="#" onclick=btnClick(57);>57</a></li>
+        <li><a href="#" onclick=btnClick(58);>58</a></li>
+        <li><a href="#" onclick=btnClick(59);>59</a></li>
+</ul>`
+    document.getElementById("myUL").innerHTML = ulList
+
+        }
+
+        else if (inputEmpty == 6){
+            ulList = `<ul id="myUL">
+
+<!-- 6 -->
+        <li><a href="#" onclick=btnClick(60);>60</a></li>
+        <li><a href="#" onclick=btnClick(61);>61</a></li>
+        <li><a href="#" onclick=btnClick(62);>62</a></li>
+        <li><a href="#" onclick=btnClick(63);>63</a></li>
+        <li><a href="#" onclick=btnClick(64);>64</a></li>
+        <li><a href="#" onclick=btnClick(65);>65</a></li>
+        <li><a href="#" onclick=btnClick(66);>66</a></li>
+        <li><a href="#" onclick=btnClick(67);>67</a></li>
+        <li><a href="#" onclick=btnClick(68);>68</a></li>
+        <li><a href="#" onclick=btnClick(69);>69</a></li>
+</ul>`
+    document.getElementById("myUL").innerHTML = ulList
+
+        }
+
+        else if (inputEmpty == 7){
+            ulList = `<ul id="myUL">
+
+<!-- 7 -->
+        <li><a href="#" onclick=btnClick(70);>70</a></li>
+        <li><a href="#" onclick=btnClick(71);>71</a></li>
+        <li><a href="#" onclick=btnClick(72);>72</a></li>
+        <li><a href="#" onclick=btnClick(73);>73</a></li>
+        <li><a href="#" onclick=btnClick(74);>74</a></li>
+        <li><a href="#" onclick=btnClick(75);>75</a></li>
+        <li><a href="#" onclick=btnClick(76);>76</a></li>
+        <li><a href="#" onclick=btnClick(77);>77</a></li>
+        <li><a href="#" onclick=btnClick(78);>78</a></li>
+        <li><a href="#" onclick=btnClick(79);>79</a></li>
+</ul>`
+    document.getElementById("myUL").innerHTML = ulList
+
+        }
+
+        else if (inputEmpty == 8){
+            ulList = `<ul id="myUL">
+
+<!-- 8 -->
+        <li><a href="#" onclick=btnClick(80);>80</a></li>
+        <li><a href="#" onclick=btnClick(81);>81</a></li>
+        <li><a href="#" onclick=btnClick(82);>82</a></li>
+        <li><a href="#" onclick=btnClick(83);>83</a></li>
+        <li><a href="#" onclick=btnClick(84);>84</a></li>
+        <li><a href="#" onclick=btnClick(85);>85</a></li>
+        <li><a href="#" onclick=btnClick(86);>86</a></li>
+        <li><a href="#" onclick=btnClick(87);>87</a></li>
+        <li><a href="#" onclick=btnClick(88);>88</a></li>
+        <li><a href="#" onclick=btnClick(89);>89</a></li>
+</ul>`
+    document.getElementById("myUL").innerHTML = ulList
+
+        }
+
+        else if (inputEmpty == 9){
+            ulList = `<ul id="myUL">
+        <!-- 9 -->
+        <li><a href="#" onclick=btnClick(90);>90</a></li>
+        <li><a href="#" onclick=btnClick(91);>91</a></li>
+        <li><a href="#" onclick=btnClick(92);>92</a></li>
+        <li><a href="#" onclick=btnClick(93);>93</a></li>
+        <li><a href="#" onclick=btnClick(94);>94</a></li>
+        <li><a href="#" onclick=btnClick(95);>95</a></li>
+        <li><a href="#" onclick=btnClick(96);>96</a></li>
+        <li><a href="#" onclick=btnClick(97);>97</a></li>
+        <li><a href="#" onclick=btnClick(98);>98</a></li>
+        <li><a href="#" onclick=btnClick(99);>99</a></li>
+</ul>`
+    document.getElementById("myUL").innerHTML = ulList
+
+        }
+
+        else if (inputEmpty == 0){
+            ulList = `<ul id="myUL">
+        <!--  -->
+        <li><a href="#" onclick=btnClick('00');>00</a></li>
+        <li><a href="#" onclick=btnClick('01');>01</a></li>
+        <li><a href="#" onclick=btnClick('02');>02</a></li>
+        <li><a href="#" onclick=btnClick('03');>03</a></li>
+        <li><a href="#" onclick=btnClick('04');>04</a></li>
+        <li><a href="#" onclick=btnClick('05');>05</a></li>
+        <li><a href="#" onclick=btnClick('06');>06</a></li>
+        <li><a href="#" onclick=btnClick('07');>07</a></li>
+        <li><a href="#" onclick=btnClick('08');>08</a></li>
+        <li><a href="#" onclick=btnClick('09');>09</a></li>
+</ul>`
+    document.getElementById("myUL").innerHTML = ulList
+
+        }
+
+
+        ul = document.getElementById("myUL");
+        li = ul.getElementsByTagName("li");
+        for (i = 0; i < li.length; i++) {
+            a = li[i].getElementsByTagName("a")[0];
+            txtValue = a.textContent || a.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                li[i].style.display = "";
+            } else {
+                li[i].style.display = "none";
+            }
+        }
+    }
+
+    function btnClick(id) {
+        document.getElementById('myInput').value = id
+        
+        document.getElementById('inputDigit').value = id
+        document.getElementById('selectedDigit').innerHTML = 'selected digit is :'+id
+        document.getElementById("myUL").hidden = true;
+    }
+</script>
+
+{% endblock %}

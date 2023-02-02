@@ -1,0 +1,467 @@
+{% extends 'app/layout.html' %}
+{% load static %}
+
+{% block title %} 52Patti Mall | Megalot {% endblock %}
+
+{% block css %}
+
+<style>
+    #myUL {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    #myUL li a {
+        border: 1px solid #ddd;
+        margin-top: -1px;
+        /* Prevent double borders */
+        background-color: #f6f6f6;
+        padding: 12px;
+        text-decoration: none;
+        font-size: 18px;
+        color: black;
+        display: block
+    }
+
+    #myUL li a:hover:not(.header) {
+        background-color: #eee;
+    }
+
+    .card-size {
+        width: 30px;
+        height: 40px;
+        margin-right: 2px;
+    }
+</style>
+{% endblock %}
+{% block body %}
+<div class="main-container container">
+
+    <!-- Blogs -->
+    <div class="row mb-3">
+        <div class="col">
+            <h6 class="title">Play game with {{title}}</h6>
+            {% if status == 'game is running for close' %}
+            <p><small class="text-danger">Ooops ! Game closed for today, You can't play now !</small></p>
+            {% else %}
+            <p><small class="text-success">{{ status }}</small></p>
+            {% endif %}
+        </div>
+        <!-- <div class="col-auto align-self-center">
+            <a href="blog.html" class="small">Read more</a>
+        </div> -->
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-12 col-lg-12">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <form action="/app/place-bid-megalot/" method="POST">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-6 my-2 mb-4">
+                                <input type="date" value="" name="date" id="today" class="form-control">
+                            </div>
+
+                            <div class="col-6 my-2 mb-4">
+                                <select class="form-select form-control" name="marketType" hidden
+                                    aria-label="Default select example">
+                                    <option value="close">CLOSE</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <div class="row mb-3">
+                                    <div class="col align-self-center">
+                                        <h6 class="title">Select Patti for Megalot</h6>
+                                    </div>
+                                    <div class="col-auto">
+                                        <nav>
+                                            <div class="nav nav-tabs border-0" id="nav-tab" role="tablist">
+                                                <button class="btn  btn-outline-dark active text-normalcase"
+                                                    id="nav-thumbnails-tab" data-bs-toggle="tab"
+                                                    data-bs-target="#nav-thumbnails" type="button" role="tab"
+                                                    aria-controls="nav-thumbnails" aria-selected="true"
+                                                    style="padding: 10px;">
+                                                    Rummy
+                                                </button>
+                                                <button class="btn  btn-outline-dark ms-2 text-normalcase"
+                                                    id="nav-lists-tab" data-bs-toggle="tab" data-bs-target="#nav-lists"
+                                                    type="button" role="tab" aria-controls="nav-lists"
+                                                    aria-selected="false">
+                                                    Joker
+                                                </button>
+                                            </div>
+                                        </nav>
+                                    </div>
+                                    <div class="col-12 text-center mt-3">
+                                        <p class="text-secondary">Check the thumbnails view and list view of all Cards
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="tab-content" id="nav-tabContent">
+
+
+                                            <div class="tab-pane fade show active" id="nav-thumbnails" role="tabpanel"
+                                                aria-labelledby="nav-thumbnails-tab">
+
+                                                <!-- product medsize box  -->
+                                                <div class="row mb-2">
+                                                    <div class="col-12 my-2 mb-4 p-2"
+                                                        style="border: 2px red solid; border-radius: 5px;">
+                                                        <!-- chockat card  -->
+                                                        <div style="display:flex; flex-wrap: wrap;">
+                                                            {% for i in card %}
+                                                            {% if i.category == 'c' %}
+                                                            <img src="/media/{{i.image}}"
+                                                                onclick="selectPatti({{i.id}},'{{i.name}}','{{i.value}}','{{i.category}}','{{i.image}}')"
+                                                                alt="" style="margin: 1px; width: 30px;">
+                                                            {% endif %}
+                                                            {% endfor %}
+                                                        </div>
+
+                                                        <!-- Espic Card  -->
+                                                        <div style="display:flex; flex-wrap: wrap; padding-top: 5px;">
+                                                            {% for i in card %}
+                                                            {% if i.category == 'e' %}
+                                                            <img src="/media/{{i.image}}"
+                                                                onclick="selectPatti({{i.id}},'{{i.name}}','{{i.value}}','{{i.category}}','{{i.image}}')"
+                                                                alt="" style="margin: 1px; width: 30px;">
+                                                            {% endif %}
+                                                            {% endfor %}
+                                                        </div>
+
+
+                                                        <!-- badam card  -->
+                                                        <div style="display:flex; flex-wrap: wrap; padding-top: 5px;">
+                                                            {% for i in card %}
+                                                            {% if i.category == 'b' %}
+                                                            <img src="/media/{{i.image}}"
+                                                                onclick="selectPatti({{i.id}},'{{i.name}}','{{i.value}}','{{i.category}}','{{i.image}}')"
+                                                                alt="" style="margin: 1px; width: 30px;">
+                                                            {% endif %}
+                                                            {% endfor %}
+                                                        </div>
+
+                                                        <!-- Kilvar Card -->
+                                                        <div style="display:flex; flex-wrap: wrap; padding-top: 5px;">
+                                                            {% for i in card %}
+                                                            {% if i.category == 'k' %}
+                                                            <img src="/media/{{i.image}}"
+                                                                onclick="selectPatti({{i.id}},'{{i.name}}','{{i.value}}','{{i.category}}','{{i.image}}')"
+                                                                alt="" style="margin: 1px; width: 30px;">
+                                                            {% endif %}
+                                                            {% endfor %}
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="tab-pane fade" id="nav-lists" role="tabpanel"
+                                                aria-labelledby="nav-lists-tab">
+
+                                                <!-- product medsize list  -->
+                                                <div class="row mb-2">
+                                                    <div class="col-12 col-md-6 ">
+                                                        <div class="card mb-3">
+                                                            <div class="card-body">
+                                                                <div class="row">
+                                                                    <div class="col-12 my-2 mb-4 p-2"
+                                                                        style="border: 2px red solid; border-radius: 5px;">
+                                                                        <!-- chockat card  -->
+                                                                        <div style="display:flex; flex-wrap: wrap;">
+                                                                            {% for i in card %}
+                                                                            {% if i.category == 'joker' %}
+                                                                            <img src="/media/{{i.image}}"
+                                                                                onclick="selectJokerPatti({{i.id}},'{{i.name}}','{{i.value}}','{{i.category}}','{{i.image}}')"
+                                                                                alt=""
+                                                                                style="margin: 2px; width: 30px;">
+                                                                            {% endif %}
+                                                                            {% endfor %}
+                                                                        </div>
+
+
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <label for="" style="font-family: monospace;">Open
+                            </label>
+                            <div class="col-12 p-1 mb-4 row "
+                                style="border: 2px red solid; border-radius: 5px; margin-left: 1px;">
+
+                                <div class="col-6">
+                                    <label for="" class="form-lable"><small>Rummy Patti
+                                        </small> </label>
+                                    <div style="display:flex; flex-wrap: wrap;" id="rummyPattiOpen">
+
+
+
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <label for="" class="form-lable"><small>Joker Patti
+                                        </small> </label>
+                                    <div style="display:flex; flex-wrap: wrap;" id="jokerPattiOpen">
+                                       
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <label for="" style="font-family: monospace;">Close
+                            </label>
+                            <div class="col-12 p-1 mb-4 row "
+                                style="border: 2px red solid; border-radius: 5px; margin-left: 1px;">
+                                <div class="col-6">
+                                    <label for="" class="form-lable"><small>Rummy Patti
+                                        </small> </label>
+                                    <div style="display:flex; flex-wrap: wrap;" id="rummyPattiClose">
+
+
+
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <label for="" class="form-lable"><small>Joker Patti
+                                        </small> </label>
+                                    <div style="display:flex; flex-wrap: wrap;" id="jokerPattiClose">
+
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-12 my-2 mb-4">
+                                <label for="" class="form-lable"><small>Points <span
+                                            class="text-danger">*</span></small>
+                                </label>
+                                <input type="number" name="points" id="point" class="form-control" required>
+                                <input type="text" name="marketId" value="{{marketId}}" hidden>
+                                <input type="text" name="gameId" value="{{gameId}}" hidden>
+                                <input type="text" name="jokerCard" value="" id="jokerCard" hidden>
+                                <input type="text" name="rummyCard" value="" id="rummyCard" hidden>
+                            </div>
+
+                            {% if status == 'game is running for close' %}
+                            <div class="col-12 mb-4" style="margin-left: 35px;">
+                                <button class="btn btn-danger bt-lg" disabled > Game Closed for today .</button>
+                            </div>
+                            {% else %}
+                            <div class="col-3 mb-4" style="margin: auto;">
+                                <button class="btn btn-primary bt-lg" disabled id="btn-add"> Play</button>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </form>
+                    <hr>
+                    <div class="text-center">
+                        <a href="/app/bidding-history" class="btn btn-primary" style="font-size: smaller;">View
+                            History</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
+
+{% block js %}
+
+<script>
+    document.getElementById('today').value = new Date().toISOString().substring(0, 10);
+
+    // declraing new cart for rummy card 
+    if (localStorage.getItem('rummyCart') == null) {
+        var rummyCart = {};
+        updateRummyCart(rummyCart)
+    } else {
+        rummyCart = JSON.parse(localStorage.getItem('rummyCart'));
+        updateRummyCart(rummyCart)
+    }
+
+    // declraing new cart for Joker card 
+    if (localStorage.getItem('jokerCart') == null) {
+        var jokerCart = {};
+        updateJokerCart(jokerCart)
+    } else {
+        jokerCart = JSON.parse(localStorage.getItem('jokerCart'));
+
+    }
+
+    function btnEnaled() {
+        var rummySize = Object.keys(rummyCart).length;
+        var jokerSize = Object.keys(jokerCart).length;
+        if (rummySize == 6) {
+            if (jokerSize == 2) {
+                document.getElementById("btn-add").disabled = false;
+            }
+        }
+    }
+    // Adding New Card in rummyCart
+    function selectPatti(id, name, value, category, image) {
+        var size = Object.keys(rummyCart).length;
+        if (size < 6) {
+
+            keyId = Math.floor((Math.random() * 10000) + 1);
+            id = id;
+            name = name;
+            value = value;
+            category = category;
+            image = image;
+            rummyCart['id' + keyId] = [id, name, value, category, image];
+            updateRummyCart(rummyCart)
+            btnEnaled()
+            $('#rummyCard').val(JSON.stringify(rummyCart));
+        }
+        else {
+
+            alert("You can't add more than six card in rummy cards");
+        }
+
+
+    }
+
+    // Adding New Card in jokerCard
+    function selectJokerPatti(id, name, value, category, image) {
+        var size = Object.keys(jokerCart).length;
+        if (size < 2) {
+
+            keyId = Math.floor((Math.random() * 10000) + 1);
+            id = id;
+            name = name;
+            value = value;
+            category = category;
+            image = image;
+            jokerCart['id' + keyId] = [id, name, value, category, image];
+            updateJokerCart(jokerCart)
+            btnEnaled()
+            $('#jokerCard').val(JSON.stringify(jokerCart));
+        }
+        else {
+
+            alert("You can add only two card in Joker Card");
+        }
+
+
+    }
+
+    // Update rummy Cart 
+    function updateRummyCart(rummyCart) {
+
+
+        if ($.isEmptyObject(rummyCart)) {
+
+            document.getElementById("rummyPattiOpen").innerHTML = `<img src="{% static 'app/assets/img/card/cardBack.jpg' %}"
+                                             alt="" style="margin: 3px; width: 40px;">
+                                        <img src="{% static 'app/assets/img/card/cardBack.jpg' %}"
+                                             alt="" style="margin: 3px; width: 40px;">
+                                        <img src="{% static 'app/assets/img/card/cardBack.jpg' %}"
+                                             alt="" style="margin: 3px; width: 40px;">`;
+
+            document.getElementById("rummyPattiClose").innerHTML = `<img src="{% static 'app/assets/img/card/cardBack.jpg' %}"
+                                             alt="" style="margin: 3px; width: 40px;">
+                                        <img src="{% static 'app/assets/img/card/cardBack.jpg' %}"
+                                             alt="" style="margin: 3px; width: 40px;">
+                                        <img src="{% static 'app/assets/img/card/cardBack.jpg' %}"
+                                             alt="" style="margin: 3px; width: 40px;">`;
+
+        } else {
+            document.getElementById("rummyPattiOpen").innerHTML = ``;
+            
+            count = 0;
+            for (item in rummyCart) {
+                let id = rummyCart[item][0];
+                let name = rummyCart[item][1];
+                let value = rummyCart[item][2];
+                let category = rummyCart[item][3];
+                let image = rummyCart[item][4];
+
+                mystr = `<img src="/media/${image}"
+                                             alt="" style="margin: 3px; width: 40px;">`;
+
+                
+                if(count <3){
+                    document.getElementById("rummyPattiClose").innerHTML = ``;
+                $('#rummyPattiOpen').append(mystr);
+                count = count + 1;
+                }
+                else{
+                    
+                    $('#rummyPattiClose').append(mystr);
+                    count = count + 1;
+                }
+
+
+
+            }
+        }
+    }
+
+    // update joker cart 
+    function updateJokerCart(jokerCart) {
+        if ($.isEmptyObject(jokerCart)) {
+
+            document.getElementById("jokerPattiOpen").innerHTML = `<img src="{% static 'app/assets/img/card/cardBack.jpg' %}"
+                                             alt="" style="margin: 3px; width: 40px;">
+                                        `;
+            document.getElementById("jokerPattiClose").innerHTML = `<img src="{% static 'app/assets/img/card/cardBack.jpg' %}"
+                                             alt="" style="margin: 3px; width: 40px;">`;
+
+        } else {
+            document.getElementById("jokerPattiOpen").innerHTML = ``;
+            count = 0;
+            for (item in jokerCart) {
+                let id = jokerCart[item][0];
+                let name = jokerCart[item][1];
+                let value = jokerCart[item][2];
+                let category = jokerCart[item][3];
+                let image = jokerCart[item][4];
+
+                mystr = `<img src = "/media/${image}"
+            alt = "" style = "margin: 3px; width: 40px;" >`;
+
+
+            if(count <1){
+                    document.getElementById("jokerPattiClose").innerHTML = ``;
+                    $('#jokerPattiOpen').append(mystr);
+                count = count + 1;
+                }
+                else{
+                    
+                    $('#jokerPattiClose').append(mystr);
+                    count = count + 1;
+                }
+
+
+                
+
+            }
+        }
+    }
+
+
+
+
+</script>
+
+{% endblock %}

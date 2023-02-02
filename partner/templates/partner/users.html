@@ -1,0 +1,181 @@
+{% extends 'partner/layout.html' %}
+{% load static %}
+{% block title %} JodiWin | Users {% endblock %}
+{% block body %}
+
+<!-- Start Content-->
+<div class="container-fluid">
+
+    <!-- start page title -->
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="/partner">Home</a></li>
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Market</a></li>
+                        <li class="breadcrumb-item active">Users</li>
+                    </ol>
+                </div>
+                <h4 class="page-title">Users List</h4>
+            </div>
+        </div>
+    </div>
+    <!-- end page title -->
+    {% if messages %}
+    <div class="alert alert-success" role="alert">
+        {% for message in messages %}
+        <i style="list-style: none;" class=" me-2"></i> <strong>Message - </strong>
+        {{ message }}
+        {% endfor %}
+    </div>
+    {% endif %}
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row mb-2">
+                        <div class="col-xl-8">
+                            
+                                <button class="btn btn-danger mb-2 me-2 col-auto " data-bs-toggle="modal" data-bs-target="#bs-example-modal-lg"><i class="mdi mdi-plus me-1"></i> Add New User</button>
+                                
+
+                        </div>
+                        <div class="col-xl-4">
+                            <div class="text-xl-end mt-xl-0 mt-2">        
+                                <a href="/partner/users" type="button" class="btn btn-primary mb-2 me-2"><i
+                                        class="mdi mdi-autorenew me-1"></i></a>
+                                <!-- <button type="button" class="btn btn-light mb-2">Export</button> -->
+                            </div>
+                        </div><!-- end col-->
+                    </div>
+
+                    <div class="table-responsive">
+                        <table id="basic-datatable" class="table dt-responsive nowrap w-100">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Email <i class="mdi mdi-email"></i></th>
+                                    <th>Phone <i class="mdi mdi-phone"></i></th>
+                                    <th>Wallet Ballance <i class="mdi mdi-wallet"></i></th>
+                                    <th>Status</th>
+                                    <th style="">Action</th>
+                                </tr>
+                            </thead>
+
+
+                            <tbody>
+                                {% for i in users reversed %}
+                                <tr>
+                                    <td>{{i.user.user.first_name}} {{i.user.user.last_name}}</td>
+                                    <td>{{ i.user.user.email }}</td>
+                                    <td>{{i.user.phone}}</td>
+                                    <td>Rs. {{i.user.walletAmount}}</td>
+                                    <td>
+                                        <h5><span class="badge badge-primary-lighten"><i class="mdi mdi-coin"></i>
+                                                {{i.status}}</span></h5>
+                                    </td>
+                                    <td>
+                                        <a href="/partner/user-details/{{i.user.id}}/" class="action-icon"> <i
+                                                class="mdi mdi-eye"></i> </a>
+                                        <!-- <a href="javascript:void(0);" class="action-icon"> <i class="mdi mdi-square-edit-outline"></i></a> -->
+                                    </td>
+                                </tr>
+                                {% endfor %}
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div> <!-- end card-body-->
+            </div> <!-- end card-->
+        </div> <!-- end col -->
+    </div>
+    <!-- end row -->
+
+</div> <!-- container -->
+
+
+<!-- Modals Here  -->
+
+ <!-- Large modal -->
+ 
+
+
+<!-- Large modal -->
+<!-- <button type="button" class="btn btn-info">Large Modal</button> -->
+<div class="modal fade" id="bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myLargeModalLabel">Adding New User </h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
+            </div>
+            <div class="modal-body">
+                <div class="conatiner">
+                    <form action="/partner/add-new-user/" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-xl-12 row">
+                                <div class="mb-3 col-6">
+                                    <label for="title" class="form-label">First Name : <span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" id="title" name="firstName" class="form-control"
+                                        placeholder="First name" required>
+                                </div>
+                                <div class="mb-3 col-6">
+                                    <label for="title" class="form-label">Last Name : <span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" id="title" name="lastName" class="form-control"
+                                        placeholder="Last name" required>
+                                </div>
+                                <div class="mb-3 col-12">
+                                    <label for="title" class="form-label">Email address : <span
+                                            class="text-danger">*</span> <small>( Note - Email address must be active, User's account password will be send on email address )</small></label>
+                                    <input type="email" id="title" name="email" class="form-control"
+                                        placeholder="Email address" required>
+                                </div>
+                                <div class="mb-3 col-6">
+                                    <label for="title" class="form-label">Phone Number : <span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" id="title" name="phone" class="form-control"
+                                        placeholder="Phone number" required>
+                                </div>
+                                <div class="mb-3 col-6">
+                                    <label for="title" class="form-label">City : <span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" id="title" name="city" class="form-control"
+                                        placeholder="City" required>
+                                </div>
+                                
+                            </div> <!-- end col-->
+
+                            <div class="col-xl-12 row">
+
+                                <!-- Date View -->
+                                <div class="mb-3 position-relative" id="datepicker2">
+                                    <button class="btn btn-success " type="submit">Save & Add</button>
+                                    <button class="btn btn-warning mx-2" type="reset">Reset</button>
+                                </div>
+                            </div> <!-- end col-->
+                        </div>
+                        <!-- end row -->
+                    </form>
+                </div>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+</div> <!-- content -->
+
+
+{% endblock %}
+
+{% block js %}
+
+<script>
+
+</script>
+{% endblock %}

@@ -1,0 +1,126 @@
+{% extends 'app/layout.html' %}
+{% load static %}
+
+{% block title %} 52 Patti Mall{% endblock %}
+
+{% block css %}
+<style>
+    .disabled {
+        pointer-events: none;
+        cursor: default;
+    }
+</style>
+{% endblock %}
+
+{% block body %}
+<div class="main-container container">
+    <!-- income expense-->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="">
+                    <div class="row">
+                        <div class="col-auto align-self-center">
+                            <img src="{% static 'app/assets/img/banner/banner1.jpg' %}" alt="" style="width: 100%; border-radius: 10px;" />
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </div>
+
+
+    <!-- Blogs -->
+    <div class="row mb-3">
+        <div class="col container">
+            <h6 class="title mx-2">Jodi Sequence</h6>
+        </div>
+        <!-- <div class="col-auto align-self-center">
+            <a href="blog.html" class="small">Read more</a>
+        </div> -->
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-12 col-lg-12">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <div class="row">
+                        {% for i in jodiMarket %}
+                        <div class="col-12 mb-2">
+                            <div class="card text-center shadow-sm" style="border-radius: 5px;">
+                                <div class="mx-2">
+                                    <marquee width="100%" direction="rigth" height="30%">
+                                        {% if i.status == "game is closed for today" %}
+                                        <small class="text-danger" style="font-size:small;">{{i.status}}</small>
+                                        {% else %}
+                                        <small class="text-success" style="font-size:small;">{{i.status}}</small>
+                                        {% endif %}
+                                    </marquee>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-4"> <img src="{% static 'app/assets/img/clock2.jpg' %}"
+                                            style="width: 60px; padding: 5px;" alt=""> </div>
+                                    <div class="col-8">
+                                        <p class="mt-1 mb-1 text-center"> <b><small>{{i.closeTime}}</small></b> </p>
+                                        {% if i.result == '**' %}
+                                        <div style="display: flex; margin-left: 65px;" class="text-center">
+                                            <img src="{% static 'app/assets/img/card/cardBack.jpg' %}" alt="" style="width: 35px; margin: 1.5px;">
+                                            <img src="{% static 'app/assets/img/card/cardBack.jpg' %}" alt="" style="width: 35px; margin: 1.5px;">
+                                        </div>
+                                        {% else %}
+                                        <div>
+                                            {% for key, values in resultCardsDict.items %}
+                                            {% if key.id == i.id %}
+                                            {% for k, v in values.resultCards.items %}
+                                            <img src="/media/{{v.4}}" alt="" style="width: 30px; margin: 1.5px;">
+                                            {% endfor %}
+                                            {% endif %}
+                                            
+                                            {% endfor %}
+                                        </div>
+                                        {% endif %}
+                                       
+                                    </div>
+
+                                </div>
+                                {% if i.status == "game is closed for today" %}
+                                <div style="display: flex;">
+                                    <a href="/app/jodi-game-panel-chart/{{i.id}}"
+                                        class="btn btn-primary btn-sm mx-2 mb-2 mt-3"><i
+                                            class="bi bi-card-list"></i></a>
+                                    <a href="/app/jodi-game-list/{{i.id}}"
+                                        class="btn btn-primary btn-sm mx-2 mb-2 mt-3 disabled"><i
+                                            class="bi bi-controller"></i>&nbsp; <small>Play</small></a>
+                                </div>
+                                {% else %}
+                                <div style="display: flex;">
+                                    <a href="/app/jodi-game-panel-chart/{{i.id}}"
+                                        class="btn btn-primary btn-sm mx-2 mb-2 mt-3"><i
+                                            class="bi bi-card-list"></i></a>
+                                    <a href="/app/jodi-game-list/{{i.id}}"
+                                        class="btn btn-primary btn-sm mx-2 mb-2 mt-3"><i
+                                            class="bi bi-controller"></i>&nbsp; <small>Play</small></a>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% endfor %}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
+
+{% block js %}
+
+
+
+{% endblock %}

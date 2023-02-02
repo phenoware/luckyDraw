@@ -1,0 +1,97 @@
+<html>
+
+<head onload="submitPayuForm()">
+  {% csrf_token %}
+  <script>
+    var hash = "{{ hash }}";
+    function formAutoSubmit() {
+      if (hash == '') {
+        return;
+      }
+      var payform = document.getElementById("aggrepayForm");
+      payform.submit();
+    }
+    window.onload = formAutoSubmit;
+  </script>
+
+
+</head>
+
+<body>
+  <h4 style="text-align: center; margin: auto;">Please wait...  <br> Do not refresh the page and don't press back button !</h4>
+  <!-- <h4>has string = {{ hash_string }}</h4> -->
+  <form action={{ action }} method="post" id="aggrepayForm" hidden>
+    <input type="hidden" name="api_key" value="{{ API_KEY }}" />
+    <input type="hidden" name="hash" value="{{ hash }}" />
+    <label>amount</label>
+    <input type="text" name="amount" value="{{ posted.amount}}" required><br><br>
+
+    <label>Email</label>
+    <input type="text" name="email" value="{{ posted.email }}" required><br><br>
+
+    <label>Name</label>
+    <input type="text" name="name" value="{{ posted.name }}" required><br><br>
+
+    <label>Phone</label>
+    <input type="text" name="phone" value="{{ posted.phone}}" required><br><br>
+
+    <label>Adress 1</label>
+    <input type="text" name="address_line_1" value="{{ posted.address_line_1}}" required><br><br>
+
+    <label>Address 2</label>
+    <input type="text" name="address_line_2" value="{{ posted.address_line_2}}"><br><br>
+
+    <label>Order Id</label>
+    <input type="text" name="order_id" value="{{ posted.order_id }}" required><br><br>
+
+    <label>Currency</label>
+    <input type="text" name="currency" value="INR" required><br><br>
+
+    <label>Description</label>
+    <input type="text" name="description" value="desc" required><br><br>
+
+    <label>City</label>
+    <input type="text" name="city" value="{{ posted.city }}" required><br><br>
+
+    <label>State</label>
+    <input type="text" name="state" value="{{ posted.state }}"><br><br>
+
+    <label>Zip Code</label>
+    <input type="text" name="zip_code" value="{{ posted.zip_code}}" required><br><br>
+
+    <label>Counrty</label>
+    <input type="text" name="country" value="IND" required><br><br>
+
+    <label>return_url</label>
+    <input type="text" name="return_url"
+      value="{{ posted.return_url |default:'http://127.0.0.1:8000/payment_response/'}}" required><br><br>
+
+    <label>mode</label>
+    <input type="text" name="mode" value="{{ posted.mode }}" required><br><br>
+
+    <label>udf1</label>
+    <input type="text" name="udf1"><br><br>
+
+    <label>udf2</label>
+    <input type="text" name="udf2"><br><br>
+
+    <label>udf3</label>
+    <input type="text" name="udf3"><br><br>
+
+    <label>udf4</label>
+    <input type="text" name="udf4"><br><br>
+
+    <label>udf5</label>
+    <input type="text" name="udf5"><br><br>
+
+
+    <div class="buttons">
+      <div class="right">
+        <input type="submit" value="Submit" class="button" />
+      </div>
+    </div>
+
+  </form>
+</body>
+
+</html>

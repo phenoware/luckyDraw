@@ -1,0 +1,299 @@
+{% extends 'website/layout.html' %}
+{% load static %}
+{% block title %} Lucky Draw Card - Home{% endblock %}
+
+{% block body %}
+
+
+<!--start promo section-->
+<section class="promo-section ptb-90">
+    <div class="promo-section-wrap">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-sm-6">
+                    <div class="bg-secondary single-promo-section text-center">
+                        <div class="single-promo-content">
+                            <span class="ti-face-smile "></span>
+                            <h6>Easy To Use</h6>
+                            <p>Simple and easy user interface, Easy to use .</p>
+                        </div>
+                        <div class="line"></div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="bg-secondary single-promo-section text-center">
+                        <div class="single-promo-content">
+                            <span class="ti-shine"></span>
+                            <h6>Awesome Design</h6>
+                            <p>User friendly design, Smart & simple markets and games listng , easy selection option
+                            </p>
+                        </div>
+                        <div class="line"></div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="bg-secondary single-promo-section text-center">
+                        <div class="single-promo-content">
+                            <span class="ti-shield"></span>
+                            <h6>Highly Secure</h6>
+                            <p>Secure with user authentication, Secure user details . </p>
+                        </div>
+                        <div class="line"></div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="bg-secondary single-promo-section text-center">
+                        <div class="single-promo-content">
+                            <span class="ti-headphone-alt"></span>
+                            <h6>24/7 Support</h6>
+                            <p>Our team actively supporting to our valuable user 24/7. </p>
+                        </div>
+                        <div class="line"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--end promo section-->
+
+<!--start features section-->
+<section id="features" class="bg-secondary ptb-90">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="section-heading text-center">
+                    <h3>Our Featured Shares & Products</h3>
+                    <p>We assure you to liquidate your investement with industry's best price shares & Products.</p>
+                </div>
+
+                <div class="">
+                    {% for i in products %}
+                    <div class="col-md-3 text-center my-4" >
+                        <div class="card bg-white py-2 mx-2" style="width: 18rem;">
+                            <img src="/media/{{i.image}}" style="width: 200px; display: block; margin-left: auto; margin-right: auto;" class="pos-hcenter img-responsive"
+                                alt="">
+                            <div class="card-body" style="padding: 5px;">
+                                <h5 class="card-title">{{i.name}}</h5>
+                                <p class="card-text">Rs. {{i.price}}/ {{i.unit}}</p>
+                                <a href="#order" class="btn btn-primary " style="margin-top: 5px; margin-bottom: 5px;">Order now</a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+<!--end features section-->
+
+<section id="aboutUs" class="ptb-90 bg-white">
+    <div class="blog-section-wrap">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class=" text-center">
+                        <h3>About us</h3>
+                        <p>The Golden Green Agriculture Pvt. Ltd. company produces and sells agricultural commodities.
+                            Customers are given the
+                            facility to book company shares and products. When customers book compnay shares and
+                            products , they will get free credit points to play rummy or cards games on Lucky Draw Card.
+                            <!-- It
+                            gives customers a chance to make a profit, customers who do not win in the
+                            Guessing game will be reimbursed or Refund by the company after 36 months of
+                            advance booking and customers who succeed in the Guessing game will be given
+                            the winning amount.-->
+                        </p>
+                        <p>Lucky Draw Card is an online free rummy game app, fully owned and operated Lucky Draw Card. Our main
+                            purpose to promote Rummy as a professional game and create a community of skilled gamers.
+                            You can play our Lucky Draw Card game online 24x7 from your home, on mobile or any location
+                            that has access to the Internet. You can create a valid account on our application and play
+                            free Lucky Draw Card games. With a vast experience of managing online multiplayer games, we
+                            believe in maintaining complete confidentiality of your information. So, create your account
+                            with us, join a Table and start playing online Lucky Draw Card games.</p>
+                        <p>Lucky Draw Card offers free rummy games and points on every new joining that allows rummy
+                            players to compete for entertainment and possible monetary gains with the use of their rummy
+                            skills.</p>
+                        <p class="pb20">We have put in great amount of effort to build our application so that players
+                            can enjoy excellent Lucky Draw Card games online right from their home and earn real money.
+                            we offers platform to the players to use their skills and play the game online and have
+                            entertainment with friends, family, collegues and also to have opportunity to earn real
+                            cash. </p>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+<!--end blog section -->
+<!--start download section-->
+<section class="download-section" style="background: url('img/download-bg.jpg')no-repeat center center fixed">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5 hidden-sm">
+                <div class="download-app-img">
+                    <img src="{% static 'website/img/handPhone.png' %}" alt="app download" class="img-responsive">
+                </div>
+            </div>
+            <div class="col-md-7 col-sm-12">
+                <div class="download-app-text">
+                    <h3>Get The App Now !</h3>
+                    <p>We Welcomes You To India's Most popular rummy game app at Lucky Draw Card.
+                    </p>
+                    <div class="download-app-button">
+                        
+                        <a href="https://play.google.com/store/apps/details?id=phenoware.luckydrawcard.com" target="_blank" class="download-btn hover-active">
+                            <span class="ti-android"></span>
+                            <p>
+                                <small>Git It On</small>
+                                <br>Google Play
+                            </p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--end download section-->
+
+<!--start product counter section-->
+<section class="product-counter-section ptb-50">
+    <div class="product-counter-wrap">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-5 col-sm-6">
+                    <div class="counter-content-wrap">
+                        <span class="ti-cup"></span>
+                        <h6 class="counter-title"><strong>Trusted by 9000+</strong></h6>
+                        <p>High performing team worldwide</p>
+                    </div>
+                </div>
+                <div class="col-md-7 col-sm-6">
+                    <ul class="counter-list list-inline text-right">
+                        <li>
+                            <span class="count">39560+</span>
+                            <span class="title">Downloads</span>
+                        </li>
+                        <li>
+                            <span class="count">19500+</span>
+                            <span class="title">Activ users</span>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<!--contact us section start-->
+<section id="contact" class="contact-us ptb-90">
+    <div class="contact-us-wrap">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="section-heading">
+                        <h3>Book Now</h3>
+                        <p>It's very easy to booking shares. Just use the contact form. Our team get in touch with you
+                            shortly.</p>
+                    </div>
+                    <!-- <div class="footer-address">
+                        <h6>Head Office</h6>
+                        <p>121 King St, Melbourne VIC 3000, Australia</p>
+                        <ul>
+                            <li><i class="fa fa-phone"></i> <span>Phone: +61 2 8376 6284</span></li>
+                            <li><i class="fa fa-envelope-o"></i> <span>Email : <a
+                                    href="mailto:hello@yourdomain.com">hello@yourdomain.com</a></span>
+                            </li>
+                        </ul>
+                    </div> -->
+                </div>
+                <div class="col-md-7" id="order">
+                    <form action="/paytmweb/" method="POST" class="contact-us-form">
+                        {% csrf_token %}
+                        <h6>One step more..</h6>
+                        <div class="row">
+                            <div class="col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="name" placeholder="Enter name"
+                                        required="required">
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    <input type="email" class="form-control" name="email" placeholder="Enter email"
+                                        required="required">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    <input type="text" name="phone" value="" class="form-control" id="phone"
+                                        placeholder="Your Phone" required>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    <input type="text" name="city" value="" size="40" class="form-control" id="company"
+                                        placeholder="City name" required>
+                                </div>
+                            </div>
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <input type="text" name="address" value="" size="40" class="form-control"
+                                        id="company" placeholder="Enter your address" required>
+                                </div>
+                            </div>
+                           
+
+                            <div class="col-sm-12 col-xs-12">
+                                <div class="form-group">
+                                   <select name="product"  class="form-control" >
+                                    <option value="0">-- Select Product -- </option>
+                                    {% for i in products %}
+                                    <option value="{{i.id}}">{{i.name}}</option>
+                                    {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-xs-12">
+                                <div class="form-group">
+                                    <input type="number" name="qnt"  size="40" class="form-control"
+                                        id="company" placeholder="Enter quantity" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <textarea name="msg" id="message" class="form-control" rows="7" cols="25"
+                                        placeholder="Message"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 mt-20">
+                                <button type="submit" class="btn softo-solid-btn pull-right" id="btnContactUs">
+                                    Book Now
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                    <p class="form-message"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--contact us section end-->
+
+{% endblock %}

@@ -1,0 +1,95 @@
+{% extends 'app/layout.html' %}
+{% load static %}
+{% block title %} Products List {% endblock %}
+
+{% block body %}
+
+<!-- main page content -->
+<div class="main-container container">
+    <!-- products -->
+    <div class="row mb-3">
+        <div class="col align-self-center">
+            <h6 class="title">Products</h6>
+            <p class="text-secondary small">{{productsCount}} products</p>
+        </div>
+        <div class="col-auto">
+            <nav>
+                <div class="nav nav-tabs border-0" id="nav-tab" role="tablist">
+                    <button class="btn btn-44 btn-outline-dark active text-normalcase" id="nav-thumbnails-tab"
+                        data-bs-toggle="tab" data-bs-target="#nav-thumbnails" type="button" role="tab"
+                        aria-controls="nav-thumbnails" aria-selected="true">
+                        <i class="bi bi-grid"></i>
+                    </button>
+                  
+                </div>
+            </nav>
+        </div>
+        
+    </div>
+    <div class="row" style="margin-top: 15px;">
+        <div class="col-12">
+            <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="nav-thumbnails" role="tabpanel"
+                    aria-labelledby="nav-thumbnails-tab">
+
+                    <!-- product medsize box  -->
+                    
+                    <!-- product medsize box no gap -->
+                    <div class="row mb-4 g-0 ">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body p-0">
+                                    <div class="row mx-0">
+
+
+                                        {% for i in products %}
+                                        <div class="col-6 col-md-4 col-lg-3 border-end p-3">
+                                            <div class="position-relative">
+                                                <div class="position-absolute start-0 top-0 z-index-1">
+                                                    
+                                                </div>
+                                                <div class="position-absolute end-0 top-0 z-index-1 ">
+                                                    <button
+                                                        class="btn btn-sm btn-26 roudned-circle shadow-sm shadow-danger text-danger">
+                                                        <i class="bi bi-heart size-10 vm"></i>
+                                                    </button>
+                                                </div>
+                                                <a href="/app/product-details/{{i.id}}/">
+                                                    <figure class="avatar w-100 rounded-15" >
+                                                        <img src="/media/{{i.image}}" alt="" class="" style="height: 180px;">
+                                                    </figure>
+                                                </a>
+
+                                                <div class="row" style="margin-top: 10px; padding-top: 10px;">
+                                                    <div class="col">
+                                                        <p class="small"><small class="text-muted size-12">{{i.name}}</small><br />&#8377;
+                                                            {{i.price}} / {{i.unit}}</p>
+                                                    </div>
+                                                    <div class="col-auto px-0">
+                                                        <a href="/app/product-details/{{i.id}}/" class="btn btn-sm btn-link text-color-theme">
+                                                            <i class="bi bi-bag-plus"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {% endfor %}
+
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+<!-- main page content ends -->
+
+{% endblock %}

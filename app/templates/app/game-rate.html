@@ -1,0 +1,62 @@
+{% extends 'app/layout.html' %}
+{% load static %}
+
+{% block title %} Account Statement{% endblock %}
+
+{% block body %}
+<div class="main-container container">
+
+    <!-- Transactions -->
+    <div class="row mb-3">
+        <div class="col">
+            <h6 class="title">Games Rates<br><small class="fw-normal text-muted">{{date}}</small>
+            </h6>
+        </div>
+        <div class="col-auto align-self-center">
+            
+        </div>
+    </div>
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body p-0">
+                    <ul class="list-group list-group-flush bg-none">
+                        {% for i in rates %}
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-auto">
+                                    <div class="avatar avatar-60 shadow-sm card rounded-15 p-1">
+                                        <img src="/media/{{i.logo}}" alt="">
+                                    </div>
+                                </div>
+                                <div class="col align-self-center ps-0">
+                                    <p class="text-secondary size-10 mb-0">{{i.transactionType}}</p>
+                                    <p>{{i.title}}</p>
+                                    <p class="text-secondary size-10 mb-0">{{i.marketType}}</p>
+                                </div>
+                                <div class="col align-self-center text-end">
+                                    <p class="text-secondary text-muted size-10 mb-0">{{i.status}}</p>
+                                    <p>{{i.rate}}</p>
+                                </div>
+                            </div>
+                        </li>
+                        {% endfor %}
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+</div>
+
+{% endblock %}
+
+{% block js %}
+
+
+
+{% endblock %}

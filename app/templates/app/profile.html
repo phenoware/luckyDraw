@@ -1,0 +1,198 @@
+
+{% extends 'app/layout.html' %}
+{% load static %}
+
+{% block title %} Account Statement{% endblock %}
+
+{% block body %}
+<!-- main page content -->
+<div class="main-container container">
+    <div class="row">
+        <div class="col-12 profile-page">
+            <div class="clearfix"></div>
+            <div class="circle small one"></div>
+            <div class="circle small two"></div>
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="282.062"
+                height="209.359" viewBox="0 0 282.062 209.359" class="menubg">
+                <defs>
+                    <linearGradient id="linear-gradient" x1="0.5" x2="0.5" y2="1"
+                        gradientUnits="objectBoundingBox">
+                        <stop offset="0" stop-color="#09b2fd" />
+                        <stop offset="1" stop-color="#6b00e5" />
+                    </linearGradient>
+                </defs>
+                <path id="profilebg"
+                    d="M751.177,233.459c-28.511,1.567-38.838,7.246-61.77,27.573s-27.623,71.926-65.15,70.883-27.624-21.369-79.744-40.132-47.13-53.005-23.676-84.8,4.009-57.671,33-75.867,83.269,30.223,127.232,21.5,64.157-41.353,82.329-26,5.953,29.138,8.773,46.369,13.786,23.5,13.786,37.91S779.688,231.893,751.177,233.459Z"
+                    transform="translate(-503.892 -122.573)" fill="url(#linear-gradient)" />
+            </svg>
+
+            {% for i in customer %}
+            <div class="row my-3 py-4">
+                <div class="col-7 align-self-center">
+                    <h1 class="mb-2"><span class="fw-light text-secondary">Hello!</span><br />{{request.user.first_name}} {{request.user.last_name}} </h1>
+                    <p class="text-muted size-12">Mobile : +91 {{i.phone}}<br />email : {{i.user.email}}</p>
+                </div>
+
+                <div class="col align-self-center">
+                    <figure class="avatar avatar-100 rounded-20 p-1 bg-white shadow-sm">
+                        <img src="{% static 'app/assets/img/user.jpg' %}" style="padding: 5px; margin-top: -7px;" alt="" class="rounded-18">
+                    </figure>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+
+    <!-- categories list -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card bg-theme text-white">
+                <div class="card-body pb-0">
+                    <div class="row justify-content-between gx-0 mx-0 pb-3">
+                        <div class="col-auto text-center">
+                            <a href="/app/add-funds/" class="avatar avatar-60 p-1 shadow-sm rounded-15 bg-opac mb-2">
+                                <div class="icons bg-success text-white rounded-12 bg-opac">
+                                    <i class="bi bi-wallet2 size-22"></i>
+                                </div>
+                            </a>
+                            <p class="size-10">Add Funds</p>
+                        </div>
+
+                        <div class="col-auto text-center">
+                            <a href="/app/history" class="avatar avatar-60 p-1 shadow-sm rounded-15 bg-opac mb-2">
+                                <div class="icons bg-success text-white rounded-12 bg-opac">
+                                    <i class="bi bi-receipt-cutoff size-22"></i>
+                                </div>
+                            </a>
+                            <p class="size-10">History</p>
+                        </div>
+
+                        <div class="col-auto text-center">
+                            <a href="/app/account-statement"
+                                class="avatar avatar-60 p-1 shadow-sm rounded-15 bg-opac mb-2">
+                                <div class="icons bg-success text-white rounded-12 bg-opac">
+                                    <i class="bi bi-file-earmark-text size-22"></i>
+                                </div>
+                            </a>
+                            <p class="size-10">Points Statement</p>
+                        </div>
+
+                        <div class="col-auto text-center">
+                            <a href="/app/withdraw" class="avatar avatar-60 p-1 shadow-sm rounded-15 bg-opac mb-2">
+                                <div class="icons bg-success text-white rounded-12 bg-opac">
+                                    <i class="bi bi-bank size-22"></i>
+                                </div>
+                            </a>
+                            <p class="size-10">Withdraw Points</p>
+                        </div>
+                    </div>
+
+                    <div class="row justify-content-between gx-0 mx-0 collapse" id="collpasemorelink">
+                        <div class="col-auto text-center">
+                            <a href="/app/pending-withdraw-request"
+                                class="avatar avatar-60 p-1 shadow-sm rounded-15 bg-opac mb-2">
+                                <div class="icons bg-success text-white rounded-12 bg-opac">
+                                    <i class="bi bi-exclamation-circle size-22"></i>
+                                </div>
+                            </a>
+                            <p class="size-10">Pending Withdraw</p>
+                        </div>
+
+                        <div class="col-auto text-center">
+                            <a href="/app/game-rate" class="avatar avatar-60 p-1 shadow-sm rounded-15 bg-opac mb-2">
+                                <div class="icons bg-success text-white rounded-12 bg-opac">
+                                    <i class="bi bi-cash-stack size-22"></i>
+                                </div>
+                            </a>
+                            <p class="size-10">Games Rates</p>
+                        </div>
+
+                        <div class="col-auto text-center">
+                            <a href="/app/notifications" class="avatar avatar-60 p-1 shadow-sm rounded-15 bg-opac mb-2">
+                                <div class="icons bg-success text-white rounded-12 bg-opac">
+                                    <i class="bi bi-bell size-22"></i>
+                                </div>
+                            </a>
+                            <p class="size-10">Notifications</p>
+                        </div>
+
+                        <div class="col-auto text-center">
+                            <a href="#" class="avatar avatar-60 p-1 shadow-sm rounded-15 bg-opac mb-2">
+                                <div class="icons bg-success text-white rounded-12 bg-opac">
+                                    <i class="bi bi-share size-22"></i>
+                                </div>
+                            </a>
+                            <p class="size-10">Refer & Earn</p>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-link mt-0 py-1 w-100 bar-more collapsed" type="button"
+                        data-bs-toggle="collapse" data-bs-target="#collpasemorelink" aria-expanded="false"
+                        aria-controls="collpasemorelink">
+                        <span class=""></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- My Frequent Payments -->
+    <div class="row mb-3">
+        <div class="col">
+            <h6 class="title">My Bank Details</h6>
+        </div>
+    </div>
+    <div class="row mb-1">
+        <div class="col-12 col-md-6">
+            <div class="card overflow-hidden mb-3">
+                <figure class="m-0 p-0 position-absolute top-0 end-0 w-50 h-100 coverimg">
+                    <!-- <img src="{% static 'app/assets/img/image2.jpg' %}" alt=""> -->
+                </figure>
+                <div class="card-body p-0">
+                    <div class="row mx-0">
+                        <div class="col-12 py-3">
+                            <div class="row">
+                                <div class="col-auto" style="margin: auto;">
+                                    <div class="card text-center">
+                                        <div class="card-body p-1">
+                                            <div
+                                                class="position-absolute end-0 top-0 bg-success z-index-1 online-status">
+                                            </div>
+                                            <figure class="avatar avatar-70 shadow-sm rounded-18">
+                                                <i class=" bi bi-bank"></i>
+                                            </figure>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% for i in bank %}
+                                <form action="/app/update-bank-details/" method="POST">
+                                    {% csrf_token %}
+                            
+                                <div class="col-12 align-self-center">
+                                    <p class="text-secondary size-10 mb-0 mx-2 mt-2">Bank Name</p>
+                                    <input type="text" name="bankName" value="{{i.bankName}}" class="form-control mt-2" style="margin-right: 2px;">
+                                    <p class="text-secondary size-10 mb-0 mx-2 mt-2">Account Holder Name</p>
+                                    <input type="text" name="accountName" value="{{i.accountName}}" class="form-control mt-2" style="margin-right: 2px;">
+                                    <p class="text-secondary size-10 mb-0 mx-2 mt-2">Account Number</p>
+                                    <input type="text" name="accountNumber" value="{{i.accountNumber}}" class="form-control mt-2" style="margin-right: 2px;">
+                                    <p class="text-secondary size-10 mb-0 mx-2 mt-2">IFSC Code</p>
+                                    <input type="text" name="ifscCode" value="{{i.ifscCode}}" class="form-control mt-2" style="margin-right: 2px;">
+                                </div>
+                                <div class="col-auto" style="margin: auto;">
+                                    <button class="btn btn-primary btn-sm size-12 mt-3" type="submit">Save</button>
+                                </div>
+                            </form>
+                            {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    
+</div>
+<!-- main page content ends -->
+{% endblock %}

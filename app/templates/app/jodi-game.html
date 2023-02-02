@@ -1,0 +1,48 @@
+{% extends 'app/layout.html' %}
+{% load static %}
+
+{% block title %} JoidWin | Select Game {% endblock %}
+
+{% block body %}
+<div class="main-container container">
+
+    <!-- Blogs -->
+    <div class="row mb-3">
+        <div class="col">
+            <h6 class="title">Place game</h6>
+        </div>
+        <!-- <div class="col-auto align-self-center">
+            <a href="blog.html" class="small">Read more</a>
+        </div> -->
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-12 col-lg-12">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <div class="row">
+                        {% for i in game %}
+                        <div class="col-4 mb-3 text-secondary" >
+                            <a href="/app/play-jodi-game/{{marketId}}/{{i.id}}">
+                            <div class="card text-center shadow-sm" style="border-radius: 5px;">
+                                <img src="/media/{{i.logo}}" alt="" style="width: 70px; margin: auto;">
+                                <p class="mt-1 mb-1 text-secondary" style="padding:5px;"> <b><small style="font-size: x-small;">{{i.title}}</small></b> </p>
+                            </div>
+                        </a>
+                        </div>
+                        {% endfor %}
+                        </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
+
+{% block js %}
+
+
+
+{% endblock %}

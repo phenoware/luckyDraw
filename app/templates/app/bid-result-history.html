@@ -1,0 +1,92 @@
+{% extends 'app/layout.html' %}
+{% load static %}
+
+{% block title %} JoidWin | Bid Result History {% endblock %}
+
+{% block body %}
+<div class="main-container container">
+
+    <!-- Blogs -->
+    <div class="row mb-3">
+        <div class="col">
+            <h6 class="title">Bid Result History</h6>
+        </div>
+        <!-- <div class="col-auto align-self-center">
+            <a href="blog.html" class="small">Read more</a>
+        </div> -->
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-12 col-lg-12">
+            <div class="card mb-3">
+                {% if bids %}
+                <table id="scroll-horizontal-datatable" class="table nowrap">
+                    <thead class="" style="font-size: small;">
+                        <tr>
+                            <th><small>Date</small></th>
+                            <th><small>Market</small></th>
+                            <th><small>Game</small></th>
+                            <th><small>Cards</small></th>
+                            <th><small>Amount</small></th>
+                            <th><small>Status</small></th>
+                        </tr>
+                    </thead>
+                    <tbody class="" style="font-size: small;">
+                        {% for i in bids %}
+                            <tr>
+                                <td><small><a href="/app/bid-details/{{i.id}}" class="text-secondary"> {{i.date}}</a></small></td>
+                                <td><small><a href="/app/bid-details/{{i.id}}" class="text-secondary">{{i.market.title}} - {{i.marketType}}</a></small></td>
+                                <td><small><a href="/app/bid-details/{{i.id}}" class="text-secondary">{{i.game.title}}</a></small></td>
+
+                                <td>
+                                {% for key, values in rummyCardDict.items %}
+                                {% if key.id == i.id %}
+                                {% for k, v in values.rummyCards.items %}
+                                <img src="/media/{{v.4}}" alt="" style="width: 30px; margin: 1.5px;">
+                                {% endfor %}
+                                {% endif %}
+                                {% endfor %}
+                                
+                                
+                                {% for key, values in jokerCardDict.items %}
+                                {% if key.id == i.id %}
+                                {% for k, v in values.jokerCards.items %}
+                                - <img src="/media/{{v.4}}" alt="" style="width: 30px; margin: 1.5px;">
+                                {% endfor %}
+                                {% endif %}
+                                {% endfor %}        
+
+                                </td>
+                                
+                                <td><small><a href="/app/bid-details/{{i.id}}" class="text-secondary">{{i.points}}</a></small></td>
+
+                                {% if i.status == 'win'%}
+                                <td><small><a href="/app/bid-details/{{i.id}}" class="text-secondary"><span class="badge bg-success">{{i.status}}</span></a></small></td>
+                                {% elif i.status == 'loss' %}
+                                <td><small><a href="/app/bid-details/{{i.id}}" class="text-secondary"><span class="badge bg-danger">{{i.status}}</span></a></small></td>
+                                {% else %}
+                                <td><small><a href="/app/bid-details/{{i.id}}" class="text-secondary"><span class="badge bg-primary">{{i.status}}</span></a></small></td>
+                                {% endif %}
+                            </tr>
+                        
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                <p class="text-danger"> Have't bidding history</p>
+                {% endif %}
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
+
+{% block js %}
+
+<script>
+    document.getElementById('today').value = new Date().toISOString().substring(0, 10);
+</script>
+
+{% endblock %}
